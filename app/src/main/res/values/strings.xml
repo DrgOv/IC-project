@@ -5,4 +5,6 @@
     <string name="loginButton">Intra in cont</string>
     <string name="registerTextView">Nu ai cont?</string>
     <string name="registerButton">Inregistrare</string>
+    <string name="logo">box logo</string>
+    <string name="name">EZcolet</string>
 </resources>
