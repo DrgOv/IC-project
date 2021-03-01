@@ -6,5 +6,15 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <color name="white">#FFf4f4f4</color>
+    <color name="yellow">#ffffd369</color>
+    <color name="light_yellow">#fffce09d</color>
+    <color name="dark_yellow">#ff916e19</color>
+    <color name="gray">#ff393e46</color>
+    <color name="dark_gray">#ff1a1a1a</color>
+    <color name="blue_gray">#ff7288ab</color>
+    <color name="light_blue_gray">#ffb8c2db</color>
+    <color name="dark_blue_gray">#ff222831</color>
+
 </resources>

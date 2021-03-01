@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ezcolet</string>
-    <string name="password">Password</string>
+    <string name="password">Parola</string>
     <string name="username">Username</string>
-    <string name="login">Log in</string>
-    <string name="button">Button</string>
+    <string name="loginButton">Intra in cont</string>
+    <string name="registerTextView">Nu ai cont?</string>
+    <string name="registerButton">Inregistrare</string>
 </resources>
