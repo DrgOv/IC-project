@@ -74,4 +74,13 @@
             android:text="@string/registerButton" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="181dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_box_outline_filled" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
