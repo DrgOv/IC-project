@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">ezcolet</string>
-    <string name="password">Parola</string>
-    <string name="username">Username</string>
-    <string name="loginButton">Intra in cont</string>
-    <string name="registerTextView">Nu ai cont?</string>
-    <string name="registerButton">Inregistrare</string>
+
+    <!-- Edit Text -->
+    <string name="passwordEditText">Parola</string>
+    <string name="usernameEditText">Username</string>
+
+    <!-- Button -->
+    <string name="loginBtn">Intra in cont</string>
+    <string name="registerBtn">Inregistrare</string>
+
+    <!-- Text View -->
     <string name="logo">box logo</string>
-    <string name="name">EZcolet</string>
+    <string name="nameTextView">EZcolet</string>
+    <string name="registerTextView">Nu ai cont?</string>
 </resources>
