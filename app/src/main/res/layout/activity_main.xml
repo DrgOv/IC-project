@@ -4,40 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".controllers.MainActivity">
+    android:background="@drawable/paper_bg"
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/nameTextView"
+        style="@style/largeHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/appName"
+        app:drawableTopCompat="@drawable/ic_box_outline_filled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:drawableTopCompat="@drawable/ic_box_outline_filled"
-        android:text="@string/appName"
-        style="@style/largeHeading" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/medium_margin"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/usernameEditTextHint"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/medium_margin"
         android:autofillHints=""
         android:ems="10"

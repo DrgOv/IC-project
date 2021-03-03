@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- yellow rounded button -->
+    <!-- yellow rounded button -->
     <style name="yellowBtn" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/yellow_grad_btn</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
@@ -11,15 +11,15 @@
         <item name="android:paddingTop">@dimen/small_padding</item>
         <item name="android:paddingBottom">@dimen/small_padding</item>
     </style>
-<!-- round input -->
+    <!-- round input -->
     <style name="roundedInput" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/rounded_edit_text_states</item>
-        <item name="android:paddingStart">@dimen/medium_padding</item>
-        <item name="android:paddingEnd">@dimen/medium_padding</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:textColor">@color/light_gray</item>
+        <item name="android:paddingStart">@dimen/medium_padding</item>
+        <item name="android:paddingEnd">@dimen/medium_padding</item>
     </style>
-<!-- heading -->
+    <!-- heading -->
     <style name="largeHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/large_text</item>
         <item name="android:paddingTop">@dimen/large_padding</item>

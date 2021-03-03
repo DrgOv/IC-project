@@ -1,15 +1,12 @@
 <resources>
     <string name="appName">EZcolet</string>
-
-    <!-- Edit Text -->
+    <!-- edit text -->
     <string name="passwordEditTextHint">Parola</string>
     <string name="usernameEditTextHint">Username</string>
-
-    <!-- Button -->
+    <!-- button -->
     <string name="loginBtn">Intra in cont</string>
     <string name="registerBtn">Inregistrare</string>
-
-    <!-- Text View -->
+    <!-- text view -->
     <string name="logo">box logo</string>
     <string name="registerTextView">Nu ai cont?</string>
 </resources>
