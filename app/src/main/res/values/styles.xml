@@ -6,23 +6,23 @@
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
         <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">12dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingStart">@dimen/medium_padding</item>
+        <item name="android:paddingEnd">@dimen/medium_padding</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
     </style>
 <!-- round input -->
     <style name="roundedInput" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/rounded_edit_text_states</item>
-        <item name="android:paddingStart">7.5dp</item>
-        <item name="android:paddingEnd">7.5dp</item>
+        <item name="android:paddingStart">@dimen/medium_padding</item>
+        <item name="android:paddingEnd">@dimen/medium_padding</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:textColor">@color/light_gray</item>
     </style>
 <!-- heading -->
     <style name="largeHeading" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">48sp</item>
-        <item name="android:paddingTop">48dp</item>
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:paddingTop">@dimen/large_padding</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
