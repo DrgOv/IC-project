@@ -2,8 +2,8 @@
     <string name="app_name">ezcolet</string>
 
     <!-- Edit Text -->
-    <string name="passwordEditText">Parola</string>
-    <string name="usernameEditText">Username</string>
+    <string name="passwordEditTextHint">Parola</string>
+    <string name="usernameEditTextHint">Username</string>
 
     <!-- Button -->
     <string name="loginBtn">Intra in cont</string>
