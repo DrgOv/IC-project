@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ezcolet</string>
+    <string name="appName">EZcolet</string>
 
     <!-- Edit Text -->
     <string name="passwordEditTextHint">Parola</string>
@@ -11,6 +11,5 @@
 
     <!-- Text View -->
     <string name="logo">box logo</string>
-    <string name="nameTextView">EZcolet</string>
     <string name="registerTextView">Nu ai cont?</string>
 </resources>
