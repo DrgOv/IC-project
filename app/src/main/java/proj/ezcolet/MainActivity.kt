@@ -1,6 +1,5 @@
 package proj.ezcolet
 
-import android.content.Intent
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
         val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.registerBtn.setOnClickListener(){
+            ViewService.setView(this,Register())
+        }
 
         setContentView(binding.root)
+
+
     }
 }
