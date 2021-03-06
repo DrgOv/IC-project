@@ -6,87 +6,134 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:fitsSystemWindows="true"
-    tools:context=".RegisterActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/crearecontTextView"
-        android:layout_width="241dp"
+        android:layout_width="275dp"
         android:layout_height="110dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="85dp"
         android:text="Creare cont"
+        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textAlignment="center"
         android:textSize="40sp"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="51dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/stradaEditText"
         android:layout_width="314dp"
         android:layout_height="57dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="49dp"
         android:hint="Strada"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="265dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prenumeEditText" />
 
     <EditText
         android:id="@+id/judetEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         android:hint="Județ"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="354dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toStartOf="@+id/orasEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stradaEditText" />
 
     <EditText
         android:id="@+id/userEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="22dp"
         android:hint="Username"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="521dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toStartOf="@+id/parolaEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/codpostalEditText" />
 
     <EditText
         android:id="@+id/orasEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="47dp"
         android:hint="Oraș"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="354dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stradaEditText" />
 
     <EditText
         android:id="@+id/parolaEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="48dp"
         android:hint="Parola"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="521dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orasEditText" />
 
     <EditText
         android:id="@+id/prenumeEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="47dp"
         android:hint="Prenume"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crearecontTextView" />
 
     <EditText
         android:id="@+id/numeEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="24dp"
         android:hint="Nume"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toStartOf="@+id/prenumeEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crearecontTextView" />
 
     <EditText
         android:id="@+id/codpostalEditText"
         android:layout_width="145dp"
         android:layout_height="56dp"
-        android:hint="@ZIPcodeEditText"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="434dp" />
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="216dp"
+        android:hint="Cod poștal"
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judetEditText" />
 
     <Button
         android:id="@+id/doneBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="76dp"
         android:text="Gata"
-        tools:layout_editor_absoluteX="257dp"
-        tools:layout_editor_absoluteY="605dp" />
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parolaEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
