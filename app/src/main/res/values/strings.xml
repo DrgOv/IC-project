@@ -3,10 +3,17 @@
     <!-- edit text -->
     <string name="passwordEditTextHint">Parola</string>
     <string name="usernameEditTextHint">Username</string>
+    <string name="streetEditTextHint">Strada</string>
+    <string name="countyEditTextHint">Judet</string>
+    <string name="countryEditTextHint">Oras</string>
+    <string name="firstNameEditTextHint">Prenume</string>
+    <string name="lastNameEditTextHint">Nume</string>
+    <string name="ZIPcodeEditTextHint">Cod postal</string>
     <!-- button -->
     <string name="loginBtn">Intra in cont</string>
     <string name="registerBtn">Inregistrare</string>
     <!-- text view -->
     <string name="logo">box logo</string>
     <string name="registerTextView">Nu ai cont?</string>
+    <string name="createAccountTextView">Creare cont</string>
 </resources>

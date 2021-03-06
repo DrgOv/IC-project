@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
+
         val binding = ActivityMainBinding.inflate(layoutInflater)
         binding.registerBtn.setOnClickListener() {
             ViewService.setView(this, RegisterActivity())
