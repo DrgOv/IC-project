@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.registerBtn.setOnClickListener(){
-            ViewService.setView(this,Register())
+        binding.registerBtn.setOnClickListener() {
+            ViewService.setView(this, RegisterActivity())
         }
 
         setContentView(binding.root)
