@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/titleTextView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Courier">
+
+    <Button
+        android:id="@+id/ScanQRBtn"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="123dp"
+        android:text="Scanează QR"
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="254dp"
+        android:layout_marginBottom="27dp"
+        android:text="Ieșire"
+        android:textCursorDrawable="@drawable/editext_cursor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScanQRBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/crearecontTextView2"
+        android:layout_width="310dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="85dp"
+        android:text="Bună ziua, curier!"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/Info_imageButton"
+        android:layout_width="69dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="306dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/round_corner_imagebutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/info" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="348dp"
+        android:layout_height="446dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="36dp"
+        android:clipToPadding="false"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crearecontTextView2"
+        tools:listitem="@layout/element" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
