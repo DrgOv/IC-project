@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_courier.*
 
 
-class Courier : AppCompatActivity() {
+class CourierActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_courier)
-        val List=generateList(500)
-        recyclerView.adapter = Adapter(List)
+        val list = generateList(500)
+        recyclerView.adapter = Adapter(list)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
     }

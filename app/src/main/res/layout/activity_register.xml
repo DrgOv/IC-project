@@ -16,7 +16,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="85dp"
         android:text="@string/createAccountTextView"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         android:textAlignment="center"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:layout_marginTop="27dp"
         android:layout_marginEnd="49dp"
         android:hint="@string/streetEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prenumeEditText" />
@@ -44,7 +44,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/countyEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toStartOf="@+id/orasEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stradaEditText" />
@@ -57,7 +57,7 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="22dp"
         android:hint="@string/usernameEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toStartOf="@+id/parolaEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/codpostalEditText" />
@@ -69,7 +69,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="47dp"
         android:hint="@string/countryEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stradaEditText" />
 
@@ -80,7 +80,7 @@
         android:layout_marginTop="108dp"
         android:layout_marginEnd="48dp"
         android:hint="@string/passwordEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orasEditText" />
 
@@ -91,7 +91,7 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="47dp"
         android:hint="@string/firstNameEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/crearecontTextView" />
 
@@ -103,7 +103,7 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/lastNameEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toStartOf="@+id/prenumeEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/crearecontTextView" />
@@ -116,7 +116,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="216dp"
         android:hint="@string/ZIPcodeEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/judetEditText" />
@@ -130,7 +130,7 @@
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="76dp"
         android:text="@string/registerBtn"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -28,7 +28,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/usernameEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +44,14 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/passwordEditTextHint"
-        android:textCursorDrawable="@drawable/editext_cursor"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/entryConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
@@ -78,5 +79,26 @@
             app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entryConstraintLayout"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/toUserBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:layout_marginEnd="5dp"/>
+        <Button
+            android:id="@+id/toCourierBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Curier"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

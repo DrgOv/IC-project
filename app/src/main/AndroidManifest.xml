@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ezcolet">
-        <activity android:name=".Courier"></activity>>
-        <activity android:name=".UserActivity"></activity>
+        <activity android:name=".CourierActivity" />
+        <activity android:name=".UserActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

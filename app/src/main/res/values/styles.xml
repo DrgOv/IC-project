@@ -22,17 +22,17 @@
     <!-- heading -->
     <style name="largeHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/large_heading</item>
-        <item name="android:paddingTop">@dimen/large_padding</item>
+        <item name="android:padding">@dimen/medium_padding</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="mediumHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/medium_heading</item>
-        <item name="android:paddingTop">@dimen/medium_padding</item>
+        <item name="android:padding">@dimen/medium_padding</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="smallHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/small_heading</item>
-        <item name="android:paddingTop">@dimen/small_padding</item>
+        <item name="android:padding">@dimen/small_padding</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
