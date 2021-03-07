@@ -12,8 +12,15 @@
     <!-- button -->
     <string name="loginBtn">Intra in cont</string>
     <string name="registerBtn">Inregistrare</string>
+    <string name="giveRatingBtn">Adauga un review</string>
     <!-- text view -->
     <string name="logo">box logo</string>
     <string name="registerTextView">Nu ai cont?</string>
     <string name="createAccountTextView">Creare cont</string>
+    <string name="welcomeUserTextView">Buna ziua, user!</string>
+    <string name="remainingOrdersTextView">Comenzi ramase pana la tine:</string>
+    <string name="numberOfOrdersTextView">4</string>
+    <string name="courierInfoTextView">Curier: nume</string>
+    <string name="courierRatingTextView">Rating: 9/10</string>
+    <string name="yourOrderNumberTextView">Ai comanda: 5/6</string>
 </resources>

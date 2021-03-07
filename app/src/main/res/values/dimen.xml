@@ -9,5 +9,7 @@
     <dimen name="medium_padding">12dp</dimen>
     <dimen name="large_padding">28dp</dimen>
     <!-- sizes -->
-    <dimen name="large_text">48sp</dimen>
+    <dimen name="large_heading">48sp</dimen>
+    <dimen name="medium_heading">36sp</dimen>
+    <dimen name="small_heading">18sp</dimen>
 </resources>
