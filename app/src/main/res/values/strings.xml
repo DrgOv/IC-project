@@ -29,6 +29,6 @@
     <string name="scanQRBtn">Scanează QR</string>
     <string name="backBtn">Ieșire</string>
     <!-- cardView -->
-    <string name="upperTextCardView">Upper</string>
-    <string name="LowerTextCardView">Lower</string>
+    <string name="upperTextCardView">Here goes the upper text</string>
+    <string name="LowerTextCardView">Here goes the lower text</string>
 </resources>
