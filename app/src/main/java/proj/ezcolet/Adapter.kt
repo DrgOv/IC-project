@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class Adapter(private val List:List<ExampleItem>):RecyclerView.Adapter<Adapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.element,parent,false)
+        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.courier_item,parent,false)
         return ViewHolder(itemView)
     }
 
