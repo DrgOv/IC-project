@@ -15,6 +15,7 @@
     <color name="brighter_yellow">#fffee876</color>
     <color name="light_yellow">#fffce09d</color>
     <color name="dark_yellow">#ff916e19</color>
+    <color name="package_yellow">#E6BE54</color>
     <!-- gray -->
     <color name="gray">#ff393e46</color>
     <color name="light_gray">#ffeeeeee</color>
