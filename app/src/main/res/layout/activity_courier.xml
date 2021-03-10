@@ -8,6 +8,29 @@
     android:background="@drawable/background"
     tools:context=".CourierActivity">
 
+    <ImageButton
+        android:id="@+id/exitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_exit"
+        android:contentDescription="@string/todoImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginStart="@dimen/large_margin"/>
+
+    <ImageButton
+        android:id="@+id/infoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_image_btn"
+        android:contentDescription="@string/todoImage"
+        app:srcCompat="@drawable/info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"/>
+
     <TextView
         android:id="@+id/welcomeCourierTextView"
         style="@style/mediumHeading"
@@ -19,47 +42,8 @@
         android:text="@string/welcomeCourierTextView"
         android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/infoImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="36dp"
-        android:background="@drawable/rounde_corner_image_btn"
-        android:contentDescription="@string/todoImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/info" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="@dimen/large_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeCourierTextView"
-        tools:listitem="@layout/element_courier" />
-
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
-        android:layout_marginTop="8dp"
-        android:text="@string/backBtn"
-        android:textCursorDrawable="@drawable/edit_text_cursor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanQRBtn" />
 
     <Button
         android:id="@+id/scanQRBtn"
@@ -70,8 +54,20 @@
         android:text="@string/scanQRBtn"
         android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/ordersListingRecyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ordersListingRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/large_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeCourierTextView"
+        tools:listitem="@layout/element_courier" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

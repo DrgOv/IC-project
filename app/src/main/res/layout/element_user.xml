@@ -30,7 +30,7 @@
                 <TextView
                     android:id="@+id/text_view_card1"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="36dp"
                     android:paddingStart="@dimen/medium_padding"
                     android:paddingEnd="@dimen/medium_padding"
                     android:text="@string/upperTextCardView"
@@ -51,17 +51,9 @@
                 android:id="@+id/checkButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="7"
+                android:layout_weight="14"
                 android:background="@null"
-                app:srcCompat="@drawable/ic_baseline_done_24" />
-
-            <ImageButton
-                android:id="@+id/xButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
-                android:background="@null"
-                app:srcCompat="@drawable/ic_baseline_clear_24" />
+                app:srcCompat="@drawable/ic_delivery" />
 
         </LinearLayout>
 

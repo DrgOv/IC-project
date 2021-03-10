@@ -3,7 +3,6 @@ package proj.ezcolet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_courier.*
 import proj.ezcolet.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity() {
@@ -13,7 +12,7 @@ class UserActivity : AppCompatActivity() {
         val binding = ActivityUserBinding.inflate(layoutInflater)
         val list = generateList(500)
 
-        binding.recyclerView.adapter = Adapter(list)
+        binding.recyclerView.adapter = UserAdapter(list)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
 
