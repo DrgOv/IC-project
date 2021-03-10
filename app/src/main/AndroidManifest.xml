@@ -10,18 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ezcolet">
         <activity android:name=".UserInfoActivity"></activity>
-        <activity android:name=".CourierQrScanActivity" />
-        <activity android:name=".CourierInfoActivity" />
-        <activity android:name=".CourierActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".CourierQrScanActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CourierInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CourierActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
