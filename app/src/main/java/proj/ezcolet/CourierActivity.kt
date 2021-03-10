@@ -14,16 +14,16 @@ class CourierActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val list = generateList(500)
-        recyclerView.adapter = Adapter(list)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-
         val binding = ActivityCourierBinding.inflate(layoutInflater)
 
         binding.infoImageBtn.setOnClickListener() {
             ViewService.setView(this, CourierInfoActivity())
         }
+
+        val list = generateList(500)
+        binding.recyclerView.adapter = Adapter(list)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
 
         setContentView(binding.root)
     }
