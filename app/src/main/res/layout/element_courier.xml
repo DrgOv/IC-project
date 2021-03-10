@@ -30,7 +30,7 @@
                 <TextView
                     android:id="@+id/text_view_card1"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="36dp"
                     android:paddingStart="@dimen/medium_padding"
                     android:paddingEnd="@dimen/medium_padding"
                     android:text="@string/upperTextCardView"
