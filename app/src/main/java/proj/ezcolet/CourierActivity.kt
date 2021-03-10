@@ -6,23 +6,26 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_courier.*
+import proj.ezcolet.databinding.ActivityCourierBinding
+import proj.ezcolet.services.ViewService
 
 
 class CourierActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_courier)
-
-        val button:ImageButton=findViewById(R.id.infoImageBtn)
-        button.setOnClickListener{
-            val intent= Intent(this,CourierInfoActivity::class.java)
-            startActivity(intent)
-        }
 
         val list = generateList(500)
         recyclerView.adapter = Adapter(list)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
+
+        val binding = ActivityCourierBinding.inflate(layoutInflater)
+
+        binding.infoImageBtn.setOnClickListener() {
+            ViewService.setView(this, CourierInfoActivity())
+        }
+
+        setContentView(binding.root)
     }
 
     private fun generateList(size: Int): List<ExampleItem> {
