@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/x_small_margin">
+    android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_29">
+        android:background="#292929"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:baselineAligned="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,45 +24,46 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="25"
+                android:layout_weight="16"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_view_card1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:paddingStart="@dimen/large_padding"
-                    android:paddingEnd="@dimen/large_padding"
+                    android:layout_height="35dp"
+                    android:paddingStart="@dimen/medium_padding"
+                    android:paddingEnd="@dimen/medium_padding"
                     android:text="@string/upperTextCardView"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/text_view_card2"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:paddingStart="@dimen/large_padding"
-                    android:paddingEnd="@dimen/large_padding"
+                    android:layout_height="35dp"
+                    android:paddingStart="@dimen/medium_padding"
+                    android:paddingEnd="@dimen/medium_padding"
                     android:text="@string/LowerTextCardView"
-                    android:textColor="@color/yellow" />
+                    android:textColor="#E6BE54" />
 
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/checkButton"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:background="@null"
                 app:srcCompat="@drawable/ic_baseline_done_24" />
 
             <ImageButton
-                android:id="@+id/deleteImageBtn"
-                android:layout_width="wrap_content"
+                android:id="@+id/xButton"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:background="@null"
                 app:srcCompat="@drawable/ic_baseline_clear_24" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
