@@ -16,15 +16,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/exitBtn"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginTop="@dimen/xx_large_margin"
-            android:layout_marginEnd="@dimen/large_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:background="@drawable/ic_exit" />
+            android:padding="@dimen/xx_large_padding">
+
+            <ImageButton
+                android:id="@+id/exitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_exit"
+                android:contentDescription="@string/todoImage" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
