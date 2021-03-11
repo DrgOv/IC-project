@@ -8,66 +8,63 @@
     android:background="@drawable/background"
     tools:context=".CourierActivity">
 
-    <ImageButton
-        android:id="@+id/exitBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_exit"
-        android:contentDescription="@string/todoImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_marginStart="@dimen/large_margin"/>
 
-    <ImageButton
-        android:id="@+id/infoBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_image_btn"
-        android:contentDescription="@string/todoImage"
-        app:srcCompat="@drawable/info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/large_margin"/>
-
-    <TextView
-        android:id="@+id/welcomeCourierTextView"
-        style="@style/mediumHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="@dimen/large_margin"
-        android:text="@string/welcomeCourierTextView"
-        android:textCursorDrawable="@drawable/edit_text_cursor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/scanQRBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/medium_margin"
-        android:layout_marginTop="12dp"
-        android:text="@string/scanQRBtn"
-        android:textCursorDrawable="@drawable/edit_text_cursor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ordersListingRecyclerView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ordersListingRecyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeCourierTextView"
-        tools:listitem="@layout/element_courier" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/large_padding">
+
+            <ImageButton
+                android:id="@+id/exitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_exit"
+                android:contentDescription="@string/todoImage" />
+
+            <ImageButton
+                android:id="@+id/infoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/rounded_corner_image_btn"
+                android:contentDescription="@string/todoImage"
+                app:srcCompat="@drawable/info" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/welcomeCourierTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcomeCourierTextView"
+            android:textSize="30sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersListingRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:padding="@dimen/medium_padding"
+            tools:listitem="@layout/element_courier" />
+
+        <Button
+            android:id="@+id/scanQRBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:text="@string/scanQRBtn"
+            android:textCursorDrawable="@drawable/edit_text_cursor" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
