@@ -16,14 +16,14 @@ class CourierActivity : AppCompatActivity() {
 
         val binding = ActivityCourierBinding.inflate(layoutInflater)
 
-        binding.infoImageBtn.setOnClickListener() {
+        binding.infoBtn.setOnClickListener() {
             ViewService.setView(this, CourierInfoActivity())
         }
 
         val list = generateList(500)
-        binding.recyclerView.adapter = Adapter(list)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.setHasFixedSize(true)
+        binding.ordersListingRecyclerView.adapter = Adapter(list)
+        binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.ordersListingRecyclerView.setHasFixedSize(true)
 
         setContentView(binding.root)
     }

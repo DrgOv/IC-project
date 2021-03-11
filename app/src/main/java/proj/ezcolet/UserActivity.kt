@@ -12,9 +12,9 @@ class UserActivity : AppCompatActivity() {
         val binding = ActivityUserBinding.inflate(layoutInflater)
         val list = generateList(500)
 
-        binding.recyclerView.adapter = UserAdapter(list)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.setHasFixedSize(true)
+        binding.ordersListingRecyclerView.adapter = UserAdapter(list)
+        binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.ordersListingRecyclerView.setHasFixedSize(true)
 
         setContentView(binding.root)
     }
