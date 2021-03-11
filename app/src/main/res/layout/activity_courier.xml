@@ -21,7 +21,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/xx_large_padding">
+            android:paddingStart="@dimen/x_large_padding"
+            android:paddingEnd="@dimen/x_large_padding"
+            android:paddingTop="@dimen/xx_large_padding"
+            android:paddingBottom="@dimen/medium_padding">
 
             <ImageButton
                 android:id="@+id/exitBtn"
