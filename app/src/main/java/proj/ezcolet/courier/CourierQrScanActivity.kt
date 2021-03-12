@@ -1,12 +1,12 @@
-package proj.ezcolet
+package proj.ezcolet.courier
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import proj.ezcolet.R
 
-class UserInfoActivity : AppCompatActivity() {
+class CourierQrScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_info)
+        setContentView(R.layout.courier_qr_scan_activity)
     }
 }

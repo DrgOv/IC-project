@@ -1,11 +1,12 @@
-package proj.ezcolet
+package proj.ezcolet.courier
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import proj.ezcolet.R
 
 class CourierInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_courier_info)
+        setContentView(R.layout.courier_info_activity)
     }
 }

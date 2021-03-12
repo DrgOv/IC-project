@@ -1,14 +1,16 @@
-package proj.ezcolet
+package proj.ezcolet.courier
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import proj.ezcolet.ExampleItem
+import proj.ezcolet.R
 
 class Adapter(private val List:List<ExampleItem>):RecyclerView.Adapter<Adapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.element_courier,parent,false)
+        val itemView=LayoutInflater.from(parent.context).inflate(R.layout.courier_card_item,parent,false)
         return ViewHolder(itemView)
     }
 

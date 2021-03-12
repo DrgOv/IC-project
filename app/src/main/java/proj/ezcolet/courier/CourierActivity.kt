@@ -1,12 +1,10 @@
-package proj.ezcolet
+package proj.ezcolet.courier
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_courier.*
-import proj.ezcolet.databinding.ActivityCourierBinding
+import proj.ezcolet.ExampleItem
+import proj.ezcolet.databinding.CourierHomeActivityBinding
 import proj.ezcolet.services.ViewService
 
 
@@ -14,7 +12,7 @@ class CourierActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityCourierBinding.inflate(layoutInflater)
+        val binding = CourierHomeActivityBinding.inflate(layoutInflater)
 
         binding.infoBtn.setOnClickListener() {
             ViewService.setView(this, CourierInfoActivity())

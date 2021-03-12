@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ezcolet">
-        <activity android:name=".UserInfoActivity"></activity>
-        <activity android:name=".CourierQrScanActivity"
+        <activity android:name=".user.UserInfoActivity" />
+        <activity android:name=".courier.CourierQrScanActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".CourierInfoActivity"
+        <activity android:name=".courier.CourierInfoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".CourierActivity"
+        <activity android:name=".courier.CourierActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".UserActivity"
+        <activity android:name=".user.UserActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".entry.RegisterActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".entry.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

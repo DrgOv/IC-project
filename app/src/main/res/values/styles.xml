@@ -2,7 +2,7 @@
 <resources>
     <!-- yellow rounded button -->
     <style name="yellowBtn" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/yellow_grad_btn</item>
+        <item name="android:background">@drawable/btn_yellow_gradient</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
         <item name="android:textColor">@color/dark_gray</item>
@@ -13,7 +13,7 @@
     </style>
     <!-- round input -->
     <style name="roundedInput" parent="Widget.AppCompat.EditText">
-        <item name="android:background">@drawable/rounded_edit_text_states</item>
+        <item name="android:background">@drawable/edit_text_rounded_states</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:textColor">@color/light_gray</item>
         <item name="android:paddingStart">@dimen/medium_padding</item>

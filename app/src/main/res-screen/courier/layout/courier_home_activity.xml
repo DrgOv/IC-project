@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".CourierActivity">
+    tools:context=".courier.CourierActivity">
 
 
     <LinearLayout
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/rounded_corner_image_btn"
+                android:background="@drawable/btn_rounded_corner_image"
                 android:contentDescription="@string/todoImage"
                 app:srcCompat="@drawable/info" />
         </RelativeLayout>
@@ -58,7 +58,7 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:padding="@dimen/medium_padding"
-            tools:listitem="@layout/element_courier" />
+            tools:listitem="@layout/courier_card_item" />
 
         <Button
             android:id="@+id/scanQRBtn"

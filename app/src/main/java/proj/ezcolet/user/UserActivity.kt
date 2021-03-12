@@ -1,15 +1,16 @@
-package proj.ezcolet
+package proj.ezcolet.user
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.databinding.ActivityUserBinding
+import proj.ezcolet.ExampleItem
+import proj.ezcolet.databinding.UserHomeActivityBinding
 
 class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityUserBinding.inflate(layoutInflater)
+        val binding = UserHomeActivityBinding.inflate(layoutInflater)
         val list = generateList(500)
 
         binding.ordersListingRecyclerView.adapter = UserAdapter(list)
