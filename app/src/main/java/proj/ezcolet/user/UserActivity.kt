@@ -5,12 +5,18 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import proj.ezcolet.ExampleItem
 import proj.ezcolet.databinding.UserHomeActivityBinding
+import proj.ezcolet.entry.LoginActivity
+import proj.ezcolet.services.ViewService
 
 class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = UserHomeActivityBinding.inflate(layoutInflater)
+        binding.exitBtn.setOnClickListener(){
+            finish();
+            ViewService.setView(this, LoginActivity())
+        }
         val list = generateList(500)
 
         binding.ordersListingRecyclerView.adapter = UserAdapter(list)

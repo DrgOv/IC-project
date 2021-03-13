@@ -1,13 +1,15 @@
 package proj.ezcolet.courier
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import proj.ezcolet.ExampleItem
 import proj.ezcolet.databinding.CourierHomeActivityBinding
+import proj.ezcolet.entry.LoginActivity
 import proj.ezcolet.services.ViewService
 
-
+private const val CAMERA_REQUEST_CODE=101
 class CourierActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +18,13 @@ class CourierActivity : AppCompatActivity() {
 
         binding.infoBtn.setOnClickListener() {
             ViewService.setView(this, CourierInfoActivity())
+        }
+        binding.scanQRBtn.setOnClickListener(){
+            ViewService.setView(this,CourierQrScanActivity())
+        }
+        binding.exitBtn.setOnClickListener(){
+            finish();
+            ViewService.setView(this,LoginActivity())
         }
 
         val list = generateList(500)
