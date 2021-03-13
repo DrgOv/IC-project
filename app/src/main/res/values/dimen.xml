@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- margins -->
-    <dimen name="xx_small_margin">4dp</dimen>
-    <dimen name="x_small_margin">6dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
-    <dimen name="medium_margin">16dp</dimen>
-    <dimen name="large_margin">32dp</dimen>
-    <dimen name="x_large_margin">48dp</dimen>
-    <dimen name="xx_large_margin">64dp</dimen>
-    <!-- padding -->
-    <dimen name="xx_small_padding">2dp</dimen>
-    <dimen name="x_small_padding">4dp</dimen>
-    <dimen name="small_padding">6dp</dimen>
-    <dimen name="medium_padding">12dp</dimen>
-    <dimen name="large_padding">24dp</dimen>
-    <dimen name="x_large_padding">32dp</dimen>
-    <dimen name="xx_large_padding">42dp</dimen>
+    <!-- spacings -->
+    <dimen name="x_small_spacing">5dp</dimen>
+    <dimen name="small_spacing">7.5dp</dimen>
+    <dimen name="medium_spacing">15dp</dimen>
+    <dimen name="large_spacing">32dp</dimen>
+    <dimen name="x_large_spacing">48dp</dimen>
+    <dimen name="xx_large_spacing">64dp</dimen>
     <!-- sizes -->
     <dimen name="xx_small_heading">14sp</dimen>
     <dimen name="x_small_heading">16sp</dimen>

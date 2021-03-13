@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="@dimen/x_small_spacing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#292929"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:paddingStart="@dimen/medium_spacing"
+        android:paddingEnd="@dimen/medium_spacing">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,19 +31,19 @@
                     android:id="@+id/text_view_card1"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
-                    android:paddingStart="@dimen/medium_padding"
-                    android:paddingEnd="@dimen/medium_padding"
+                    android:paddingStart="@dimen/medium_spacing"
+                    android:paddingEnd="@dimen/medium_spacing"
                     android:text="@string/upperTextCardView"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small_heading" />
 
                 <TextView
                     android:id="@+id/text_view_card2"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:paddingStart="@dimen/medium_padding"
-                    android:paddingEnd="@dimen/medium_padding"
+                    android:paddingStart="@dimen/medium_spacing"
+                    android:paddingEnd="@dimen/medium_spacing"
                     android:text="@string/LowerTextCardView"
-                    android:textColor="#E6BE54" />
+                    android:textColor="@color/primary_accent_color" />
 
             </LinearLayout>
 

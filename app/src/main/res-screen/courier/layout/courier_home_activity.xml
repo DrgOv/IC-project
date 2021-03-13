@@ -21,10 +21,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/x_large_padding"
-            android:paddingEnd="@dimen/x_large_padding"
-            android:paddingTop="@dimen/xx_large_padding"
-            android:paddingBottom="@dimen/medium_padding">
+            android:paddingStart="@dimen/x_large_spacing"
+            android:paddingEnd="@dimen/x_large_spacing"
+            android:paddingTop="@dimen/xx_large_spacing"
+            android:paddingBottom="@dimen/medium_spacing">
 
             <ImageButton
                 android:id="@+id/exitBtn"
@@ -50,14 +50,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/welcomeCourierTextView"
-            android:textSize="30sp" />
+            android:textSize="@dimen/medium_heading" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ordersListingRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:padding="@dimen/medium_padding"
+            android:padding="@dimen/medium_spacing"
             tools:listitem="@layout/courier_card_item" />
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_spacing"
             android:text="@string/scanQRBtn"
             android:textCursorDrawable="@drawable/edit_text_cursor" />
     </LinearLayout>

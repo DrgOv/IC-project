@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/paper_bg"
-    tools:context=".entry.LoginActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".entry.LoginActivity">
 
     <TextView
         android:id="@+id/nameTextView"
@@ -23,13 +23,12 @@
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_margin="@dimen/medium_spacing"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/usernameEditTextHint"
-        android:textCursorDrawable="@drawable/edit_text_cursor"
         android:inputType="textPersonName"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
@@ -38,14 +37,13 @@
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_margin="@dimen/medium_spacing"
+        android:layout_marginStart="@dimen/medium_spacing"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/passwordEditTextHint"
-        android:textCursorDrawable="@drawable/edit_text_cursor"
         android:inputType="textPassword"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
@@ -63,6 +61,7 @@
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_spacing"
             android:text="@string/loginBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +71,7 @@
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_margin="@dimen/medium_spacing"
             android:text="@string/registerBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,22 +82,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/entryConstraintLayout"
-        android:layout_marginTop="20dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entryConstraintLayout">
+
         <Button
             android:id="@+id/toUserBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp"
+            android:text="User" />
+
         <Button
             android:id="@+id/toCourierBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Curier"
-            android:layout_marginStart="5dp"/>
+            android:layout_marginStart="5dp"
+            android:text="Curier" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

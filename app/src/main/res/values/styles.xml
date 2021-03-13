@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- yellow rounded button -->
-    <style name="yellowBtn" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/btn_yellow_gradient</item>
+    <style name="btnRoundedPrimary" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_primary_gradient</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
-        <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:paddingStart">@dimen/medium_padding</item>
-        <item name="android:paddingEnd">@dimen/medium_padding</item>
-        <item name="android:paddingTop">@dimen/small_padding</item>
-        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:textColor">@color/primary_base_color_dark</item>
+        <item name="android:padding">@dimen/small_spacing</item>
     </style>
     <!-- round input -->
-    <style name="roundedInput" parent="Widget.AppCompat.EditText">
+    <style name="inputRoundedPrimary" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/edit_text_rounded_states</item>
-        <item name="android:textColorHint">@color/light_gray</item>
-        <item name="android:textColor">@color/light_gray</item>
-        <item name="android:paddingStart">@dimen/medium_padding</item>
-        <item name="android:paddingEnd">@dimen/medium_padding</item>
+        <item name="android:textColorHint">@color/primary_base_color_light</item>
+        <item name="android:textColor">@color/primary_base_color_light</item>
+        <item name="android:paddingStart">@dimen/medium_spacing</item>
+        <item name="android:paddingEnd">@dimen/medium_spacing</item>
+        <item name="android:paddingTop">@dimen/small_spacing</item>
+        <item name="android:paddingBottom">@dimen/small_spacing</item>
     </style>
     <!-- heading -->
     <style name="largeHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/large_heading</item>
-        <item name="android:padding">@dimen/medium_padding</item>
+        <item name="android:padding">@dimen/medium_spacing</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="mediumHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/medium_heading</item>
-        <item name="android:padding">@dimen/medium_padding</item>
+        <item name="android:padding">@dimen/medium_spacing</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="smallHeading" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">@dimen/small_heading</item>
-        <item name="android:padding">@dimen/small_padding</item>
+        <item name="android:padding">@dimen/small_spacing</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
