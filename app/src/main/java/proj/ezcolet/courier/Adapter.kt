@@ -22,8 +22,8 @@ class Adapter(private val List:List<ExampleItem>):RecyclerView.Adapter<Adapter.V
 
     override fun getItemCount()=List.size
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val textView1: TextView =itemView.findViewById(R.id.text_view_card1)
-        val textView2: TextView=itemView.findViewById(R.id.text_view_card2)
+        val textView1: TextView =itemView.findViewById(R.id.upperTextView)
+        val textView2: TextView=itemView.findViewById(R.id.lowerTextView)
     }
 
 }
