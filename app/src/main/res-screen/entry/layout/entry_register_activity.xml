@@ -147,8 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/ZIPcodeEditTextHint"
-                android:text="Telefon"
+                android:hint="@string/PhoneEditTextHint"
                 android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -184,6 +183,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="5"
+                android:inputType="textPassword"
                 android:hint="@string/passwordEditTextHint"
                 android:textCursorDrawable="@drawable/edit_text_cursor"
                 android:textSize="14sp" />
