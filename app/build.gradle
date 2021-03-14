@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -34,6 +36,17 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src\\main\\res-main',
+                    'src\\main\\res-screen\\client',
+                    'src\\main\\res-screen\\courier',
+                    'src\\main/res-screen\\entry', 'src\\main\\res', 'src\\main\\res-screen\\entry'
+            ]
+        }
+    }
 }
 
 dependencies {
@@ -46,4 +59,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-firestore'
+
 }

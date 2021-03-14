@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/courierPageTextView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".views.courier.CourierHomeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/x_large_spacing"
+            android:paddingEnd="@dimen/x_large_spacing"
+            android:paddingTop="@dimen/xx_large_spacing"
+            android:paddingBottom="@dimen/medium_spacing">
+
+            <ImageButton
+                android:id="@+id/exitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_exit"
+                android:contentDescription="@string/todoImage" />
+
+            <ImageButton
+                android:id="@+id/infoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/btn_rounded_corner_image"
+                android:contentDescription="@string/todoImage"
+                app:srcCompat="@drawable/info" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/welcomeCourierTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcomeCourierTextView"
+            android:textSize="@dimen/medium_heading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersListingRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:padding="@dimen/medium_spacing"
+            tools:listitem="@layout/courier_card_item" />
+
+        <Button
+            android:id="@+id/scanQRBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/medium_spacing"
+            android:text="@string/scanQRBtn"
+            android:textCursorDrawable="@drawable/edit_text_cursor" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

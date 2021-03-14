@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024370811065",
+    "project_id": "ez-colet",
+    "storage_bucket": "ez-colet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024370811065:android:583c9190360cb6fd717b68",
+        "android_client_info": {
+          "package_name": "proj.ezcolet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024370811065-uuf2fp8o0l60ukapfuke6i9e5lj5sbq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD-7PZ8XApt1PKN9DwJa7WQa7ucrd6b1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024370811065-uuf2fp8o0l60ukapfuke6i9e5lj5sbq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

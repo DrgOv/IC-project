@@ -1,0 +1,35 @@
+<resources>
+    <string name="appName">EZcolet</string>
+    <string name="logo">box logo</string>
+    <!-- login page -->
+    <string name="usernameEditTextHint">Username</string>
+    <string name="passwordEditTextHint">Parola</string>
+    <string name="loginBtn">Intra in cont</string>
+    <string name="registerTextView">Nu ai cont?</string>
+    <!-- register page -->
+    <string name="createAccountTextView">Creare cont</string>
+    <string name="streetEditTextHint">Strada</string>
+    <string name="countyEditTextHint">Judet</string>
+    <string name="countryEditTextHint">Oras</string>
+    <string name="firstNameEditTextHint">Prenume</string>
+    <string name="lastNameEditTextHint">Nume</string>
+    <string name="ZIPcodeEditTextHint">Cod postal</string>
+    <string name="PhoneEditTextHint">Telefon</string>
+    <string name="registerBtn">Inregistrare</string>
+    <!-- user page -->
+    <string name="welcomeUserTextView">Buna ziua, user!</string>
+    <string name="remainingOrdersTextView">Comenzi ramase pana la tine:</string>
+    <string name="numberOfOrdersTextView">4</string>
+    <string name="courierInfoTextView">Curier: nume</string>
+    <string name="courierRatingTextView">Rating: 9/10</string>
+    <string name="giveRatingBtn">Adauga un review</string>
+    <string name="yourOrderNumberTextView">Ai comanda: 5/6</string>
+    <!-- courier page -->
+    <string name="todoImage">TODO</string>
+    <string name="welcomeCourierTextView">Buna ziua, curier!</string>
+    <string name="scanQRBtn">Scanează QR</string>
+    <string name="backBtn">Ieșire</string>
+    <!-- cardView -->
+    <string name="upperTextCardView">Here goes the upper text</string>
+    <string name="LowerTextCardView">Here goes the lower text</string>
+</resources>

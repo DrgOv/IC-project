@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".views.client.ClientActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/x_large_spacing"
+            android:paddingEnd="@dimen/x_large_spacing"
+            android:paddingTop="@dimen/xx_large_spacing"
+            android:paddingBottom="@dimen/medium_spacing"
+            >
+
+            <ImageButton
+                android:id="@+id/exitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_exit"
+                android:contentDescription="@string/todoImage" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Buna ziua, user!"
+            android:textSize="@dimen/medium_heading" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/x_small_spacing"
+            android:text="Comenzi ramase pana la dumneavoastra"
+            android:textSize="@dimen/x_small_heading" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:text="10"
+            android:textColor="@color/package_yellow"
+            android:textSize="@dimen/large_heading" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/medium_spacing"
+            android:paddingStart="@dimen/large_spacing"
+            android:paddingEnd="@dimen/large_spacing">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Curier: username" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/small_spacing"
+                android:text="9/10 (noteaza curier)"
+                app:drawableLeftCompat="@drawable/ic_baseline_thumb_up_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aveti comanda: 100/10" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersListingRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:paddingStart="@dimen/medium_spacing"
+            android:paddingEnd="@dimen/medium_spacing"
+            android:paddingTop="@dimen/small_spacing"
+            android:paddingBottom="@dimen/large_spacing"
+            tools:listitem="@layout/client_card_item" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
