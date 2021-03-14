@@ -1,13 +1,13 @@
-package proj.ezcolet.entry
+package proj.ezcolet.views.entry
 
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import proj.ezcolet.user.UserActivity
-import proj.ezcolet.courier.CourierActivity
 import proj.ezcolet.databinding.EntryLoginActivityBinding
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.views.client.ClientActivity
+import proj.ezcolet.views.courier.CourierHomeActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,11 +23,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.toUserBtn.setOnClickListener() {
-            ViewService.setView(this, UserActivity())
+            ViewService.setView(this, ClientActivity())
         }
 
         binding.toCourierBtn.setOnClickListener() {
-            ViewService.setView(this, CourierActivity())
+            ViewService.setView(this, CourierHomeActivity())
         }
 
         setContentView(binding.root)

@@ -1,18 +1,19 @@
-package proj.ezcolet.user
+package proj.ezcolet.views.client
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.ExampleItem
-import proj.ezcolet.databinding.UserHomeActivityBinding
-import proj.ezcolet.entry.LoginActivity
+import proj.ezcolet.models.OrderModel
+import proj.ezcolet.databinding.ClientHomeActivityBinding
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.views.adapters.UserAdapter
+import proj.ezcolet.views.entry.LoginActivity
 
-class UserActivity : AppCompatActivity() {
+class ClientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = UserHomeActivityBinding.inflate(layoutInflater)
+        val binding = ClientHomeActivityBinding.inflate(layoutInflater)
         binding.exitBtn.setOnClickListener(){
             finish();
             ViewService.setView(this, LoginActivity())
@@ -26,11 +27,11 @@ class UserActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun generateList(size: Int): List<ExampleItem> {
-        val list = ArrayList<ExampleItem>()
+    private fun generateList(size: Int): List<OrderModel> {
+        val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = ExampleItem("Comanda $i", "livrat la ora:")
+            val item = OrderModel("Comanda $i", "livrat la ora:")
             list += item
         }
         return list

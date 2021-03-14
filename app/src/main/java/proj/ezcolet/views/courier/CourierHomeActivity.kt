@@ -1,16 +1,16 @@
-package proj.ezcolet.courier
+package proj.ezcolet.views.courier
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.ExampleItem
+import proj.ezcolet.models.OrderModel
+import proj.ezcolet.views.adapters.Adapter
 import proj.ezcolet.databinding.CourierHomeActivityBinding
-import proj.ezcolet.entry.LoginActivity
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.views.entry.LoginActivity
 
 private const val CAMERA_REQUEST_CODE=101
-class CourierActivity : AppCompatActivity() {
+class CourierHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,11 +20,11 @@ class CourierActivity : AppCompatActivity() {
             ViewService.setView(this, CourierInfoActivity())
         }
         binding.scanQRBtn.setOnClickListener(){
-            ViewService.setView(this,CourierQrScanActivity())
+            ViewService.setView(this, CourierQrScanActivity())
         }
         binding.exitBtn.setOnClickListener(){
             finish();
-            ViewService.setView(this,LoginActivity())
+            ViewService.setView(this, LoginActivity())
         }
 
         val list = generateList(500)
@@ -35,11 +35,11 @@ class CourierActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    private fun generateList(size: Int): List<ExampleItem> {
-        val list = ArrayList<ExampleItem>()
+    private fun generateList(size: Int): List<OrderModel> {
+        val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = ExampleItem("Comanda $i", "  livrat la ora:")
+            val item = OrderModel("Comanda $i", "  livrat la ora:")
             list += item
         }
         return list

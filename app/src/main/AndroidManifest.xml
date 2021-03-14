@@ -11,22 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ezcolet">
         <activity
-            android:name=".courier.CourierQrScanActivity"
+            android:name=".views.courier.CourierQrScanActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".courier.CourierInfoActivity"
+            android:name=".views.courier.CourierInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".courier.CourierActivity"
+            android:name=".views.courier.CourierHomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".user.UserActivity"
+            android:name=".views.client.ClientActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".entry.RegisterActivity"
+            android:name=".views.entry.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".entry.LoginActivity"
+            android:name=".views.entry.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
