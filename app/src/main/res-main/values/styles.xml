@@ -2,7 +2,7 @@
 <resources>
     <!-- yellow rounded button -->
     <style name="btnRoundedPrimary" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/btn_primary_gradient</item>
+        <item name="android:background">@drawable/btn_primary</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:clickable">true</item>
         <item name="android:textColor">@color/primary_base_color_dark</item>
