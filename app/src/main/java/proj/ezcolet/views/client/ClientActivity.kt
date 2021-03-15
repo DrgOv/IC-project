@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import proj.ezcolet.models.OrderModel
 import proj.ezcolet.databinding.ClientHomeActivityBinding
 import proj.ezcolet.services.ViewService
-import proj.ezcolet.views.adapters.UserAdapter
+import proj.ezcolet.views.adapters.ClientAdapter
 import proj.ezcolet.views.entry.LoginActivity
 
 class ClientActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class ClientActivity : AppCompatActivity() {
         }
         val list = generateList(500)
 
-        binding.ordersListingRecyclerView.adapter = UserAdapter(list)
+        binding.ordersListingRecyclerView.adapter = ClientAdapter(list)
         binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.ordersListingRecyclerView.setHasFixedSize(true)
 

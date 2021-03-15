@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import proj.ezcolet.models.OrderModel
-import proj.ezcolet.views.adapters.Adapter
+import proj.ezcolet.views.adapters.CourierAdapter
 import proj.ezcolet.databinding.CourierHomeActivityBinding
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.entry.LoginActivity
@@ -28,7 +28,7 @@ class CourierHomeActivity : AppCompatActivity() {
         }
 
         val list = generateList(500)
-        binding.ordersListingRecyclerView.adapter = Adapter(list)
+        binding.ordersListingRecyclerView.adapter = CourierAdapter(list)
         binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.ordersListingRecyclerView.setHasFixedSize(true)
 

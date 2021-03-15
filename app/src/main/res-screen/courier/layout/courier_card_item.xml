@@ -28,14 +28,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/upperTextView"
+                    android:id="@+id/courierOrderNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:text="@string/upperTextCardView"
                     android:textSize="@dimen/small_heading" />
 
                 <TextView
-                    android:id="@+id/lowerTextView"
+                    android:id="@+id/courierOrderDetailsTextView"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:text="@string/LowerTextCardView"
