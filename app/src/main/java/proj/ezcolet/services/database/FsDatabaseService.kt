@@ -1,9 +1,8 @@
-package proj.ezcolet.services
+movepackage proj.ezcolet.services.database
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import proj.ezcolet.models.ClientModel
 import proj.ezcolet.models.Model
 
 class FsDatabaseService : DatabaseService {

@@ -1,4 +1,4 @@
-package proj.ezcolet.services
+package proj.ezcolet.services.database
 
 import proj.ezcolet.models.ClientModel
 import proj.ezcolet.models.Model

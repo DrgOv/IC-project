@@ -1,7 +1,6 @@
 package proj.ezcolet.contracts
 
 import proj.ezcolet.models.ClientModel
-import proj.ezcolet.services.DatabaseService
 
 interface RegisterContract {
     interface View {

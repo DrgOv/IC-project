@@ -2,12 +2,12 @@ package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.models.ClientModel
-import proj.ezcolet.services.FsDatabaseService
-import proj.ezcolet.services.ViewService
+import proj.ezcolet.services.database.DatabaseService
+import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.views.entry.RegisterActivity
 
 class RegisterPresenter(private val registerActivity: RegisterActivity) : RegisterContract.Presenter {
-    private val fsDatabaseService = FsDatabaseService()
+    private val fsDatabaseService: DatabaseService = FsDatabaseService()
 
     override fun addClient(newClient: ClientModel): Boolean {
         if (isLastNameValid(newClient.lastName) &&
