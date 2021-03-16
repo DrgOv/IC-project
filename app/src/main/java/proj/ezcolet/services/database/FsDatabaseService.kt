@@ -1,4 +1,4 @@
-movepackage proj.ezcolet.services.database
+package proj.ezcolet.services.database
 
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
