@@ -1,5 +1,6 @@
 package proj.ezcolet.views.entry
 
+import android.content.Intent
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
