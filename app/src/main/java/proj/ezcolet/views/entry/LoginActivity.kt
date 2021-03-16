@@ -22,20 +22,9 @@ class LoginActivity : AppCompatActivity() {
         val binding = EntryLoginActivityBinding.inflate(layoutInflater)
 
         binding.loginBtn.setOnClickListener() {
-            val city = hashMapOf(
-                "name" to "Los Angeles",
-                "state" to "CA",
-                "country" to "USA"
-            )
-
-            val db = FirebaseFirestore.getInstance()
-            db.collection("clients").document("LA")
-                .set(city)
-                .addOnSuccessListener {}
-                .addOnFailureListener { }
         }
 
-        binding.registerBtn.setOnClickListener() {
+        binding.toRegisterBtn.setOnClickListener() {
             ViewService.setView(this, RegisterActivity())
         }
 
