@@ -4,121 +4,152 @@ import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.models.ClientModel
 import proj.ezcolet.services.database.DatabaseService
 import proj.ezcolet.services.database.FsDatabaseService
-import proj.ezcolet.views.entry.RegisterActivity
 
-class RegisterPresenter(private val registerActivity: RegisterActivity) : RegisterContract.Presenter {
+class RegisterPresenter(private val registerActivity: RegisterContract.View) :
+    RegisterContract.Presenter {
     private val fsDatabaseService: DatabaseService = FsDatabaseService()
 
     override fun addClient(newClient: ClientModel): Boolean {
-        if (isLastNameValid(newClient.lastName) &&
-            isFirstNameValid(newClient.firstName) &&
-            isStreetValid(newClient.street) &&
-            isCountyValid(newClient.county) &&
-            isCityValid(newClient.city) &&
-            isZipCodeValid(newClient.zipCode) &&
-            isPhoneValid(newClient.phone) &&
-            isUsernameValid(newClient.username) &&
-            isPasswordValid(newClient.password)
-        ) {
+        if (isDataValid(newClient)) {
+            println(newClient)
             fsDatabaseService.add(FsDatabaseService.CLIENTS_COLLECTION, newClient)
             return true
         }
         return false
     }
 
+    private fun isDataValid(newClient: ClientModel): Boolean {
+        val lastNameState = newClient.isLastNameValid()
+        val firstNameState = newClient.isFirstNameValid()
+        val streetState = newClient.isStreetValid()
+        val countyState = newClient.isCountyValid()
+        val cityState = newClient.isCityValid()
+        val zipCodeState = newClient.isZipCodeValid()
+        val phoneState = newClient.isPhoneValid()
+        val usernameState = newClient.isUsernameValid()
+        val passwordState = newClient.isPasswordValid()
+
+        if (isLastNameValid(lastNameState) && isFirstNameValid(firstNameState) &&
+            isStreetValid(streetState) && isCountyValid(countyState) && isCityValid(cityState) &&
+            isZipCodeValid(zipCodeState) && isPhoneValid(phoneState) &&
+            isUsernameValid(usernameState) && isPasswordValid(passwordState)
+        ) {
+            return true
+        }
+        return false
+    }
+
     override fun isLastNameValid(lastName: String): Boolean {
-        if (lastName.isEmpty()) {
-            registerActivity.showLastNameError("Introdu numele")
-            return false
+        return when (lastName) {
+            "empty" -> {
+                registerActivity.showLastNameError("Introdu numele")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showLastNameError("Nume invalid")
+                false
+            }
+            else -> true
         }
-        if (!lastName.matches(Regex("^[A-Z][-a-zA-Z]{2,}$"))) {
-            registerActivity.showLastNameError("Nume invalid")
-            return false
-        }
-        return true
     }
 
     override fun isFirstNameValid(firstName: String): Boolean {
-        if (firstName.isEmpty()) {
-            registerActivity.showFirstNameError("Introdu prenumele")
-            return false
+        return when (firstName) {
+            "empty" -> {
+                registerActivity.showFirstNameError("Introdu prenumele")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showFirstNameError("Prenume invalid")
+                false
+            }
+            else -> true
         }
-        if (!firstName.matches(Regex("^[A-Z][-a-zA-Z]{2,}$"))) {
-            registerActivity.showFirstNameError("Prenume invalid")
-            return false
-        }
-        return true
     }
 
     override fun isStreetValid(street: String): Boolean {
-        if (street.isEmpty()) {
-            registerActivity.showStreetError("Introdu adresa")
-            return false
+        return when (street) {
+            "empty" -> {
+                registerActivity.showStreetError("Introdu adresa")
+                false
+            }
+            else -> true
         }
-        return true
     }
 
     override fun isCountyValid(county: String): Boolean {
-        if (county.isEmpty()) {
-            registerActivity.showCountyError("Introdu judetul")
-            return false
+        return when (county) {
+            "empty" -> {
+                registerActivity.showCountyError("Introdu judetul")
+                false
+            }
+            else -> true
         }
-        return true
     }
 
     override fun isCityValid(city: String): Boolean {
-        if (city.isEmpty()) {
-            registerActivity.showCityError("Introdu orasul")
-            return false
+        return when (city) {
+            "empty" -> {
+                registerActivity.showCityError("Introdu orasul")
+                false
+            }
+            else -> true
         }
-        return true
     }
 
     override fun isZipCodeValid(zipCode: String): Boolean {
-        if (zipCode.isEmpty()) {
-            registerActivity.showZipCodeError("Introdu un cod postal")
-            return false
+        return when (zipCode) {
+            "empty" -> {
+                registerActivity.showZipCodeError("Introdu un cod postal")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showZipCodeError("Cod postal invalid")
+                false
+            }
+            else -> true
         }
-        if (!zipCode.matches(Regex("^[0-9]{6}$"))) {
-            registerActivity.showZipCodeError("Cod postal invalid")
-            return false
-        }
-        return true
     }
 
     override fun isPhoneValid(phone: String): Boolean {
-        if (phone.isEmpty()) {
-            registerActivity.showPhoneError("Introdu un numar de telefon")
-            return false
+        return when (phone) {
+            "empty" -> {
+                registerActivity.showPhoneError("Introdu un numar de telefon")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showPhoneError("Numar de telefon invalid")
+                false
+            }
+            else -> true
         }
-        if (!phone.matches(Regex("^0[0-9]{9}$"))) {
-            registerActivity.showPhoneError("Numar de telefon invalid")
-            return false
-        }
-        return true
     }
 
     override fun isUsernameValid(username: String): Boolean {
-        if (username.isEmpty()) {
-            registerActivity.showUsernameError("Introdu un username")
-            return false
+        return when (username) {
+            "empty" -> {
+                registerActivity.showUsernameError("Introdu un username")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showUsernameError("Username invalid")
+                false
+            }
+            else -> true
         }
-        if (!username.matches(Regex("^(?=[a-zA-Z0-9._]{8,20}\$)(?!.*[_.]{2})[^_.].*[^_.]$"))) {
-            registerActivity.showUsernameError("Username invalid")
-            return false
-        }
-        return true
     }
 
     override fun isPasswordValid(password: String): Boolean {
-        if (password.isEmpty()) {
-            registerActivity.showPasswordError("Introdu o parola")
-            return false
+        return when (password) {
+            "empty" -> {
+                registerActivity.showPasswordError("Introdu o parola")
+                false
+            }
+            "invalid" -> {
+                registerActivity.showPasswordError("Parola invalida - minim 8 caractere, o litera mare, o litera mica, o cifra")
+                false
+            }
+            else -> true
         }
-        if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"))) {
-            registerActivity.showPasswordError("Parola invalida - minim 8 caractere, o litera mare, o litera mica, o cifra")
-            return false
-        }
-        return true
     }
 }

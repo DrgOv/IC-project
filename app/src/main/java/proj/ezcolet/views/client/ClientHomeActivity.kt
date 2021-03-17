@@ -9,7 +9,7 @@ import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.adapters.ClientAdapter
 import proj.ezcolet.views.entry.LoginActivity
 
-class ClientActivity : AppCompatActivity() {
+class ClientHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

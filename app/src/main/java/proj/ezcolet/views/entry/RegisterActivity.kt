@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.databinding.EntryRegisterActivityBinding
 import proj.ezcolet.models.ClientModel
@@ -14,7 +12,7 @@ import proj.ezcolet.services.ViewService
 
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
-    private val registerPresenter = RegisterPresenter(this)
+    private lateinit var registerPresenter: RegisterContract.Presenter
     private lateinit var binding: EntryRegisterActivityBinding
 
     private lateinit var firstNameET: EditText
@@ -30,6 +28,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        registerPresenter = RegisterPresenter(this)
         binding = EntryRegisterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -46,7 +45,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
         registerBtn.setOnClickListener() {
             if (addClient()) {
-                println("SUCCESS")
+                println("REGISTERED SUCCESSFULLY")
                 goToLoginScreen()
             }
         }
