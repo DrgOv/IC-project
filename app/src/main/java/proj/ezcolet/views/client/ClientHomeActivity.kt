@@ -9,7 +9,7 @@ import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.adapters.ClientAdapter
 import proj.ezcolet.views.entry.LoginActivity
 
-class ClientActivity : AppCompatActivity() {
+class ClientHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,7 +31,7 @@ class ClientActivity : AppCompatActivity() {
         val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = OrderModel("Comanda $i", "livrat la ora:")
+            val item = OrderModel(orderName = "Comanda $i", orderDetails =  "livrat la ora:")
             list += item
         }
         return list

@@ -39,7 +39,7 @@ class CourierHomeActivity : AppCompatActivity() {
         val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = OrderModel("Comanda $i", "  livrat la ora:")
+            val item = OrderModel(orderName = "Comanda $i", orderDetails =  "  livrat la ora:")
             list += item
         }
         return list

@@ -3,50 +3,71 @@ package proj.ezcolet.views.entry
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
+import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.databinding.EntryLoginActivityBinding
+import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
-import proj.ezcolet.views.client.ClientActivity
+import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginContract.View {
+    private val loginPresenter: LoginContract.Presenter = LoginPresenter(this)
+    private lateinit var binding: EntryLoginActivityBinding
+
+    private lateinit var usernameET: EditText
+    private lateinit var passwordET: EditText
+    private lateinit var loginBtn: Button
+    private lateinit var toRegisterBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
+        binding = EntryLoginActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val binding = EntryLoginActivityBinding.inflate(layoutInflater)
+        usernameET = binding.usernameEditText
+        passwordET = binding.passwordEditText
+        loginBtn = binding.loginBtn
+        toRegisterBtn = binding.toRegisterBtn
 
-        binding.loginBtn.setOnClickListener() {
-            val city = hashMapOf(
-                "name" to "Los Angeles",
-                "state" to "CA",
-                "country" to "USA"
-            )
-
-            val db = FirebaseFirestore.getInstance()
-            db.collection("clients").document("LA")
-                .set(city)
-                .addOnSuccessListener {}
-                .addOnFailureListener { }
+        loginBtn.setOnClickListener() {
         }
 
-        binding.registerBtn.setOnClickListener() {
-            ViewService.setView(this, RegisterActivity())
+        toRegisterBtn.setOnClickListener() {
+            goToRegisterScreen()
         }
 
         binding.toUserBtn.setOnClickListener() {
-            ViewService.setView(this, ClientActivity())
+            goToClientScreen()
         }
 
         binding.toCourierBtn.setOnClickListener() {
-            ViewService.setView(this, CourierHomeActivity())
+            goToCourierScreen()
         }
 
-        setContentView(binding.root)
+    }
+
+    override fun showUsernameError(error: String) {
+        usernameET.error = error
+    }
+
+    override fun showPasswordError(error: String) {
+        passwordET.error = error
+    }
+
+    override fun goToRegisterScreen() {
+        ViewService.setView(this, RegisterActivity())
+    }
+
+    override fun goToClientScreen() {
+        ViewService.setView(this, ClientHomeActivity())
+    }
+
+    override fun goToCourierScreen() {
+        ViewService.setView(this, CourierHomeActivity())
     }
 }
