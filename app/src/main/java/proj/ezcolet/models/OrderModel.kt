@@ -6,9 +6,6 @@ data class OrderModel(
     val orderDetails: String
 ) :
     Model(id) {
-    override fun isDataValid() {
-        TODO("Not yet implemented")
-    }
 
     override fun toString(): String {
         return "OrderModel(id='$id', orderName='$orderName', orderDetails='$orderDetails')"

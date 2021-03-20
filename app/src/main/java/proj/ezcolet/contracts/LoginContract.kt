@@ -10,7 +10,8 @@ interface LoginContract {
     }
 
     interface Presenter {
-        fun isUsernameValid(username: String): Boolean
-        fun isPasswordValid(password: String): Boolean
+        fun login(username: String, password: String): String
+        fun isDataValid(username: String, password: String): Boolean
+        fun showError(field: String, error: String)
     }
 }

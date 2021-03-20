@@ -20,14 +20,7 @@ interface RegisterContract {
 
     interface Presenter {
         fun addClient(newClient: ClientModel): Boolean
-        fun isLastNameValid(lastName: String): Boolean
-        fun isFirstNameValid(firstName: String): Boolean
-        fun isStreetValid(street: String): Boolean
-        fun isCountyValid(county: String): Boolean
-        fun isCityValid(city: String): Boolean
-        fun isZipCodeValid(zipCode: String): Boolean
-        fun isPhoneValid(phone: String): Boolean
-        fun isUsernameValid(username: String): Boolean
-        fun isPasswordValid(password: String): Boolean
+        fun isDataValid(newClient: ClientModel): Boolean
+        fun showError(field: String, error: String)
     }
 }

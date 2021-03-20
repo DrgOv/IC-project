@@ -14,7 +14,7 @@ import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
-    private val loginPresenter: LoginContract.Presenter = LoginPresenter(this)
+    private lateinit var loginPresenter: LoginContract.Presenter
     private lateinit var binding: EntryLoginActivityBinding
 
     private lateinit var usernameET: EditText
@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
+        loginPresenter = LoginPresenter(this)
         binding = EntryLoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +36,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         toRegisterBtn = binding.toRegisterBtn
 
         loginBtn.setOnClickListener() {
+            login()
         }
 
         toRegisterBtn.setOnClickListener() {
@@ -49,6 +51,16 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             goToCourierScreen()
         }
 
+    }
+
+    private fun login() {
+        val username = usernameET.text.toString()
+        val password = passwordET.text.toString()
+
+        when (loginPresenter.login(username, password)) {
+            "client" -> goToClientScreen()
+            "courier" -> goToCourierScreen()
+        }
     }
 
     override fun showUsernameError(error: String) {

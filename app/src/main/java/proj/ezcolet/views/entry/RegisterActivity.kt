@@ -1,7 +1,9 @@
 package proj.ezcolet.views.entry
 
+import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import proj.ezcolet.contracts.RegisterContract
@@ -28,6 +30,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFormat(PixelFormat.RGBA_8888)
         registerPresenter = RegisterPresenter(this)
         binding = EntryRegisterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
