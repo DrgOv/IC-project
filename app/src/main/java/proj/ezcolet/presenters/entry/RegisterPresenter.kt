@@ -1,7 +1,7 @@
 package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.RegisterContract
-import proj.ezcolet.models.ClientModel
+import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.database.DatabaseService
 import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.validation.EMPTY
@@ -31,7 +31,12 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
                 return false
             }
             if (value == INVALID) {
-                showError(key, INVALID_ERROR_MESSAGE)
+                var errorMessage = INVALID_ERROR_MESSAGE
+                if (key == "password") {
+                    errorMessage =
+                        "$INVALID_ERROR_MESSAGE - minim 8 caractere, 1 litera mare, 1 litera mica, 1 cifra"
+                }
+                showError(key, errorMessage)
                 return false
             }
         }

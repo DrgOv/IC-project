@@ -1,7 +1,9 @@
 package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.LoginContract
-import proj.ezcolet.models.ClientModel
+import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.models.users.CourierModel
+import proj.ezcolet.models.users.UserModel
 import proj.ezcolet.services.database.DatabaseService
 import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.validation.*
@@ -9,17 +11,18 @@ import proj.ezcolet.services.validation.*
 class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContract.Presenter {
     private val fsDatabaseService: DatabaseService = FsDatabaseService()
 
-    override fun login(username: String, password: String): String {
+    override suspend fun login(username: String, password: String): UserModel? {
+        var user: UserModel? = null
         if (isDataValid(username, password)) {
-            println("DATE VALIDE")
-            return "client"
+            user = fsDatabaseService.getClient(username)
+            println("FOUND USER: $user")
         }
-        println("DATE INVALIDE")
-        return ""
+        println(user)
+        return user
     }
 
     override fun isDataValid(username: String, password: String): Boolean {
-        val validationMap = hashMapOf(
+        val validationMap = linkedMapOf(
             "username" to ValidationService.getStringState(username, PATTERN_USERNAME),
             "password" to ValidationService.getStringState(password, PATTERN_PASSWORD)
         )

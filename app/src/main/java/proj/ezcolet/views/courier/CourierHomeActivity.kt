@@ -24,7 +24,7 @@ class CourierHomeActivity : AppCompatActivity() {
         }
         binding.exitBtn.setOnClickListener(){
             finish();
-            ViewService.setView(this, LoginActivity())
+            //ViewService.setView(this, LoginActivity())
         }
 
         val list = generateList(500)

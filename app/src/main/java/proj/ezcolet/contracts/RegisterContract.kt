@@ -1,6 +1,6 @@
 package proj.ezcolet.contracts
 
-import proj.ezcolet.models.ClientModel
+import proj.ezcolet.models.users.ClientModel
 
 interface RegisterContract {
     interface View {

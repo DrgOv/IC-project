@@ -3,12 +3,11 @@ package proj.ezcolet.views.entry
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.databinding.EntryRegisterActivityBinding
-import proj.ezcolet.models.ClientModel
+import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.presenters.entry.RegisterPresenter
 import proj.ezcolet.services.ViewService
 
@@ -126,6 +125,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun goToLoginScreen() {
-        ViewService.setView(this, LoginActivity())
+        //ViewService.setView(this, LoginActivity())
     }
 }

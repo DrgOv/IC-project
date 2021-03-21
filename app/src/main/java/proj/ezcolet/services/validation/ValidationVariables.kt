@@ -22,4 +22,4 @@ const val INVALID = "invalid"
 const val VALID = "valid"
 
 const val EMPTY_ERROR_MESSAGE = "Camp obligatoriu"
-const val INVALID_ERROR_MESSAGE = "Date invalide"
+const val INVALID_ERROR_MESSAGE = "Format invalid"

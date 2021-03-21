@@ -1,10 +1,15 @@
 package proj.ezcolet.services.database
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import proj.ezcolet.models.Model
+import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.models.users.CourierModel
 import java.lang.NullPointerException
 
 class FsDatabaseService : DatabaseService {
@@ -28,18 +33,18 @@ class FsDatabaseService : DatabaseService {
         db.collection(collectionName).document(document.id).delete()
     }
 
-    override fun get(collectionName: String, documentId: String): Model? {
-        var user: Model? = null ?: throw NullPointerException()
-        val docRef = db.collection(collectionName).document(documentId)
-        docRef.get().addOnSuccessListener { documentSnapshot ->
-            if (documentSnapshot != null) {
-                user = documentSnapshot.toObject<Model>()
-                println("${documentSnapshot.data}")
-            } else {
-                println("No document")
-                user = null
-            }
-        }
-        return user
+    override suspend fun get(collectionName: String, documentId: String): DocumentSnapshot? {
+        var docSnapshot: DocumentSnapshot? = null
+        docSnapshot = db.collection(collectionName).document(documentId).get().await()
+        println(docSnapshot.data)
+        return docSnapshot
+    }
+
+    override suspend fun getClient(documentId: String): ClientModel? {
+        return get(CLIENTS_COLLECTION, documentId)?.toObject<ClientModel>()
+    }
+
+    override suspend fun getCourier(documentId: String): CourierModel? {
+        return get(COURIERS_COLLECTION, documentId)?.toObject<CourierModel>()
     }
 }

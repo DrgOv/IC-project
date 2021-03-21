@@ -1,28 +1,29 @@
-package proj.ezcolet.models
+package proj.ezcolet.models.users
 
 import com.google.firebase.firestore.Exclude
+import proj.ezcolet.models.Model
 import proj.ezcolet.services.validation.*
 
-class ClientModel(
-    override val id: String,
-    val lastName: String,
-    val firstName: String,
-    val street: String,
-    val county: String,
-    val city: String,
-    val zipCode: String,
-    val phone: String,
-    val username: String,
-    val password: String,
-    val role: String = "client"
-) : Model(id) {
+data class ClientModel(
+    override val id: String = "",
+    override val lastName: String = "",
+    override val firstName: String = "",
+    val street: String = "",
+    override val county: String = "",
+    override val city: String = "",
+    val zipCode: String = "",
+    override val phone: String = "",
+    override val username: String = "",
+    override val password: String = ""
+) : UserModel(id, lastName, firstName, county, city, phone, username, password, "client") {
+
     override fun toString(): String {
         return "ClientModel(id='$id', lastName='$lastName', firstName='$firstName', street='$street', county='$county', city='$city', zipCode='$zipCode', phone='$phone', username='$username', password='$password', role='$role')"
     }
 
     @Exclude
     fun generateValidationMap(): HashMap<String, String> {
-        return hashMapOf(
+        return linkedMapOf(
             "lastName" to isLastNameValid(),
             "firstName" to isFirstNameValid(),
             "street" to isStreetValid(),

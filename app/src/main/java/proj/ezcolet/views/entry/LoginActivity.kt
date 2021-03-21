@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatDelegate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.databinding.EntryLoginActivityBinding
 import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
+import kotlin.coroutines.CoroutineContext
 
-class LoginActivity : AppCompatActivity(), LoginContract.View {
+class LoginActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
+    AppCompatActivity(), LoginContract.View, CoroutineScope {
     private lateinit var loginPresenter: LoginContract.Presenter
     private lateinit var binding: EntryLoginActivityBinding
 
@@ -23,7 +28,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private lateinit var toRegisterBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
         loginPresenter = LoginPresenter(this)
@@ -36,7 +40,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         toRegisterBtn = binding.toRegisterBtn
 
         loginBtn.setOnClickListener() {
-            login()
+            launch {
+                login()
+            }
         }
 
         toRegisterBtn.setOnClickListener() {
@@ -53,14 +59,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     }
 
-    private fun login() {
+    private suspend fun login() {
         val username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        when (loginPresenter.login(username, password)) {
-            "client" -> goToClientScreen()
-            "courier" -> goToCourierScreen()
-        }
+        loginPresenter.login(username, password)
     }
 
     override fun showUsernameError(error: String) {
