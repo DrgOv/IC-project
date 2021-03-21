@@ -16,7 +16,7 @@ class ClientHomeActivity : AppCompatActivity() {
         val binding = ClientHomeActivityBinding.inflate(layoutInflater)
         binding.exitBtn.setOnClickListener() {
             finish();
-            //ViewService.setView(this, LoginActivity())
+            ViewService.setView(this, LoginActivity())
         }
         val list = generateList(500)
 

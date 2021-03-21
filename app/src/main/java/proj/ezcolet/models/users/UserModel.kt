@@ -2,7 +2,7 @@ package proj.ezcolet.models.users
 
 import proj.ezcolet.models.Model
 
-abstract class UserModel(
+abstract open class UserModel(
     override val id: String = "",
     open val lastName: String = "",
     open val firstName: String = "",
@@ -13,4 +13,10 @@ abstract class UserModel(
     open val password: String = "",
     val role: String = ""
 ) : Model(id) {
+    fun doPasswordsMatch(password: String): Boolean {
+        if (this.password == password) {
+            return true
+        }
+        return false
+    }
 }

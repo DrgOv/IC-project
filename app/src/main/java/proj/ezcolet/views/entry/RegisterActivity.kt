@@ -125,6 +125,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun goToLoginScreen() {
-        //ViewService.setView(this, LoginActivity())
+        ViewService.setView(this, LoginActivity())
     }
 }

@@ -11,12 +11,11 @@ import proj.ezcolet.services.validation.INVALID_ERROR_MESSAGE
 
 class RegisterPresenter(private val registerActivity: RegisterContract.View) :
     RegisterContract.Presenter {
-    private val fsDatabaseService: DatabaseService = FsDatabaseService()
 
     override fun addClient(newClient: ClientModel): Boolean {
         if (isDataValid(newClient)) {
             println(newClient)
-            fsDatabaseService.add(FsDatabaseService.CLIENTS_COLLECTION, newClient)
+            FsDatabaseService.addClient(newClient)
             return true
         }
         return false

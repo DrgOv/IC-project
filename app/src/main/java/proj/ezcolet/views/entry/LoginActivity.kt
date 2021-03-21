@@ -11,6 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.databinding.EntryLoginActivityBinding
+import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.client.ClientHomeActivity
@@ -63,7 +65,10 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         val username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        loginPresenter.login(username, password)
+        when (loginPresenter.login(username, password)) {
+            is ClientModel -> goToClientScreen()
+            is CourierModel -> goToCourierScreen()
+        }
     }
 
     override fun showUsernameError(error: String) {

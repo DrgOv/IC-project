@@ -1,24 +1,28 @@
 package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.LoginContract
-import proj.ezcolet.models.users.ClientModel
-import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
-import proj.ezcolet.services.database.DatabaseService
 import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.validation.*
 
 class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContract.Presenter {
-    private val fsDatabaseService: DatabaseService = FsDatabaseService()
 
     override suspend fun login(username: String, password: String): UserModel? {
-        var user: UserModel? = null
         if (isDataValid(username, password)) {
-            user = fsDatabaseService.getClient(username)
-            println("FOUND USER: $user")
+            val user = if (username.startsWith("curier_")) {
+                println(FsDatabaseService.getCourier(username))
+                FsDatabaseService.getCourier(username)
+            } else {
+                println(FsDatabaseService.getClient(username))
+                FsDatabaseService.getClient(username)
+            }
+            if (user != null) {
+                if (user.doPasswordsMatch(password)) {
+                    return user
+                }
+            }
         }
-        println(user)
-        return user
+        return null
     }
 
     override fun isDataValid(username: String, password: String): Boolean {

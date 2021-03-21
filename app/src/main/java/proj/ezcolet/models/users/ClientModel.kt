@@ -42,12 +42,12 @@ data class ClientModel(
     }
 
     @Exclude
-    fun isFirstNameValid(): String {
+    fun isFirstNameValid(): String? {
         return ValidationService.getStringState(firstName, PATTERN_START_UPPERCASE_MIN_3)
     }
 
     @Exclude
-    fun isStreetValid(): String {
+    fun isStreetValid(): String? {
         return ValidationService.getStringState(street)
     }
 
