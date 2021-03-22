@@ -13,6 +13,7 @@ import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.databinding.EntryLoginActivityBinding
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
+import proj.ezcolet.models.users.UserModel
 import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.client.ClientHomeActivity
@@ -58,17 +59,13 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         binding.toCourierBtn.setOnClickListener() {
             goToCourierScreen()
         }
-
     }
 
     private suspend fun login() {
         val username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        when (loginPresenter.login(username, password)) {
-            is ClientModel -> goToClientScreen()
-            is CourierModel -> goToCourierScreen()
-        }
+        goToUserScreen(loginPresenter.login(username, password))
     }
 
     override fun showUsernameError(error: String) {
@@ -83,6 +80,12 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         ViewService.setView(this, RegisterActivity())
     }
 
+    private fun goToUserScreen(user: UserModel?) {
+        when (user) {
+            is ClientModel -> goToClientScreen()
+            is CourierModel -> goToCourierScreen()
+        }
+    }
     override fun goToClientScreen() {
         ViewService.setView(this, ClientHomeActivity())
     }

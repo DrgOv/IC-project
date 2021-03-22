@@ -19,7 +19,7 @@ interface RegisterContract {
     }
 
     interface Presenter {
-        fun addClient(newClient: ClientModel): Boolean
+        suspend fun addClient(newClient: ClientModel): Boolean
         fun isDataValid(newClient: ClientModel): Boolean
         fun showError(field: String, error: String)
     }

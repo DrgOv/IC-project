@@ -21,30 +21,30 @@ object FsDatabaseService : DatabaseService {
         return FirebaseFirestore.getInstance()
     }
 
-    override fun add(collectionName: String, document: Model) {
+    override suspend fun add(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id)
-            .set(document)
+            .set(document).await()
     }
 
-    override fun addClient(client: ClientModel) {
+    override suspend fun addClient(client: ClientModel) {
         add(CLIENTS_COLLECTION, client)
     }
 
-    override fun addCourier(courier: CourierModel) {
+    override suspend fun addCourier(courier: CourierModel) {
         add(COURIERS_COLLECTION, courier)
     }
 
-    override fun addOrder(order: OrderModel) {
+    override suspend fun addOrder(order: OrderModel) {
         add(ORDERS_COLLECTION, order)
     }
 
-    override fun update(collectionName: String, document: Model) {
+    override suspend fun update(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id)
-            .set(document, SetOptions.merge())
+            .set(document, SetOptions.merge()).await()
     }
 
-    override fun delete(collectionName: String, document: Model) {
-        db().collection(collectionName).document(document.id).delete()
+    override suspend fun delete(collectionName: String, document: Model) {
+        db().collection(collectionName).document(document.id).delete().await()
     }
 
     override suspend fun get(collectionName: String, documentId: String): DocumentSnapshot? {
