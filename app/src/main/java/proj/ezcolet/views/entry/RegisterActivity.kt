@@ -1,17 +1,23 @@
 package proj.ezcolet.views.entry
 
+import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.databinding.EntryRegisterActivityBinding
-import proj.ezcolet.models.ClientModel
+import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.presenters.entry.RegisterPresenter
 import proj.ezcolet.services.ViewService
+import kotlin.coroutines.CoroutineContext
 
 
-class RegisterActivity : AppCompatActivity(), RegisterContract.View {
+class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
+    AppCompatActivity(), RegisterContract.View, CoroutineScope {
     private lateinit var registerPresenter: RegisterContract.Presenter
     private lateinit var binding: EntryRegisterActivityBinding
 
@@ -28,6 +34,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFormat(PixelFormat.RGBA_8888)
         registerPresenter = RegisterPresenter(this)
         binding = EntryRegisterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,14 +51,17 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         registerBtn = binding.registerBtn
 
         registerBtn.setOnClickListener() {
-            if (addClient()) {
-                println("REGISTERED SUCCESSFULLY")
-                goToLoginScreen()
+            launch {
+                if (addClient()) {
+                    println("REGISTERED SUCCESSFULLY")
+                    goToLoginScreen()
+                }
             }
+
         }
     }
 
-    private fun addClient(): Boolean {
+    private suspend fun addClient(): Boolean {
         val firstName = firstNameET.text.toString()
         val lastName = lastNameET.text.toString()
         val street = streetET.text.toString()

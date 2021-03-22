@@ -14,7 +14,7 @@ class ClientHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ClientHomeActivityBinding.inflate(layoutInflater)
-        binding.exitBtn.setOnClickListener(){
+        binding.exitBtn.setOnClickListener() {
             finish();
             ViewService.setView(this, LoginActivity())
         }
@@ -31,7 +31,7 @@ class ClientHomeActivity : AppCompatActivity() {
         val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = OrderModel(orderName = "Comanda $i", orderDetails =  "livrat la ora:")
+            val item = OrderModel(orderName = "Comanda $i", orderDetails = "livrat la ora:")
             list += item
         }
         return list
