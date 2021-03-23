@@ -11,6 +11,8 @@ import proj.ezcolet.models.Model
 import proj.ezcolet.models.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
+import proj.ezcolet.models.users.UserModel
+import proj.ezcolet.services.validation.ValidationService
 
 object FsDatabaseService : DatabaseService {
     private const val CLIENTS_COLLECTION = "clients"
@@ -43,8 +45,32 @@ object FsDatabaseService : DatabaseService {
             .set(document, SetOptions.merge()).await()
     }
 
+    override suspend fun updateClient(client: ClientModel) {
+        update(CLIENTS_COLLECTION, client)
+    }
+
+    override suspend fun updateCourier(courier: CourierModel) {
+        update(COURIERS_COLLECTION, courier)
+    }
+
+    override suspend fun updateOrder(order: OrderModel) {
+        update(ORDERS_COLLECTION, order)
+    }
+
     override suspend fun delete(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id).delete().await()
+    }
+
+    override suspend fun deleteClient(client: ClientModel) {
+        delete(CLIENTS_COLLECTION, client)
+    }
+
+    override suspend fun deleteCourier(courier: CourierModel) {
+        delete(COURIERS_COLLECTION, courier)
+    }
+
+    override suspend fun deleteOrder(order: OrderModel) {
+        delete(ORDERS_COLLECTION, order)
     }
 
     override suspend fun get(collectionName: String, documentId: String): DocumentSnapshot? {
@@ -58,5 +84,13 @@ object FsDatabaseService : DatabaseService {
 
     override suspend fun getCourier(documentId: String): CourierModel? {
         return get(COURIERS_COLLECTION, documentId)?.toObject<CourierModel>()
+    }
+
+    suspend fun getUserBasedOnUsername(username: String): UserModel? {
+        return if (ValidationService.hasCourierUsername(username)) {
+            getCourier(username)
+        } else {
+            getClient(username)
+        }
     }
 }

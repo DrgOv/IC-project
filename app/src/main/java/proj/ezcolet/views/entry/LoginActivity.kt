@@ -86,6 +86,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
             is CourierModel -> goToCourierScreen()
         }
     }
+
     override fun goToClientScreen() {
         ViewService.setView(this, ClientHomeActivity())
     }

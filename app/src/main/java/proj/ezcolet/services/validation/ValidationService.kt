@@ -11,5 +11,9 @@ class ValidationService {
             }
             return VALID
         }
+
+        fun hasCourierUsername(username: String): Boolean {
+            return username.startsWith("curier_")
+        }
     }
 }

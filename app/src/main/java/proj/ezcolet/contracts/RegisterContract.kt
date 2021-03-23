@@ -13,8 +13,6 @@ interface RegisterContract {
         fun showPhoneError(error: String)
         fun showUsernameError(error: String)
         fun showPasswordError(error: String)
-        fun disableRegisterBtn()
-        fun enableRegisterBtn()
         fun goToLoginScreen()
     }
 

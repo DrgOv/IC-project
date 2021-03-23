@@ -57,7 +57,6 @@ class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatc
                     goToLoginScreen()
                 }
             }
-
         }
     }
 
@@ -122,14 +121,6 @@ class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatc
 
     override fun showPasswordError(error: String) {
         passwordET.error = error
-    }
-
-    override fun disableRegisterBtn() {
-        registerBtn.isEnabled = false
-    }
-
-    override fun enableRegisterBtn() {
-        registerBtn.isEnabled = true
     }
 
     override fun goToLoginScreen() {

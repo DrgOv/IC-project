@@ -14,7 +14,6 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
 
     override suspend fun addClient(newClient: ClientModel): Boolean {
         if (isDataValid(newClient)) {
-            println(newClient)
             FsDatabaseService.addClient(newClient)
             return true
         }
@@ -25,21 +24,22 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
         val validationMap = newClient.generateValidationMap()
 
         for ((key, value) in validationMap) {
-            if (value == EMPTY) {
-                showError(key, EMPTY_ERROR_MESSAGE)
-                return false
-            }
-            if (value == INVALID) {
-                var errorMessage = INVALID_ERROR_MESSAGE
-                if (key == "password") {
-                    errorMessage =
-                        "$INVALID_ERROR_MESSAGE - minim 8 caractere, 1 litera mare, 1 litera mica, 1 cifra"
+            when (value) {
+                EMPTY -> {
+                    showError(key, EMPTY_ERROR_MESSAGE)
+                    return false
                 }
-                showError(key, errorMessage)
-                return false
+                INVALID -> {
+                    var errorMessage = INVALID_ERROR_MESSAGE
+                    if (key == "password") {
+                        errorMessage =
+                            "$INVALID_ERROR_MESSAGE - minim 8 caractere, 1 litera mare, 1 litera mica, 1 cifra"
+                    }
+                    showError(key, errorMessage)
+                    return false
+                }
             }
         }
-
         return true
     }
 

@@ -9,13 +9,7 @@ class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContr
 
     override suspend fun login(username: String, password: String): UserModel? {
         if (isDataValid(username, password)) {
-            val user = if (username.startsWith("curier_")) {
-                println(FsDatabaseService.getCourier(username))
-                FsDatabaseService.getCourier(username)
-            } else {
-                println(FsDatabaseService.getClient(username))
-                FsDatabaseService.getClient(username)
-            }
+            val user = FsDatabaseService.getUserBasedOnUsername(username)
             if (user != null) {
                 if (user.doPasswordsMatch(password)) {
                     return user
@@ -32,16 +26,18 @@ class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContr
         )
 
         for ((key, value) in validationMap) {
-            if (value == EMPTY) {
-                showError(key, EMPTY_ERROR_MESSAGE)
-                return false
-            }
-            if (value == INVALID) {
-                showError(key, INVALID_ERROR_MESSAGE)
-                return false
+            return when (value) {
+                EMPTY -> {
+                    showError(key, EMPTY_ERROR_MESSAGE)
+                    false
+                }
+                INVALID -> {
+                    showError(key, INVALID_ERROR_MESSAGE)
+                    false
+                }
+                else -> true
             }
         }
-
         return true
     }
 
