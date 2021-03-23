@@ -12,17 +12,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 import kotlinx.android.synthetic.main.courier_qr_scan_activity.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 import proj.ezcolet.R
 import proj.ezcolet.databinding.CourierQrScanActivityBinding
+import proj.ezcolet.models.OrderModel
+import proj.ezcolet.services.database.FsDatabaseService
+import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
 
-class CourierQrScanActivity : AppCompatActivity() {
+class CourierQrScanActivity(override val coroutineContext: CoroutineContext=Dispatchers.Main) : AppCompatActivity(),CoroutineScope {
     private lateinit var codeScanner: CodeScanner
 
 
     private var add_order_count = 0
+    private lateinit var orderDetails:List<String>
+
     val delimiter1 = "\n"
     val delimiter2 = "Comanda:"
     val delimiter3 = "Nume:"
@@ -58,9 +66,10 @@ class CourierQrScanActivity : AppCompatActivity() {
                         orderInfoTextView.text = it.text
                         var addButton = findViewById<Button>(R.id.addBtn)
                         addButton.setOnClickListener() {
+                            launch {
 
                             if (add_order_count == 0) {
-                                val orderDetails = orderInfoTextView.text.split(
+                                orderDetails = orderInfoTextView.text.split(
                                     delimiter1,
                                     delimiter2,
                                     delimiter3,
@@ -82,7 +91,22 @@ class CourierQrScanActivity : AppCompatActivity() {
 
                                 add_order_count++;
                             }
+                            var order = OrderModel(
+                                "asfja",
+                                "caca",
+                                "12",
+                                orderDetails[1],
+                                orderDetails[3],
+                                orderDetails[5],
+                                orderDetails[7],
+                                orderDetails[9],
+                                orderDetails[11],
+                                orderDetails[13],
+                                orderDetails[15]
+                            )
+                            FsDatabaseService.addOrder(order)
                         }
+                    }
                         add_order_count = 0;
                     }
                 }

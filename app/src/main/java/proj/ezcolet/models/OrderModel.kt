@@ -1,7 +1,7 @@
 package proj.ezcolet.models
 
 data class OrderModel(
-    override val id: String = "",
+
     val courierUsername:String,
     val clientUsername:String,
     val orderName: String,
@@ -14,7 +14,7 @@ data class OrderModel(
     val clientCounty: String,
     val orderSum: String
 ) :
-    Model(id) {
+    Model(orderName) {
 
     override fun toString(): String {
         return "OrderModel(id='$id', orderName='$orderName', orderDetails='$orderDetails')"
