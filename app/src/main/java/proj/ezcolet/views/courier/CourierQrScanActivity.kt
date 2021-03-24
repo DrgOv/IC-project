@@ -18,6 +18,7 @@ import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.models.OrderModel
 import proj.ezcolet.presenters.courier.CourierQrScanPresenter
 import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.services.database.FsDatabaseService.addOrder
 import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -26,18 +27,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
     AppCompatActivity(), CoroutineScope {
     private lateinit var codeScanner: CodeScanner
     private lateinit var courier_qr_scan_Presenter: CourierQrScanContract.Presenter
-    private lateinit var orderDetails: List<String>
     private var add_order_count = 0
-
-    val delimiter1 = "\n"
-    val delimiter2 = "Comanda: "
-    val delimiter3 = "Nume: "
-    val delimiter4 = "Prenume: "
-    val delimiter5 = "Telefon: "
-    val delimiter6 = "Strada: "
-    val delimiter7 = "Oraș: "
-    val delimiter8 = "Județ: "
-    val delimiter9 = "Suma: "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,57 +55,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
                         var addButton = findViewById<Button>(R.id.addBtn)
                         addButton.setOnClickListener() {
                             launch {
-
-                                if (add_order_count == 0) {
-                                    orderDetails = orderInfoTextView.text.split(
-                                        delimiter1,
-                                        delimiter2,
-                                        delimiter3,
-                                        delimiter4,
-                                        delimiter5,
-                                        delimiter6,
-                                        delimiter7,
-                                        delimiter8,
-                                        delimiter9
-                                    )
-                                    println(orderDetails[1])
-                                    println(orderDetails[3])
-                                    println(orderDetails[5])
-                                    println(orderDetails[7])
-                                    println(orderDetails[9])
-                                    println(orderDetails[11])
-                                    println(orderDetails[13])
-                                    println(orderDetails[15])
-
-                                    Toast.makeText(
-                                        this@CourierQrScanActivity,
-                                        "Comandă adăugată",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-
-                                var order = OrderModel(
-                                    "alex",
-                                    "filip.adrian",
-                                    orderDetails[1],
-                                    "12",
-                                    orderDetails[3],
-                                    orderDetails[5],
-                                    orderDetails[7],
-                                    orderDetails[9],
-                                    orderDetails[11],
-                                    orderDetails[13],
-                                    orderDetails[15]
-                                )
-                                FsDatabaseService.addOrder(order)
-                                if (add_order_count > 0) {
-                                    Toast.makeText(
-                                        this@CourierQrScanActivity,
-                                        "Comanda a fost deja adăugată",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                                add_order_count++;
+                                addOrderDetails(orderInfoTextView.text.toString())
                             }
                         }
 
@@ -126,7 +66,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
 
             errorCallback = ErrorCallback {
                 runOnUiThread {
-                    Log.e("Main", "Camera initialization error: ${it.message}")
+                    Log.e("Main", "Eroare la inițializarea camerei: ${it.message}")
                 }
             }
         }
@@ -136,6 +76,29 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
         }
     }
 
+    private suspend fun addOrderDetails(info: String) {
+
+        if (add_order_count == 0) {
+
+            courier_qr_scan_Presenter.splitOrderInfos(info)
+            Toast.makeText(
+                this@CourierQrScanActivity,
+                "Comandă adăugată",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            courier_qr_scan_Presenter.addOrderInfo()
+        }
+
+        if (add_order_count > 0) {
+            Toast.makeText(
+                this@CourierQrScanActivity,
+                "Comanda a fost deja adăugată",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        add_order_count++;
+    }
 
     override fun onResume() {
         super.onResume()
