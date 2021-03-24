@@ -1,11 +1,9 @@
 package proj.ezcolet.views.courier
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,36 +13,36 @@ import kotlinx.android.synthetic.main.courier_qr_scan_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 import proj.ezcolet.R
-import proj.ezcolet.databinding.CourierQrScanActivityBinding
+import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.models.OrderModel
+import proj.ezcolet.presenters.courier.CourierQrScanPresenter
 import proj.ezcolet.services.database.FsDatabaseService
 import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
 
-class CourierQrScanActivity(override val coroutineContext: CoroutineContext=Dispatchers.Main) : AppCompatActivity(),CoroutineScope {
+class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
+    AppCompatActivity(), CoroutineScope {
     private lateinit var codeScanner: CodeScanner
-
-
+    private lateinit var courier_qr_scan_Presenter: CourierQrScanContract.Presenter
+    private lateinit var orderDetails: List<String>
     private var add_order_count = 0
-    private lateinit var orderDetails:List<String>
 
     val delimiter1 = "\n"
-    val delimiter2 = "Comanda:"
-    val delimiter3 = "Nume:"
-    val delimiter4 = "Prenume:"
-    val delimiter5 = "Telefon:"
-    val delimiter6 = "Strada:"
-    val delimiter7 = "Oras:"
-    val delimiter8 = "Judet:"
-    val delimiter9 = "Suma:"
+    val delimiter2 = "Comanda: "
+    val delimiter3 = "Nume: "
+    val delimiter4 = "Prenume: "
+    val delimiter5 = "Telefon: "
+    val delimiter6 = "Strada: "
+    val delimiter7 = "Oraș: "
+    val delimiter8 = "Județ: "
+    val delimiter9 = "Suma: "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.courier_qr_scan_activity)
-
+        courier_qr_scan_Presenter = CourierQrScanPresenter(this)
         setupPermissions()
         codeScanner()
     }
@@ -68,45 +66,59 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext=Disp
                         addButton.setOnClickListener() {
                             launch {
 
-                            if (add_order_count == 0) {
-                                orderDetails = orderInfoTextView.text.split(
-                                    delimiter1,
-                                    delimiter2,
-                                    delimiter3,
-                                    delimiter4,
-                                    delimiter5,
-                                    delimiter6,
-                                    delimiter7,
-                                    delimiter8,
-                                    delimiter9
-                                )
-                                println(orderDetails[1])
-                                println(orderDetails[3])
-                                println(orderDetails[5])
-                                println(orderDetails[7])
-                                println(orderDetails[9])
-                                println(orderDetails[11])
-                                println(orderDetails[13])
-                                println(orderDetails[15])
+                                if (add_order_count == 0) {
+                                    orderDetails = orderInfoTextView.text.split(
+                                        delimiter1,
+                                        delimiter2,
+                                        delimiter3,
+                                        delimiter4,
+                                        delimiter5,
+                                        delimiter6,
+                                        delimiter7,
+                                        delimiter8,
+                                        delimiter9
+                                    )
+                                    println(orderDetails[1])
+                                    println(orderDetails[3])
+                                    println(orderDetails[5])
+                                    println(orderDetails[7])
+                                    println(orderDetails[9])
+                                    println(orderDetails[11])
+                                    println(orderDetails[13])
+                                    println(orderDetails[15])
 
+                                    Toast.makeText(
+                                        this@CourierQrScanActivity,
+                                        "Comandă adăugată",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                var order = OrderModel(
+                                    "alex",
+                                    "filip.adrian",
+                                    orderDetails[1],
+                                    "12",
+                                    orderDetails[3],
+                                    orderDetails[5],
+                                    orderDetails[7],
+                                    orderDetails[9],
+                                    orderDetails[11],
+                                    orderDetails[13],
+                                    orderDetails[15]
+                                )
+                                FsDatabaseService.addOrder(order)
+                                if (add_order_count > 0) {
+                                    Toast.makeText(
+                                        this@CourierQrScanActivity,
+                                        "Comanda a fost deja adăugată",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                                 add_order_count++;
                             }
-                            var order = OrderModel(
-                                "asfja",
-                                "caca",
-                                "12",
-                                orderDetails[1],
-                                orderDetails[3],
-                                orderDetails[5],
-                                orderDetails[7],
-                                orderDetails[9],
-                                orderDetails[11],
-                                orderDetails[13],
-                                orderDetails[15]
-                            )
-                            FsDatabaseService.addOrder(order)
                         }
-                    }
+
                         add_order_count = 0;
                     }
                 }

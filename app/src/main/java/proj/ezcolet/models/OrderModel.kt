@@ -2,8 +2,8 @@ package proj.ezcolet.models
 
 data class OrderModel(
 
-    val courierUsername:String,
-    val clientUsername:String,
+    val courierUsername: String,
+    val clientUsername: String,
     val orderName: String,
     val orderDetails: String,
     val clientFirstName: String,
