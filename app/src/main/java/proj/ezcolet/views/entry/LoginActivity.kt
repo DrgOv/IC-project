@@ -1,5 +1,6 @@
 package proj.ezcolet.views.entry
 
+import android.content.Intent
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,7 @@ import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
+import proj.ezcolet.views.courier.CourierInfoActivity
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
@@ -29,6 +31,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     private lateinit var passwordET: EditText
     private lateinit var loginBtn: Button
     private lateinit var toRegisterBtn: Button
+    private lateinit var username:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,6 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         passwordET = binding.passwordEditText
         loginBtn = binding.loginBtn
         toRegisterBtn = binding.toRegisterBtn
-
         loginBtn.setOnClickListener() {
             launch {
                 login()
@@ -62,7 +64,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     }
 
     private suspend fun login() {
-        val username = usernameET.text.toString()
+        username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
         goToUserScreen(loginPresenter.login(username, password))
@@ -87,10 +89,11 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         }
     }
     override fun goToClientScreen() {
-        ViewService.setView(this, ClientHomeActivity())
+        ViewService.setViewAndId(this, ClientHomeActivity(),username)
     }
 
     override fun goToCourierScreen() {
-        ViewService.setView(this, CourierHomeActivity())
+        ViewService.setViewAndId(this, CourierHomeActivity(),username)
+
     }
 }
