@@ -21,4 +21,5 @@ interface DatabaseService {
     suspend fun get(collectionName: String, documentId: String): Any?
     suspend fun getClient(documentId: String): ClientModel?
     suspend fun getCourier(documentId: String): CourierModel?
+    suspend fun getOrder(documentId: String) : OrderModel?
 }

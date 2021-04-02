@@ -86,6 +86,10 @@ object FsDatabaseService : DatabaseService {
         return get(COURIERS_COLLECTION, documentId)?.toObject<CourierModel>()
     }
 
+    override suspend fun getOrder(documentId: String): OrderModel? {
+        return get(ORDERS_COLLECTION, documentId)?.toObject<OrderModel>()
+    }
+
     suspend fun getUserBasedOnUsername(username: String): UserModel? {
         return if (ValidationService.hasCourierUsername(username)) {
             getCourier(username)

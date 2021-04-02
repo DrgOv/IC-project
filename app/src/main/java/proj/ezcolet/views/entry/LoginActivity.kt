@@ -90,11 +90,11 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     }
 
     override fun goToClientScreen() {
-        ViewService.setViewAndId(this, ClientHomeActivity(),username)
+        ViewService.setViewAndId(this, ClientHomeActivity(), username)
     }
 
     override fun goToCourierScreen() {
-        ViewService.setViewAndId(this, CourierHomeActivity(),username)
+        ViewService.setViewAndId(this, CourierHomeActivity(), username)
 
     }
 }
