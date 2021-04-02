@@ -1,0 +1,114 @@
+Index: app/src/main/java/proj/ezcolet/views/courier/CourierQrScanActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package proj.ezcolet.views.courier\r\n\r\nimport android.content.Intent\r\nimport android.content.pm.PackageManager\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.widget.Button\r\nimport android.widget.TextView\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport com.budiyev.android.codescanner.*\r\nimport kotlinx.android.synthetic.main.courier_qr_scan_activity.*\r\nimport org.w3c.dom.Text\r\nimport proj.ezcolet.R\r\nimport proj.ezcolet.databinding.CourierQrScanActivityBinding\r\n\r\nprivate const val CAMERA_REQUEST_CODE = 101\r\n\r\nclass CourierQrScanActivity : AppCompatActivity() {\r\n    private lateinit var codeScanner: CodeScanner\r\n\r\n    //private lateinit var orderInfoTextView: TextView\r\n    //private lateinit var addBtuun: Button\r\n    private var count = 0\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.courier_qr_scan_activity)\r\n\r\n        setupPermissions()\r\n        codeScanner()\r\n    }\r\n\r\n\r\n    private fun codeScanner() {\r\n        codeScanner = CodeScanner(this, qrScannerView)\r\n        codeScanner.apply {\r\n            camera = CodeScanner.CAMERA_BACK\r\n            formats = CodeScanner.ALL_FORMATS\r\n            autoFocusMode = AutoFocusMode.SAFE\r\n            scanMode = ScanMode.CONTINUOUS\r\n            isAutoFocusEnabled = true\r\n            isFlashEnabled = false\r\n\r\n            decodeCallback = DecodeCallback {\r\n                runOnUiThread {\r\n                    if (it.text != orderInfoTextView.text) {\r\n                        orderInfoTextView.text = it.text\r\n                        var addButton = findViewById<Button>(R.id.addBtn)\r\n                        addButton.setOnClickListener() {\r\n                            //println(\"hellooo\")\r\n                            if (count == 0) {\r\n                                println(orderInfoTextView.text.toString());\r\n                                count++;\r\n                            }\r\n                        }\r\n                        count = 0;\r\n                    }\r\n                }\r\n            }\r\n\r\n            errorCallback = ErrorCallback {\r\n                runOnUiThread {\r\n                    Log.e(\"Main\", \"Camera initialization error: ${it.message}\")\r\n                }\r\n            }\r\n        }\r\n\r\n        qrScannerView.setOnClickListener {\r\n            codeScanner.startPreview()\r\n        }\r\n    }\r\n\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        codeScanner.startPreview()\r\n    }\r\n\r\n    override fun onPause() {\r\n        codeScanner.releaseResources()\r\n        super.onPause()\r\n    }\r\n\r\n    private fun setupPermissions() {\r\n        val permission = ContextCompat.checkSelfPermission(\r\n            this, android.Manifest.permission.CAMERA\r\n        )\r\n\r\n        if (permission != PackageManager.PERMISSION_GRANTED) {\r\n            makeRequest()\r\n        }\r\n    }\r\n\r\n    private fun makeRequest() {\r\n        ActivityCompat.requestPermissions(\r\n            this, arrayOf(android.Manifest.permission.CAMERA),\r\n            CAMERA_REQUEST_CODE\r\n        )\r\n    }\r\n\r\n    override fun onRequestPermissionsResult(\r\n        requestCode: Int,\r\n        permissions: Array<out String>,\r\n        grantResults: IntArray\r\n    ) {\r\n        when (requestCode) {\r\n            CAMERA_REQUEST_CODE -> {\r\n                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {\r\n                    Toast.makeText(\r\n                        this,\r\n                        \"Pentru a putea folosi această funcție trebuie să acceptați permisiunile pentru camera foto\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/proj/ezcolet/views/courier/CourierQrScanActivity.kt	(revision 7a2dccb27b383732177cc3566674d14b3a220f4f)
++++ app/src/main/java/proj/ezcolet/views/courier/CourierQrScanActivity.kt	(date 1616416299542)
+@@ -1,30 +1,35 @@
+ package proj.ezcolet.views.courier
+ 
+-import android.content.Intent
++import android.R.string
+ import android.content.pm.PackageManager
+ import android.os.Bundle
+ import android.util.Log
+ import android.widget.Button
+-import android.widget.TextView
+ import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.app.ActivityCompat
+ import androidx.core.content.ContextCompat
+ import com.budiyev.android.codescanner.*
+ import kotlinx.android.synthetic.main.courier_qr_scan_activity.*
+-import org.w3c.dom.Text
+ import proj.ezcolet.R
+-import proj.ezcolet.databinding.CourierQrScanActivityBinding
++
+ 
+ private const val CAMERA_REQUEST_CODE = 101
+ 
+ class CourierQrScanActivity : AppCompatActivity() {
+     private lateinit var codeScanner: CodeScanner
+ 
+-    //private lateinit var orderInfoTextView: TextView
+-    //private lateinit var addBtuun: Button
+-    private var count = 0
+ 
++    private var add_order_count = 0
++    var delimiter1 = "\n"
++    var delimiter2= "Comanda:"
++    var delimiter3 = "Nume:"
++    var delimiter4= "Prenume:"
++    var delimiter5 = "Telefon:"
++    var delimiter6= "Strada:"
++    var delimiter7 = "Oras:"
++    var delimiter8= "Judet:"
++    var delimiter9="Suma:"
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.courier_qr_scan_activity)
+@@ -50,13 +55,21 @@
+                         orderInfoTextView.text = it.text
+                         var addButton = findViewById<Button>(R.id.addBtn)
+                         addButton.setOnClickListener() {
+-                            //println("hellooo")
+-                            if (count == 0) {
+-                                println(orderInfoTextView.text.toString());
+-                                count++;
++
++                            if (add_order_count == 0) {
++                                val parts = orderInfoTextView.text.split(delimiter1,delimiter2,delimiter3,delimiter4,delimiter5,delimiter6,delimiter7,delimiter8,delimiter9)
++                                println(parts[1]);
++                                println(parts[3]);
++                                println(parts[5]);
++                                println(parts[7]);
++                                println(parts[9]);
++                                println(parts[11]);
++                                println(parts[13]);
++                                println(parts[15]);
++                                add_order_count++;
+                             }
+                         }
+-                        count = 0;
++                        add_order_count= 0;
+                     }
+                 }
+             }
+Index: app/src/main/java/proj/ezcolet/models/OrderModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package proj.ezcolet.models\r\n\r\ndata class OrderModel (val orderName: String, val orderDetails: String){\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/proj/ezcolet/models/OrderModel.kt	(revision 7a2dccb27b383732177cc3566674d14b3a220f4f)
++++ app/src/main/java/proj/ezcolet/models/OrderModel.kt	(date 1616428287895)
+@@ -1,4 +1,22 @@
+ package proj.ezcolet.models
+ 
+-data class OrderModel (val orderName: String, val orderDetails: String){
+-}
+\ No newline at end of file
++data class OrderModel (
++    val usernameCourier: String,
++    val usernameClient: String,
++    val orderName: String,
++    val clientFirstName: String,
++    val clientLastName: String,
++    val clientPhone: String,
++    val clientStreet: String,
++    val clientCity: String,
++    val clientCounty: String,
++    val orderSum: String,
++    val orderDetails: String)
++
++{
++
++
++        override fun toString(): String {
++            return "OrderModel(usernameCourier='$usernameCourier', orderName='$orderName', orderDetails='$orderDetails')"
++        }
++}

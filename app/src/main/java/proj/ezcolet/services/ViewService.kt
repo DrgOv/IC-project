@@ -14,6 +14,13 @@ class ViewService {
             OldActivity.startActivity(intent)
         }
 
+        fun setViewAndId(OldActivity: AppCompatActivity, NewActivity: AppCompatActivity,username:String)
+        {
+            val intent = Intent(OldActivity.applicationContext, NewActivity::class.java)
+            intent.putExtra("Username",username)
+            OldActivity.startActivity(intent)
+
+        }
         fun setEditTextError(editText: EditText, error: String) {
             editText.error = error
         }

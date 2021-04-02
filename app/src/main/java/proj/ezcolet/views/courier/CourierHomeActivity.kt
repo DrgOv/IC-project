@@ -1,5 +1,6 @@
 package proj.ezcolet.views.courier
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +16,12 @@ class CourierHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = CourierHomeActivityBinding.inflate(layoutInflater)
-
+        val Username=intent.getStringExtra("Username")
         binding.infoBtn.setOnClickListener() {
-            ViewService.setView(this, CourierInfoActivity())
+            //ViewService.setView(this, CourierInfoActivity())
+            val intent = Intent(this,CourierInfoActivity::class.java)
+            intent.putExtra("courierUsername",Username)
+            startActivity(intent)
         }
         binding.scanQRBtn.setOnClickListener(){
             ViewService.setView(this, CourierQrScanActivity())
@@ -39,8 +43,8 @@ class CourierHomeActivity : AppCompatActivity() {
         val list = ArrayList<OrderModel>()
         for (i in 0 until size) {
 
-            val item = OrderModel(orderName = "Comanda $i", orderDetails =  "  livrat la ora:")
-            list += item
+           // val item = OrderModel(orderName = "Comanda $i", orderDetails =  "  livrat la ora:")
+          //  list += item
         }
         return list
     }
