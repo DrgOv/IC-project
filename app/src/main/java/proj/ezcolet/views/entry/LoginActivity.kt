@@ -31,7 +31,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     private lateinit var passwordET: EditText
     private lateinit var loginBtn: Button
     private lateinit var toRegisterBtn: Button
-    private lateinit var username:String
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
