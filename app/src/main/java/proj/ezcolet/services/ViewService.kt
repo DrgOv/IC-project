@@ -14,10 +14,10 @@ class ViewService {
             OldActivity.startActivity(intent)
         }
 
-        fun setViewAndId(OldActivity: AppCompatActivity, NewActivity: AppCompatActivity,username:String)
+        fun setViewAndId(OldActivity: AppCompatActivity, NewActivity: AppCompatActivity, username:String)
         {
             val intent = Intent(OldActivity.applicationContext, NewActivity::class.java)
-            intent.putExtra("Username",username)
+            intent.putExtra("Username", username)
             OldActivity.startActivity(intent)
 
         }

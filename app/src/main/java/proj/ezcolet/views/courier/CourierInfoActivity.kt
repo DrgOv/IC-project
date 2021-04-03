@@ -12,8 +12,8 @@ class CourierInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.courier_info_activity)
         val binding = CourierInfoActivityBinding.inflate(layoutInflater)
-        val Username=intent.getStringExtra("courierUsername")
-        courierUsernameTextView.text=Username
-        println(Username)
+        val username = intent.getStringExtra("Username")
+        courierUsernameTextView.text = username
+        println(username)
     }
 }
