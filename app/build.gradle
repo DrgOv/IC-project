@@ -41,9 +41,11 @@ android {
         main {
             res.srcDirs = [
                     'src\\main\\res-main',
+                    'src\\main\\res-screen\\admin',
                     'src\\main\\res-screen\\client',
                     'src\\main\\res-screen\\courier',
-                    'src\\main\\res-screen\\entry'
+                    'src\\main\\res-screen\\entry',
+                    'src\\main\\res'
             ]
         }
     }

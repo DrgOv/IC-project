@@ -1,12 +1,10 @@
 package proj.ezcolet.views.entry
 
-import android.content.Intent
 import android.graphics.PixelFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,9 +15,9 @@ import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
 import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.views.admin.AdminHomeActivity
 import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
-import proj.ezcolet.views.courier.CourierInfoActivity
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
@@ -67,7 +65,11 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        goToUserScreen(loginPresenter.login(username, password))
+        if (username == "admin" && password == "admin") {
+            goToAdminScreen()
+        } else {
+            goToUserScreen(loginPresenter.login(username, password))
+        }
     }
 
     override fun showUsernameError(error: String) {
@@ -75,6 +77,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     }
 
     override fun showPasswordError(error: String) {
+        println("test");
         passwordET.error = error
     }
 
@@ -96,5 +99,9 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     override fun goToCourierScreen() {
         ViewService.setViewAndId(this, CourierHomeActivity(), username)
 
+    }
+
+    override fun goToAdminScreen() {
+        ViewService.setView(this, AdminHomeActivity())
     }
 }
