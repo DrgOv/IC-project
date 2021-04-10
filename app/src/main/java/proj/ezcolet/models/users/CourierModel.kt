@@ -8,9 +8,14 @@ class CourierModel(
     override val city: String = "",
     override val phone: String = "",
     override val username: String = "",
-    override val password: String = ""
+    override val password: String = "",
+    val rating: Float = 0f,
+    val maxRatings: Int = 0,
+    val numberRatings: Int = 0,
+    val monthlyOrders: Int = 0,
+    val totalOrders: Int = 0
 ) : UserModel(id, lastName, firstName, county, city, phone, username, password, "courier") {
     override fun toString(): String {
-        return "CourierModel(id='$id', firstName='$firstName', lastName='$lastName', phone='$phone', username='$username', password='$password')"
+        return "CourierModel(id='$id', firstName='$firstName', lastName='$lastName', phone='$phone', username='$username', password='$password', rating='$rating', maxRatings'$maxRatings',numberRatings='$numberRatings', monthlyOrders='$monthlyOrders', totalOrders='$totalOrders')"
     }
 }
