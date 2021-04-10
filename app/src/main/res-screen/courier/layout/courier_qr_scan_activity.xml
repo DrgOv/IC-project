@@ -61,7 +61,11 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="5"
-            android:text="Result.." />
+            android:background="@drawable/text_view_rounded_corners"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="Informații comandă..."
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"

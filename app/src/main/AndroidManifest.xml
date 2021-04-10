@@ -20,7 +20,7 @@
             android:name=".views.courier.CourierHomeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.client.ClientActivity"
+            android:name=".views.client.ClientHomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.entry.RegisterActivity"
