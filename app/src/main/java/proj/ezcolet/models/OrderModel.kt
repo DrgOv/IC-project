@@ -12,11 +12,12 @@ data class OrderModel(
     val clientStreet: String,
     val clientCity: String,
     val clientCounty: String,
-    val orderSum: String
+    val orderSum: String,
+    val orderNumber:Int
 ) :
-    Model(orderName) {
+    ModelInt(orderNumber) {
 
     override fun toString(): String {
-        return "OrderModel(id='$id', orderName='$orderName', orderDetails='$orderDetails')"
+        return "OrderModel(id='$id', orderName='$orderName', orderNumber='$orderNumber')"
     }
 }

@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="Username"
             android:textSize="@dimen/medium_heading" />
 
         <LinearLayout
@@ -54,7 +53,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:text="_/10"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -76,7 +74,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center_vertical"
-                    android:text="Comenzi lunare:"
                     android:textSize="26sp" />
 
             </LinearLayout>
@@ -98,7 +95,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center_vertical"
-                    android:text="Comenzi totale:"
                     android:textSize="26sp" />
 
             </LinearLayout>
@@ -120,7 +116,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center_vertical"
-                    android:text="Rating maxim:"
                     android:textSize="26sp" />
 
             </LinearLayout>

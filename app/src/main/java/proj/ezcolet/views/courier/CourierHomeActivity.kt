@@ -23,7 +23,7 @@ class CourierHomeActivity : AppCompatActivity() {
 
         }
         binding.scanQRBtn.setOnClickListener() {
-            ViewService.setView(this, CourierQrScanActivity())
+            ViewService.setViewAndId(this, CourierQrScanActivity(),username.toString())
         }
         binding.exitBtn.setOnClickListener() {
             finish();

@@ -27,12 +27,15 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
     AppCompatActivity(), CoroutineScope {
     private lateinit var codeScanner: CodeScanner
     private lateinit var courier_qr_scan_Presenter: CourierQrScanContract.Presenter
+    private lateinit var username: String
     private var add_order_count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.courier_qr_scan_activity)
         courier_qr_scan_Presenter = CourierQrScanPresenter(this)
+        username = intent.getStringExtra("Username").toString()
+
         setupPermissions()
         codeScanner()
     }
@@ -87,7 +90,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
                 Toast.LENGTH_SHORT
             ).show()
 
-            courier_qr_scan_Presenter.addOrderInfo()
+            courier_qr_scan_Presenter.addOrderInfo(username)
         }
 
         if (add_order_count > 0) {
