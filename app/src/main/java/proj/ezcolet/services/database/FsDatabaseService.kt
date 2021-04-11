@@ -1,11 +1,15 @@
 package proj.ezcolet.services.database
 
-import com.google.firebase.firestore.*
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
+import io.grpc.InternalChannelz.id
 import kotlinx.coroutines.tasks.await
+import proj.ezcolet.models.GeneralModel
 import proj.ezcolet.models.Model
-import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.models.ModelInt
+import proj.ezcolet.models.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
@@ -15,29 +19,19 @@ object FsDatabaseService : DatabaseService {
     private const val CLIENTS_COLLECTION = "clients"
     private const val COURIERS_COLLECTION = "couriers"
     private const val ORDERS_COLLECTION = "orders"
+    private const val GENERAL_COLLECTION = "general"
 
     private fun db(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
 
-    private fun getCollectionReference(collectionName: String): CollectionReference {
-        return db().collection(collectionName)
-    }
-
-    fun getClientsCollectionReference(): CollectionReference {
-        return getCollectionReference(CLIENTS_COLLECTION)
-    }
-
-    fun getCouriersCollectionReference(): CollectionReference {
-        return getCollectionReference(COURIERS_COLLECTION)
-    }
-
-    fun getOrdersCollectionReference(): CollectionReference {
-        return getCollectionReference(ORDERS_COLLECTION)
-    }
-
     override suspend fun add(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id)
+            .set(document).await()
+    }
+
+    override suspend fun addInt(collectionName: String, document: ModelInt) {
+        db().collection(collectionName).document(document.id.toString())
             .set(document).await()
     }
 
@@ -50,11 +44,21 @@ object FsDatabaseService : DatabaseService {
     }
 
     override suspend fun addOrder(order: OrderModel) {
-        add(ORDERS_COLLECTION, order)
+        addInt(ORDERS_COLLECTION, order)
+    }
+
+    override suspend fun addGeneral(general: GeneralModel) {
+        db().collection(GENERAL_COLLECTION).document("orderStats")
+            .set(general).await()
     }
 
     override suspend fun update(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id)
+            .set(document, SetOptions.merge()).await()
+    }
+
+    override suspend fun updateInt(collectionName: String, document: ModelInt) {
+        db().collection(collectionName).document(document.id.toString())
             .set(document, SetOptions.merge()).await()
     }
 
@@ -67,11 +71,15 @@ object FsDatabaseService : DatabaseService {
     }
 
     override suspend fun updateOrder(order: OrderModel) {
-        update(ORDERS_COLLECTION, order)
+        updateInt(ORDERS_COLLECTION, order)
     }
 
     override suspend fun delete(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id).delete().await()
+    }
+
+    override suspend fun deleteInt(collectionName: String, document: ModelInt) {
+        db().collection(collectionName).document(document.id.toString()).delete().await()
     }
 
     override suspend fun deleteClient(client: ClientModel) {
@@ -83,7 +91,7 @@ object FsDatabaseService : DatabaseService {
     }
 
     override suspend fun deleteOrder(order: OrderModel) {
-        delete(ORDERS_COLLECTION, order)
+        deleteInt(ORDERS_COLLECTION, order)
     }
 
     override suspend fun get(collectionName: String, documentId: String): DocumentSnapshot? {
@@ -103,7 +111,11 @@ object FsDatabaseService : DatabaseService {
         return get(ORDERS_COLLECTION, documentId)?.toObject<OrderModel>()
     }
 
-    suspend fun getUserByUsername(username: String): UserModel? {
+    override suspend fun getGeneral(documentId: String): GeneralModel? {
+        return get(GENERAL_COLLECTION, documentId)?.toObject<GeneralModel>()
+    }
+
+    suspend fun getUserBasedOnUsername(username: String): UserModel? {
         return if (ValidationService.hasCourierUsername(username)) {
             getCourier(username)
         } else {
@@ -111,9 +123,24 @@ object FsDatabaseService : DatabaseService {
         }
     }
 
-    suspend fun getOrdersByUsername(username: String): List<OrderModel> {
-        return db().collection(ORDERS_COLLECTION)
-            .whereEqualTo("clientUsername", username)
-            .get().await().toObjects<OrderModel>()
+    suspend fun getClientBasedOnNamePhone(
+        firstName: String,
+        lastName: String,
+        phone: String
+    ): ClientModel? {
+
+        var client: ClientModel? = null
+        db().collection(CLIENTS_COLLECTION).whereEqualTo("firstName", firstName)
+            .whereEqualTo("lastName", lastName).whereEqualTo("phone", phone).get()
+            .addOnSuccessListener { querySnapshot ->
+                for (query in querySnapshot)
+                    client = query.toObject()
+
+            }.await()
+
+        return client
+
+
     }
+
 }

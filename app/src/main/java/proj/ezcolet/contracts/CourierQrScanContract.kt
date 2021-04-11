@@ -5,7 +5,7 @@ import proj.ezcolet.models.order.OrderModel
 interface CourierQrScanContract {
     interface Presenter {
         suspend fun addOrder(newOrder: OrderModel)
-        suspend fun addOrderInfo()
+        suspend fun addOrderInfo(courierUsername:String)
         fun splitOrderInfos(info: String)
 
     }
