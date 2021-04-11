@@ -2,6 +2,7 @@ package proj.ezcolet.services.database
 
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.tasks.await
 import proj.ezcolet.models.Model
 import proj.ezcolet.models.order.OrderModel
@@ -102,7 +103,7 @@ object FsDatabaseService : DatabaseService {
         return get(ORDERS_COLLECTION, documentId)?.toObject<OrderModel>()
     }
 
-    suspend fun getUserBasedOnUsername(username: String): UserModel? {
+    suspend fun getUserByUsername(username: String): UserModel? {
         return if (ValidationService.hasCourierUsername(username)) {
             getCourier(username)
         } else {
@@ -110,14 +111,9 @@ object FsDatabaseService : DatabaseService {
         }
     }
 
-    suspend fun getAllOrders(): List<OrderModel> {
-        val orders: MutableList<OrderModel> = arrayListOf()
-        val querySnapshot = db().collection(ORDERS_COLLECTION).get().await()
-        for (document in querySnapshot) {
-            val order = document.toObject<OrderModel>()
-            orders.add(order)
-        }
-        println("Orders ${orders.size}")
-        return orders
+    suspend fun getOrdersByUsername(username: String): List<OrderModel> {
+        return db().collection(ORDERS_COLLECTION)
+            .whereEqualTo("clientUsername", username)
+            .get().await().toObjects<OrderModel>()
     }
 }

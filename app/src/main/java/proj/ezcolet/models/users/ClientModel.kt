@@ -22,6 +22,11 @@ data class ClientModel(
     }
 
     @Exclude
+    fun getOrder() {
+
+    }
+
+    @Exclude
     fun generateValidationMap(): HashMap<String, String> {
         return linkedMapOf(
             "lastName" to isLastNameValid(),

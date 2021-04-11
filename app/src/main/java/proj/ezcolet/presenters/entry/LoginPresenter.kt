@@ -9,7 +9,7 @@ class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContr
 
     override suspend fun login(username: String, password: String): UserModel? {
         if (isDataValid(username, password)) {
-            val user = FsDatabaseService.getUserBasedOnUsername(username)
+            val user = FsDatabaseService.getUserByUsername(username)
             if (user != null) {
                 if (user.doPasswordsMatch(password)) {
                     return user
