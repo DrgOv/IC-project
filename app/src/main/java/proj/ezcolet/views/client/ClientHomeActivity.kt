@@ -2,7 +2,6 @@ package proj.ezcolet.views.client
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 import proj.ezcolet.databinding.ClientHomeActivityBinding
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
-import proj.ezcolet.models.users.UserModel
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.views.adapters.ClientOrderAdapter
@@ -37,8 +35,9 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ClientHomeActivityBinding.inflate(layoutInflater)
+
         launch {
-            client = intent.getStringExtra("id")?.let { FsDatabaseService.getClient(it) }!!
+            client = intent.getStringExtra("Username")?.let { FsDatabaseService.getClient(it) }!!
             println(client.username)
             order = FsDatabaseService.getOrdersByUsername(client.username)[0]
             println()
@@ -48,12 +47,13 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
                 .build()
             orderAdapter = ClientOrderAdapter(options)
             orderAdapter.startListening()
-            recyclerView = binding.ordersListingRecyclerView
-            recyclerView.setHasFixedSize(true)
+
             recyclerView.adapter = orderAdapter
         }
         setContentView(binding.root)
-
+        recyclerView = binding.ordersListingRecyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         exitBtn = binding.exitBtn
 
         exitBtn.setOnClickListener() {

@@ -1,15 +1,16 @@
 package proj.ezcolet.services.database
 
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
-import io.grpc.InternalChannelz.id
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.tasks.await
-import proj.ezcolet.models.GeneralModel
+import proj.ezcolet.models.order.GeneralModel
 import proj.ezcolet.models.Model
-import proj.ezcolet.models.ModelInt
-import proj.ezcolet.models.OrderModel
+import proj.ezcolet.models.order.ModelInt
+import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
@@ -25,6 +26,9 @@ object FsDatabaseService : DatabaseService {
         return FirebaseFirestore.getInstance()
     }
 
+    fun getOrdersCollectionReference(): CollectionReference {
+        return db().collection(ORDERS_COLLECTION)
+    }
     override suspend fun add(collectionName: String, document: Model) {
         db().collection(collectionName).document(document.id)
             .set(document).await()
@@ -115,12 +119,18 @@ object FsDatabaseService : DatabaseService {
         return get(GENERAL_COLLECTION, documentId)?.toObject<GeneralModel>()
     }
 
-    suspend fun getUserBasedOnUsername(username: String): UserModel? {
+    suspend fun getUserByUsername(username: String): UserModel? {
         return if (ValidationService.hasCourierUsername(username)) {
             getCourier(username)
         } else {
             getClient(username)
         }
+    }
+
+    suspend fun getOrdersByUsername(username: String): List<OrderModel> {
+        return db().collection(ORDERS_COLLECTION)
+            .whereEqualTo("clientUsername", username)
+            .get().await().toObjects()
     }
 
     suspend fun getClientBasedOnNamePhone(

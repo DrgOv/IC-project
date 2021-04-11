@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.R
+import proj.ezcolet.models.order.OrderModel
 
 class CourierOrderAdapter(private val list: List<OrderModel>) :
     RecyclerView.Adapter<CourierOrderAdapter.ViewHolder>() {

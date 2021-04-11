@@ -1,4 +1,4 @@
-package proj.ezcolet.models
+package proj.ezcolet.models.order
 
 data class GeneralModel(
 

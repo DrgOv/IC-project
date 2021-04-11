@@ -1,8 +1,8 @@
 package proj.ezcolet.presenters.courier
 
 import proj.ezcolet.contracts.CourierQrScanContract
-import proj.ezcolet.models.GeneralModel
-import proj.ezcolet.models.OrderModel
+import proj.ezcolet.models.order.GeneralModel
+import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.views.courier.CourierQrScanActivity
 import kotlin.properties.Delegates
