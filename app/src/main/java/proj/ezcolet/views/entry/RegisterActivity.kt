@@ -17,7 +17,8 @@ import kotlin.coroutines.CoroutineContext
 
 
 class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
-    AppCompatActivity(), RegisterContract.View, CoroutineScope {
+    AppCompatActivity(),
+    RegisterContract.View, CoroutineScope {
     private lateinit var registerPresenter: RegisterContract.Presenter
     private lateinit var binding: EntryRegisterActivityBinding
 

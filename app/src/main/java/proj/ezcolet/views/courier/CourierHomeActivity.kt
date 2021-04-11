@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.models.OrderModel
-import proj.ezcolet.views.adapters.CourierAdapter
+import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.views.adapters.CourierOrderAdapter
 import proj.ezcolet.databinding.CourierHomeActivityBinding
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.views.entry.LoginActivity
@@ -16,7 +16,7 @@ class CourierHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = CourierHomeActivityBinding.inflate(layoutInflater)
-        val Username=intent.getStringExtra("Username")
+        val Username=intent.getStringExtra("id")
         binding.infoBtn.setOnClickListener() {
             //ViewService.setView(this, CourierInfoActivity())
             val intent = Intent(this,CourierInfoActivity::class.java)
@@ -32,7 +32,7 @@ class CourierHomeActivity : AppCompatActivity() {
         }
 
         val list = generateList(500)
-        binding.ordersListingRecyclerView.adapter = CourierAdapter(list)
+        binding.ordersListingRecyclerView.adapter = CourierOrderAdapter(list)
         binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.ordersListingRecyclerView.setHasFixedSize(true)
 

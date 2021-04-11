@@ -1,14 +1,10 @@
 package proj.ezcolet.services.database
 
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import proj.ezcolet.models.Model
-import proj.ezcolet.models.OrderModel
+import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
@@ -21,6 +17,22 @@ object FsDatabaseService : DatabaseService {
 
     private fun db(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
+    }
+
+    private fun getCollectionReference(collectionName: String): CollectionReference {
+        return db().collection(collectionName)
+    }
+
+    fun getClientsCollectionReference(): CollectionReference {
+        return getCollectionReference(CLIENTS_COLLECTION)
+    }
+
+    fun getCouriersCollectionReference(): CollectionReference {
+        return getCollectionReference(COURIERS_COLLECTION)
+    }
+
+    fun getOrdersCollectionReference(): CollectionReference {
+        return getCollectionReference(ORDERS_COLLECTION)
     }
 
     override suspend fun add(collectionName: String, document: Model) {
@@ -96,5 +108,16 @@ object FsDatabaseService : DatabaseService {
         } else {
             getClient(username)
         }
+    }
+
+    suspend fun getAllOrders(): List<OrderModel> {
+        val orders: MutableList<OrderModel> = arrayListOf()
+        val querySnapshot = db().collection(ORDERS_COLLECTION).get().await()
+        for (document in querySnapshot) {
+            val order = document.toObject<OrderModel>()
+            orders.add(order)
+        }
+        println("Orders ${orders.size}")
+        return orders
     }
 }

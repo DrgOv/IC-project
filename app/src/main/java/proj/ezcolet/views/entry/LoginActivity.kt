@@ -21,7 +21,8 @@ import proj.ezcolet.views.courier.CourierHomeActivity
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
-    AppCompatActivity(), LoginContract.View, CoroutineScope {
+    AppCompatActivity(),
+    LoginContract.View, CoroutineScope {
     private lateinit var loginPresenter: LoginContract.Presenter
     private lateinit var binding: EntryLoginActivityBinding
 
@@ -42,6 +43,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         passwordET = binding.passwordEditText
         loginBtn = binding.loginBtn
         toRegisterBtn = binding.toRegisterBtn
+
         loginBtn.setOnClickListener() {
             launch {
                 login()

@@ -1,8 +1,6 @@
 package proj.ezcolet.contracts
 
-import proj.ezcolet.models.OrderModel
-import proj.ezcolet.models.users.ClientModel
-import proj.ezcolet.models.users.UserModel
+import proj.ezcolet.models.order.OrderModel
 
 interface CourierQrScanContract {
     interface Presenter {

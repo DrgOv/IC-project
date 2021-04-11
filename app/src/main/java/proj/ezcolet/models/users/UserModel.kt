@@ -2,16 +2,16 @@ package proj.ezcolet.models.users
 
 import proj.ezcolet.models.Model
 
-abstract open class UserModel(
-    override val id: String = "",
-    open val lastName: String = "",
-    open val firstName: String = "",
-    open val county: String = "",
-    open val city: String = "",
-    open val phone: String = "",
-    open val username: String = "",
-    open val password: String = "",
-    val role: String = ""
+abstract class UserModel(
+    override var id: String = "",
+    open var lastName: String = "",
+    open var firstName: String = "",
+    open var county: String = "",
+    open var city: String = "",
+    open var phone: String = "",
+    open var username: String = "",
+    open var password: String = "",
+    var role: String = ""
 ) : Model(id) {
     fun doPasswordsMatch(password: String): Boolean {
         if (this.password == password) {

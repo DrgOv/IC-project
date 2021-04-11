@@ -3,37 +3,56 @@ package proj.ezcolet.views.client
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.models.OrderModel
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.Query
 import proj.ezcolet.databinding.ClientHomeActivityBinding
+import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.ViewService
-import proj.ezcolet.views.adapters.ClientAdapter
+import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.views.adapters.ClientOrderAdapter
+import proj.ezcolet.views.adapters.OrderAdapter
 import proj.ezcolet.views.entry.LoginActivity
 
 class ClientHomeActivity : AppCompatActivity() {
+    private lateinit var binding: ClientHomeActivityBinding
+
+    private lateinit var orderAdapter: OrderAdapter
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ClientHomeActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val binding = ClientHomeActivityBinding.inflate(layoutInflater)
         binding.exitBtn.setOnClickListener() {
             finish();
             ViewService.setView(this, LoginActivity())
         }
-        val list = generateList(500)
 
-        binding.ordersListingRecyclerView.adapter = ClientAdapter(list)
-        binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.ordersListingRecyclerView.setHasFixedSize(true)
-
-        setContentView(binding.root)
+        setUpRecyclerView()
     }
 
-    private fun generateList(size: Int): List<OrderModel> {
-        val list = ArrayList<OrderModel>()
-        for (i in 0 until size) {
+    private fun setUpRecyclerView() {
+        val query: Query = FsDatabaseService.getOrdersCollectionReference()
+        val options: FirestoreRecyclerOptions<OrderModel> =
+            FirestoreRecyclerOptions.Builder<OrderModel>()
+                .setQuery(query, OrderModel::class.java)
+                .build()
+        orderAdapter = ClientOrderAdapter(options)
+        recyclerView = binding.ordersListingRecyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = orderAdapter
+    }
 
-           // val item = OrderModel(orderName = "Comanda $i", orderDetails = "livrat la ora:")
-           // list += item
-        }
-        return list
+    override fun onStart() {
+        super.onStart()
+        orderAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        orderAdapter.stopListening()
     }
 }

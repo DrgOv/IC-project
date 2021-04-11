@@ -49,8 +49,6 @@ class AdminAddCourierActivity(override val coroutineContext: CoroutineContext = 
                 println("REGISTERED SUCCESSFULLY")
             }
         }
-
-
     }
 
     private suspend fun addCourier() {
@@ -74,5 +72,13 @@ class AdminAddCourierActivity(override val coroutineContext: CoroutineContext = 
         )
 
         adminAddCourierPresenter.addCourier(newCourier)
+
+        firstNameET.text.clear()
+        lastNameET.text.clear()
+        countyET.text.clear()
+        cityET.text.clear()
+        phoneET.text.clear()
+        usernameET.text.clear()
+        passwordET.text.clear()
     }
 }

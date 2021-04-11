@@ -15,10 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import proj.ezcolet.R
 import proj.ezcolet.contracts.CourierQrScanContract
-import proj.ezcolet.models.OrderModel
 import proj.ezcolet.presenters.courier.CourierQrScanPresenter
-import proj.ezcolet.services.database.FsDatabaseService
-import proj.ezcolet.services.database.FsDatabaseService.addOrder
 import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -36,7 +33,6 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
         setupPermissions()
         codeScanner()
     }
-
 
     private fun codeScanner() {
         codeScanner = CodeScanner(this, qrScannerView)
