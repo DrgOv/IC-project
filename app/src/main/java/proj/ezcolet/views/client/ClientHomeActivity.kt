@@ -39,10 +39,19 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         super.onCreate(savedInstanceState)
         binding = ClientHomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        bindViews()
+        setUpRecyclerView()
+        setListeners()
+    }
+
+    private fun bindViews() {
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         exitBtn = binding.exitBtn
+    }
+
+    private fun setUpRecyclerView() {
         launch {
             client = intent.getStringExtra("Username")?.let { FsClientService.getClient(it) }!!
             order = FsQueryingService.getOrdersByClientUsername(client.username)[0]
@@ -57,7 +66,9 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
 
             recyclerView.adapter = orderAdapter
         }
+    }
 
+    private fun setListeners() {
         exitBtn.setOnClickListener() {
             goToLoginScreen()
         }

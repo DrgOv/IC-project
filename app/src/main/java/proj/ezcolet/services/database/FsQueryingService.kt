@@ -33,18 +33,14 @@ object FsQueryingService : FsDatabaseService() {
         lastName: String,
         phone: String
     ): ClientModel? {
-
         var client: ClientModel? = null
         FsClientService.getCollectionRef().whereEqualTo("firstName", firstName)
             .whereEqualTo("lastName", lastName).whereEqualTo("phone", phone).get()
             .addOnSuccessListener { querySnapshot ->
                 for (query in querySnapshot)
                     client = query.toObject()
-
             }.await()
 
         return client
-
-
     }
 }

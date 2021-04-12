@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import kotlinx.android.synthetic.main.entry_login_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,15 +36,22 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
-        loginPresenter = LoginPresenter(this)
         binding = EntryLoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loginPresenter = LoginPresenter(this)
+        bindViews()
+        setListeners()
+    }
+
+    private fun bindViews() {
         usernameET = binding.usernameEditText
         passwordET = binding.passwordEditText
         loginBtn = binding.loginBtn
         toRegisterBtn = binding.toRegisterBtn
+    }
 
+    private fun setListeners() {
         loginBtn.setOnClickListener() {
             launch {
                 login()
@@ -52,14 +60,6 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
 
         toRegisterBtn.setOnClickListener() {
             goToRegisterScreen()
-        }
-
-        binding.toUserBtn.setOnClickListener() {
-            goToClientScreen()
-        }
-
-        binding.toCourierBtn.setOnClickListener() {
-            goToCourierScreen()
         }
     }
 
@@ -100,7 +100,6 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
 
     override fun goToCourierScreen() {
         ViewService.setViewAndId(this, CourierHomeActivity(), username)
-
     }
 
     override fun goToAdminScreen() {

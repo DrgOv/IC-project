@@ -6,7 +6,7 @@ import proj.ezcolet.views.adapters.OrderAdapter
 import proj.ezcolet.views.viewholders.OrderViewHolder
 import java.util.*
 
-class OrderAdapterPresenter() : OrdersRecyclerViewContract.AdapterPresenter {
+abstract class OrderAdapterPresenter() : OrdersRecyclerViewContract.AdapterPresenter {
     override fun onBindVH(holder: OrderViewHolder, model: OrderModel) {
         holder.setUpperLowerTexts(
             model.orderName,
