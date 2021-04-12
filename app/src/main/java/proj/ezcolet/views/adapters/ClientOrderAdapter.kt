@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import proj.ezcolet.R
 import proj.ezcolet.models.order.OrderModel
-import proj.ezcolet.presenters.adapters.ClientOrderAdapterPresenter
 import proj.ezcolet.presenters.adapters.OrderAdapterPresenter
 import proj.ezcolet.views.viewholders.ClientOrderViewHolder
 import proj.ezcolet.views.viewholders.OrderViewHolder
@@ -13,7 +12,7 @@ import proj.ezcolet.views.viewholders.OrderViewHolder
 class ClientOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
     OrderAdapter(options) {
     private var clientOrderAdapterPresenter: OrderAdapterPresenter =
-        ClientOrderAdapterPresenter(this)
+        OrderAdapterPresenter()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         return ClientOrderViewHolder(LayoutInflater.from(parent.context)

@@ -3,6 +3,7 @@ package proj.ezcolet.views.client
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -14,7 +15,9 @@ import proj.ezcolet.databinding.ClientHomeActivityBinding
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.services.database.FsClientService
 import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.adapters.ClientOrderAdapter
 import proj.ezcolet.views.adapters.OrderAdapter
 import proj.ezcolet.views.entry.LoginActivity
@@ -22,7 +25,7 @@ import kotlin.coroutines.CoroutineContext
 
 class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
     AppCompatActivity(),
-    CoroutineScope{
+    CoroutineScope {
     private lateinit var binding: ClientHomeActivityBinding
 
     private lateinit var orderAdapter: OrderAdapter
@@ -35,26 +38,25 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ClientHomeActivityBinding.inflate(layoutInflater)
-
-        launch {
-            client = intent.getStringExtra("Username")?.let { FsDatabaseService.getClient(it) }!!
-            println(client.username)
-            order = FsDatabaseService.getOrdersByUsername(client.username)[0]
-            println()
-            val query: Query = FsDatabaseService.getOrdersCollectionReference().whereEqualTo("courierUsername", order.courierUsername)
-            val options = FirestoreRecyclerOptions.Builder<OrderModel>()
-                .setQuery(query, OrderModel::class.java)
-                .build()
-            orderAdapter = ClientOrderAdapter(options)
-            orderAdapter.startListening()
-
-            recyclerView.adapter = orderAdapter
-        }
         setContentView(binding.root)
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         exitBtn = binding.exitBtn
+        launch {
+            client = intent.getStringExtra("Username")?.let { FsClientService.getClient(it) }!!
+            order = FsQueryingService.getOrdersByClientUsername(client.username)[0]
+            val options = ViewService
+                .setFsRecyclerAdapterOptions(
+                    FsQueryingService.getOrdersQueryWhereEqualsTo(
+                        "courierUsername", order.courierUsername
+                    )
+                )
+            orderAdapter = ClientOrderAdapter(options)
+            orderAdapter.startListening()
+
+            recyclerView.adapter = orderAdapter
+        }
 
         exitBtn.setOnClickListener() {
             goToLoginScreen()

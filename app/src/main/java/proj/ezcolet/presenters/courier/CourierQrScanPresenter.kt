@@ -4,6 +4,8 @@ import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.models.order.GeneralModel
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.services.database.FsOrderService
+import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.courier.CourierQrScanActivity
 import kotlin.properties.Delegates
 
@@ -85,7 +87,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
     }
 
     suspend fun checkClient(): String {
-        val clientObj = FsDatabaseService.getClientBasedOnNamePhone(
+        val clientObj = FsQueryingService.getClientBasedOnNamePhone(
             clientFirstName,
             clientLastName,
             clientPhone
@@ -98,7 +100,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
     }
 
     suspend fun getOrderNumber(): Int {
-        val orderNum = FsDatabaseService.getGeneral("orderStats")
+        val orderNum = FsOrderService.getGeneral("orderStats")
         if (orderNum != null) {
             return orderNum.orderNumber
         }
@@ -108,9 +110,9 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
 
     override suspend fun addOrder(newOrder: OrderModel) {
 
-        FsDatabaseService.addOrder(newOrder)
+        FsOrderService.addOrder(newOrder)
         orderNumber += 1
         var newGeneral = GeneralModel(orderNumber)
-        FsDatabaseService.addGeneral(newGeneral)
+        FsOrderService.addGeneral(newGeneral)
     }
 }
