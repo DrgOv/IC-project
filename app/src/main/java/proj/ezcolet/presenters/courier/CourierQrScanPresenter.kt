@@ -3,7 +3,6 @@ package proj.ezcolet.presenters.courier
 import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.models.order.GeneralModel
 import proj.ezcolet.models.order.OrderModel
-import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.courier.CourierQrScanActivity

@@ -1,17 +1,10 @@
 package proj.ezcolet.services.database
 
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
-import proj.ezcolet.models.order.GeneralModel
 import proj.ezcolet.models.Model
-import proj.ezcolet.models.order.ModelInt
-import proj.ezcolet.models.order.OrderModel
-import proj.ezcolet.models.users.ClientModel
-import proj.ezcolet.models.users.CourierModel
-import proj.ezcolet.models.users.UserModel
-import proj.ezcolet.services.validation.ValidationService
 
 abstract class FsDatabaseService : DatabaseService {
     protected fun db(): FirebaseFirestore {

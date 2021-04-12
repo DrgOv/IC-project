@@ -1,7 +1,6 @@
 package proj.ezcolet.models.users
 
 import com.google.firebase.firestore.Exclude
-import proj.ezcolet.models.Model
 import proj.ezcolet.services.validation.*
 
 data class ClientModel(

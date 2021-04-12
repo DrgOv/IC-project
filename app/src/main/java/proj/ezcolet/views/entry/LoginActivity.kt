@@ -1,11 +1,10 @@
 package proj.ezcolet.views.entry
 
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import kotlinx.android.synthetic.main.entry_login_activity.*
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

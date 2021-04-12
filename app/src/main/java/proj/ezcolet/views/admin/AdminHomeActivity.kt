@@ -1,13 +1,10 @@
 package proj.ezcolet.views.admin
 
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import proj.ezcolet.R
+import androidx.appcompat.app.AppCompatActivity
 import proj.ezcolet.databinding.AdminMenuActivityBinding
-import proj.ezcolet.databinding.EntryLoginActivityBinding
-import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
 
 class AdminHomeActivity : AppCompatActivity() {

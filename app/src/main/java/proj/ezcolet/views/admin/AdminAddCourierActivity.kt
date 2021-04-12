@@ -1,14 +1,13 @@
 package proj.ezcolet.views.admin
 
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import proj.ezcolet.R
 import proj.ezcolet.databinding.AdminAddCourierActivityBinding
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.presenters.admin.AdminAddCourierPresenter

@@ -1,13 +1,10 @@
 package proj.ezcolet.views.client
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
-import androidx.lifecycle.LifecycleOwner
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.Query
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +13,6 @@ import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsClientService
-import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.adapters.ClientOrderAdapter
 import proj.ezcolet.views.adapters.OrderAdapter

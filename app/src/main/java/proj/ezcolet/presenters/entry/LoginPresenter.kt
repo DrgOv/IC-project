@@ -2,7 +2,6 @@ package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.models.users.UserModel
-import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.services.validation.*
 

@@ -2,9 +2,7 @@ package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.models.users.ClientModel
-import proj.ezcolet.services.database.DatabaseService
 import proj.ezcolet.services.database.FsClientService
-import proj.ezcolet.services.database.FsDatabaseService
 import proj.ezcolet.services.validation.EMPTY
 import proj.ezcolet.services.validation.EMPTY_ERROR_MESSAGE
 import proj.ezcolet.services.validation.INVALID

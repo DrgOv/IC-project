@@ -2,7 +2,6 @@ package proj.ezcolet.services.database
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.toObject
-import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
 
 object FsCourierService : FsDatabaseService() {
