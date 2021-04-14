@@ -13,6 +13,7 @@
     <color name="light_gray">#ffeeeeee</color>
     <color name="dark_gray">#ff292929</color>
     <color name="blue_gray">#ff7288ab</color>
+    <color name="focused_light_blue_gray">#4F545C</color>
     <color name="light_blue_gray">#ffb8c2db</color>
     <color name="dark_blue_gray">#ff222831</color>
 

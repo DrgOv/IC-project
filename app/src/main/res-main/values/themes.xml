@@ -4,20 +4,21 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_accent_color</item>
         <item name="colorPrimaryVariant">@color/primary_accent_color_light</item>
+        <item name="colorAccent">@color/package_yellow</item>
         <item name="colorOnPrimary">@color/primary_base_color_dark</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary_accent_color</item>
-        <item name="colorSecondaryVariant">@color/secondary_accent_color_light</item>
+        <item name="colorSecondary">@color/blue_gray</item>
+        <item name="colorSecondaryVariant">@color/blue_gray</item>
         <item name="colorOnSecondary">@color/primary_base_color_light</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_base_color_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary_base_color_dark
+        </item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/noto_sans_tc_black</item>
         <item name="android:textColor">@color/light_gray</item>
         <item name="android:textSize">12sp</item>
         <item name="buttonStyle">@style/btnRoundedPrimary</item>
         <item name="editTextStyle">@style/inputRoundedPrimary</item>
-
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>
