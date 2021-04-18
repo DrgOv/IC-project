@@ -14,7 +14,8 @@ data class OrderModel(
     val clientCounty: String = "",
     val orderSum: String = "",
     val orderNumber:Int = 0,
-    val orderStatus: String = "normal"
+    val orderStatus: String = "normal",
+    val orderDate: String=""
 ) :
     ModelInt(orderNumber) {
 

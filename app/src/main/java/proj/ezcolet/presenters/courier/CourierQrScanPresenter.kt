@@ -6,6 +6,7 @@ import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.courier.CourierQrScanActivity
+import java.util.*
 import kotlin.properties.Delegates
 
 private lateinit var orderDetails: List<String>
@@ -18,6 +19,7 @@ private lateinit var clientCity: String
 private lateinit var clientCounty: String
 private lateinit var orderSum: String
 private lateinit var clientUsername: String
+private lateinit var orderDate:String
 
 private var orderNumber by Delegates.notNull<Int>()
 val delimiter1 = "\n"
@@ -68,6 +70,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
     override suspend fun addOrderInfo(courierUsername: String) {
         clientUsername = checkClient()
         orderNumber = getOrderNumber()
+        orderDate=getDate()
         var newOrder = OrderModel(
             courierUsername,
             clientUsername,
@@ -80,7 +83,9 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
             orderDetails[11],
             orderDetails[13],
             orderDetails[15],
-            orderNumber
+            orderNumber,
+            "normal",
+            orderDate
         )
         addOrder(newOrder)
     }
@@ -113,5 +118,21 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
         orderNumber += 1
         var newGeneral = GeneralModel(orderNumber)
         FsOrderService.addGeneral(newGeneral)
+    }
+
+   private fun getDate():String{
+        val calendar: Calendar = Calendar.getInstance()
+        val month: String =
+            calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))
+
+        val dayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
+        val dayOfMonthStr = dayOfMonth.toString()
+
+        val year:Int=calendar.get(Calendar.YEAR)
+        val yearStr=year.toString()
+
+        val date= "$dayOfMonthStr $month $yearStr"
+        return date
+
     }
 }
