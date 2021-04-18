@@ -64,8 +64,8 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
         val calendar: Calendar = Calendar.getInstance()
         val month: String =
             calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))
-        monthlyOrdersTextView.text = "Comenzi " + month + ": " + monthlyOrders
 
+        monthlyOrdersTextView.text = "Comenzi " + month + ": " + monthlyOrders
         totalOrdersTextView.text = "Comenzi totale: " + totalOrders
         maxRatingsTextView.text = "Rating maxim: " + ratingMaxim + "/" + ratingsNumber
 
