@@ -23,7 +23,7 @@ class CourierOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int, model: OrderModel) {
-        courierOrderAdapterPresenter.onBindVH(holder, model)
+        courierOrderAdapterPresenter.onBindVHCourier(holder, model)
 
     }
 

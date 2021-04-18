@@ -5,7 +5,7 @@ data class OrderModel(
     val courierUsername: String = "",
     val clientUsername: String = "",
     val orderName: String = "",
-    val orderDetails: String = "",
+    var orderDetails: String = "-",
     val clientFirstName: String = "",
     val clientLastName: String = "",
     val clientPhone: String = "",
@@ -13,9 +13,9 @@ data class OrderModel(
     val clientCity: String = "",
     val clientCounty: String = "",
     val orderSum: String = "",
-    val orderNumber:Int = 0,
-    val orderStatus: String = "normal",
-    val orderDate: String=""
+    val orderNumber: Int = 0,
+    var orderStatus: String = "normal",
+    val orderDate: String = ""
 ) :
     ModelInt(orderNumber) {
 
