@@ -29,7 +29,4 @@ abstract class FsDatabaseService : DatabaseService {
         return db().collection(collectionName).document(documentId).get()
             .await()
     }
-
-
-
 }

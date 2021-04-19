@@ -35,6 +35,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/text_welcome_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -51,7 +52,7 @@
             android:textSize="@dimen/x_small_heading" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/text_remaining_orders_number"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:gravity="center"
@@ -70,11 +71,13 @@
             android:paddingEnd="@dimen/large_spacing">
 
             <TextView
+                android:id="@+id/text_courier_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Curier: username" />
 
             <TextView
+                android:id="@+id/text_courier_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/small_spacing"
@@ -82,6 +85,7 @@
                 app:drawableLeftCompat="@drawable/ic_baseline_thumb_up_24" />
 
             <TextView
+                android:id="@+id/text_your_order_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Aveti comanda: 100/10" />

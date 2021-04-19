@@ -2,6 +2,7 @@ package proj.ezcolet.views.client
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,11 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     CoroutineScope {
     private lateinit var binding: ClientHomeActivityBinding
 
+    private lateinit var welcomeUserTextView: TextView
+    private lateinit var remainingOrdersNumberTextView: TextView
+    private lateinit var courierUsernameTextView: TextView
+    private lateinit var courierRatingTextView: TextView
+    private lateinit var yourOrderNumberTextView: TextView
     private lateinit var orderAdapter: OrderAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var exitBtn: ImageButton
@@ -41,6 +47,11 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     }
 
     private fun bindViews() {
+        welcomeUserTextView = binding.textWelcomeUser
+        remainingOrdersNumberTextView = binding.textRemainingOrdersNumber
+        courierUsernameTextView = binding.textCourierUsername
+        courierRatingTextView = binding.textCourierRating
+        yourOrderNumberTextView = binding.textYourOrderNumber
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
