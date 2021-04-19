@@ -9,19 +9,24 @@ import proj.ezcolet.views.viewholders.CourierOrderViewHolder
 import proj.ezcolet.views.viewholders.OrderViewHolder
 import java.util.*
 import kotlin.coroutines.CoroutineContext
+
 class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
-    OrderAdapterPresenter(),
+    OrderAdapterPresenter<CourierOrderViewHolder>(),
     CoroutineScope {
-    override fun onBindVHCourier(holder: OrderViewHolder, model: OrderModel) {
-        super.onBindVHCourier(holder, model)
-        (holder as CourierOrderViewHolder).checkImageBtn.setOnClickListener {
+    override fun onBindVH(holder: CourierOrderViewHolder, model: OrderModel) {
+        holder.setUpperLowerTexts(
+            model.orderName,
+            "Status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
+        )
+
+        holder.checkImageBtn.setOnClickListener {
             launch {
                 println("check+ $model")
                 checkPressed(model)
             }
 
         }
-        (holder as CourierOrderViewHolder).cancelImageBtn.setOnClickListener {
+        holder.cancelImageBtn.setOnClickListener {
             launch {
                 println("cancel + $model")
                 cancelPressed(model)
@@ -29,7 +34,7 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         }
     }
 
-    suspend fun checkPressed(model: OrderModel) {
+    private suspend fun checkPressed(model: OrderModel) {
         val calendar: Calendar = Calendar.getInstance()
         val hour: Int = calendar.get(Calendar.HOUR_OF_DAY)
         val hourStr = hour.toString()
@@ -45,7 +50,7 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         FsOrderService.updateOrder(model)
     }
 
-    suspend fun cancelPressed(model: OrderModel) {
+    private suspend fun cancelPressed(model: OrderModel) {
         model.orderStatus = "canceled"
         FsOrderService.updateOrder(model)
     }

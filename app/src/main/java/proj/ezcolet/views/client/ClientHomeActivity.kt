@@ -40,10 +40,14 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ClientHomeActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        bindViews()
-        setUpRecyclerView()
-        setListeners()
+        launch {
+            client = intent.getStringExtra("Username")?.let { FsClientService.getClient(it) }!!
+            setContentView(binding.root)
+            bindViews()
+            setUpViews()
+            setUpRecyclerView()
+            setListeners()
+        }
     }
 
     private fun bindViews() {
@@ -52,15 +56,19 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         courierUsernameTextView = binding.textCourierUsername
         courierRatingTextView = binding.textCourierRating
         yourOrderNumberTextView = binding.textYourOrderNumber
+        exitBtn = binding.exitBtn
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        exitBtn = binding.exitBtn
+    }
+
+    private fun setUpViews() {
+        val welcomeUserText = "Buna ziua, ${client.firstName}!"
+        welcomeUserTextView.text = welcomeUserText
     }
 
     private fun setUpRecyclerView() {
         launch {
-            client = intent.getStringExtra("Username")?.let { FsClientService.getClient(it) }!!
             order = FsQueryingService.getOrdersByClientUsername(client.username)[0]
             val options = ViewService
                 .setFsRecyclerAdapterOptions(
@@ -68,7 +76,7 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
                         "courierUsername", order.courierUsername
                     )
                 )
-            orderAdapter = ClientOrderAdapter(options)
+            orderAdapter = ClientOrderAdapter(client, options)
             orderAdapter.startListening()
 
             recyclerView.adapter = orderAdapter

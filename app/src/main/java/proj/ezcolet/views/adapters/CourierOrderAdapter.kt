@@ -12,8 +12,7 @@ import proj.ezcolet.views.viewholders.OrderViewHolder
 
 class CourierOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
     OrderAdapter(options) {
-    private var courierOrderAdapterPresenter: OrderAdapterPresenter =
-        CourierOrderAdapterPresenter()
+    private var courierOrderAdapterPresenter = CourierOrderAdapterPresenter()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         return CourierOrderViewHolder(
@@ -23,8 +22,7 @@ class CourierOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int, model: OrderModel) {
-        courierOrderAdapterPresenter.onBindVHCourier(holder, model)
-
+        courierOrderAdapterPresenter.onBindVH(holder as CourierOrderViewHolder, model)
     }
 
 }

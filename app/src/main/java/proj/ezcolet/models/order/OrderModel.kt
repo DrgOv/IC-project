@@ -1,5 +1,7 @@
 package proj.ezcolet.models.order
 
+import proj.ezcolet.models.users.ClientModel
+
 data class OrderModel(
 
     val courierUsername: String = "",
@@ -21,5 +23,9 @@ data class OrderModel(
 
     override fun toString(): String {
         return "OrderModel(id='$id', orderName='$orderName', orderNumber='$orderNumber')"
+    }
+
+    fun isClientOrder(client: ClientModel): Boolean {
+        return this.clientUsername == client.username
     }
 }
