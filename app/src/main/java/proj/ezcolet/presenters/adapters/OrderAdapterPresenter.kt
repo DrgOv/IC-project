@@ -9,7 +9,14 @@ abstract class OrderAdapterPresenter() : OrdersRecyclerViewContract.AdapterPrese
     override fun onBindVH(holder: OrderViewHolder, model: OrderModel) {
         holder.setUpperLowerTexts(
             model.orderName,
-            "Status: ${model.orderStatus.toUpperCase(Locale.ROOT)}"
+            "livrat la ora: ${model.orderDetails.toUpperCase(Locale.ROOT)}"
+        )
+    }
+
+    override fun onBindVHCourier(holder: OrderViewHolder, model: OrderModel) {
+        holder.setUpperLowerTexts(
+            model.orderName,
+            "status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
         )
     }
 }

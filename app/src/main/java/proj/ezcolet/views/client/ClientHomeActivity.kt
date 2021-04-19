@@ -85,4 +85,8 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         finish();
         ViewService.setView(this, LoginActivity())
     }
+
+    override fun onBackPressed() {
+        //Disables back button
+    }
 }

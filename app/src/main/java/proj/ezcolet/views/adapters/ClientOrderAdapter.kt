@@ -16,8 +16,10 @@ class ClientOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
         ClientOrderAdapterPresenter()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        return ClientOrderViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.client_card_item, parent, false))
+        return ClientOrderViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.client_card_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int, model: OrderModel) {
