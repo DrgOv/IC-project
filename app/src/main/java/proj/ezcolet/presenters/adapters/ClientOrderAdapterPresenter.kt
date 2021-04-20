@@ -13,9 +13,11 @@ class ClientOrderAdapterPresenter(val client: ClientModel) : OrderAdapterPresent
             model.orderName,
             "Livrat la ora: ${model.orderDetails.toUpperCase(Locale.ROOT)}"
         )
+
         if (model.isClientOrder(client)) {
-            holder.deliverImageBtn
+
         } else {
+            holder.setUpperText("Comanda ${holder.layoutPosition + 1}")
             holder.hideDeliverBtn()
         }
     }

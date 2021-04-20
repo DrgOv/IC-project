@@ -6,12 +6,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import proj.ezcolet.databinding.ClientHomeActivityBinding
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.presenters.client.ClientHomePresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsClientService
 import proj.ezcolet.services.database.FsQueryingService
@@ -23,6 +25,7 @@ import kotlin.coroutines.CoroutineContext
 class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
     AppCompatActivity(),
     CoroutineScope {
+    private lateinit var clientHomePresenter: ClientHomePresenter
     private lateinit var binding: ClientHomeActivityBinding
 
     private lateinit var welcomeUserTextView: TextView
@@ -30,21 +33,19 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     private lateinit var courierUsernameTextView: TextView
     private lateinit var courierRatingTextView: TextView
     private lateinit var yourOrderNumberTextView: TextView
-    private lateinit var orderAdapter: OrderAdapter
+    private lateinit var orderAdapter: ClientOrderAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var exitBtn: ImageButton
-
-    private lateinit var client: ClientModel
-    private lateinit var order: OrderModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ClientHomeActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        clientHomePresenter = ClientHomePresenter(this)
         launch {
-            client = intent.getStringExtra("Username")?.let { FsClientService.getClient(it) }!!
-            setContentView(binding.root)
+            clientHomePresenter.initializeClient()
             bindViews()
-            setUpViews()
+            clientHomePresenter.setUpAdapter()
             setUpRecyclerView()
             setListeners()
         }
@@ -62,25 +63,13 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun setUpViews() {
-        val welcomeUserText = "Buna ziua, ${client.firstName}!"
-        welcomeUserTextView.text = welcomeUserText
+    fun setUpAdapter(client: ClientModel, options: FirestoreRecyclerOptions<OrderModel>) {
+        orderAdapter = ClientOrderAdapter(client, options)
+        orderAdapter.startListening()
     }
 
     private fun setUpRecyclerView() {
-        launch {
-            order = FsQueryingService.getOrdersByClientUsername(client.username)[0]
-            val options = ViewService
-                .setFsRecyclerAdapterOptions(
-                    FsQueryingService.getOrdersQueryWhereEqualsTo(
-                        "courierUsername", order.courierUsername
-                    )
-                )
-            orderAdapter = ClientOrderAdapter(client, options)
-            orderAdapter.startListening()
-
-            recyclerView.adapter = orderAdapter
-        }
+        recyclerView.adapter = orderAdapter
     }
 
     private fun setListeners() {

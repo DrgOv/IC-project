@@ -12,6 +12,10 @@ class ClientOrderViewHolder(itemView: View) :
     override var lowerTextView: TextView = binding.lowerTextView
     val deliverImageBtn: ImageButton = binding.deliverBtn
 
+    fun setUpperText(upperText: String) {
+        upperTextView.text = upperText
+    }
+
     fun hideDeliverBtn() {
         deliverImageBtn.visibility = View.GONE
     }

@@ -1,6 +1,9 @@
 package proj.ezcolet.models.users
 
 import com.google.firebase.firestore.Exclude
+import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.services.database.FsOrderService
+import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.services.validation.*
 
 data class ClientModel(
@@ -18,11 +21,6 @@ data class ClientModel(
 
     override fun toString(): String {
         return "ClientModel(id='$id', lastName='$lastName', firstName='$firstName', street='$street', county='$county', city='$city', zipCode='$zipCode', phone='$phone', username='$username', password='$password', role='$role')"
-    }
-
-    @Exclude
-    fun getOrder() {
-
     }
 
     @Exclude
@@ -83,5 +81,10 @@ data class ClientModel(
     @Exclude
     fun isPasswordValid(): String {
         return ValidationService.getStringState(password, PATTERN_PASSWORD)
+    }
+
+    @Exclude
+    suspend fun getOrdersByUsername(): List<OrderModel> {
+        return FsQueryingService.getOrdersByClientUsername(this.username)
     }
 }
