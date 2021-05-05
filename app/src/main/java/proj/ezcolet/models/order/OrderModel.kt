@@ -15,7 +15,7 @@ data class OrderModel(
     val clientCity: String = "",
     val clientCounty: String = "",
     val orderSum: String = "",
-    val orderNumber: Int = 0,
+    var orderNumber: Int = 0,
     var orderStatus: String = "normal",
     val orderDate: String = ""
 ) :

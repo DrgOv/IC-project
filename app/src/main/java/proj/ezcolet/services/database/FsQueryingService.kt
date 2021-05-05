@@ -43,4 +43,23 @@ object FsQueryingService : FsDatabaseService() {
 
         return client
     }
+
+
+    suspend fun getOrdersBasedOnCourierUserName(
+        courierUsername: String
+    ): MutableList<OrderModel> {
+        lateinit var order: OrderModel
+        var orderList: MutableList<OrderModel> = mutableListOf()
+        FsOrderService.getCollectionRef().whereEqualTo("courierUsername", courierUsername).get()
+            .addOnSuccessListener { querySnapshot ->
+                for (query in querySnapshot) {
+                    order = query.toObject(OrderModel::class.java)
+                    orderList.add(order)
+
+
+                }
+            }.await()
+
+        return orderList
+    }
 }
