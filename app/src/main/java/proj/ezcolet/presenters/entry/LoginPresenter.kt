@@ -16,6 +16,7 @@ class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContr
                 }
             }
         }
+        loginActivity.showLoginError()
         return null
     }
 

@@ -14,7 +14,7 @@ data class ClientModel(
     val zipCode: String = "",
     override val phone: String = "",
     override val username: String = "",
-    override val password: String = ""
+    override var password: String = ""
 ) : UserModel(id, lastName, firstName, county, city, phone, username, password, "client") {
 
     override fun toString(): String {

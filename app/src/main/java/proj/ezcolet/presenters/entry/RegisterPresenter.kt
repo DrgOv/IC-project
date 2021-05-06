@@ -1,5 +1,6 @@
 package proj.ezcolet.presenters.entry
 
+import org.mindrot.jbcrypt.BCrypt
 import proj.ezcolet.contracts.RegisterContract
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.database.DatabaseService
@@ -14,6 +15,7 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
 
     override suspend fun addClient(newClient: ClientModel): Boolean {
         if (isDataValid(newClient)) {
+            newClient.password = BCrypt.hashpw(newClient.password, BCrypt.gensalt())
             FsDatabaseService.addClient(newClient)
             return true
         }
