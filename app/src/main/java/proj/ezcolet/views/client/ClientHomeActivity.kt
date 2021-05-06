@@ -47,6 +47,7 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
             bindViews()
             clientHomePresenter.setUpAdapter()
             setUpRecyclerView()
+            clientHomePresenter.setUpTexts()
             setListeners()
         }
     }
@@ -61,6 +62,18 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    fun setWelcomeText(text: String) {
+        welcomeUserTextView.text = text
+    }
+
+    fun setRemainingOrdersNumberText(text: String) {
+        remainingOrdersNumberTextView.text = text
+    }
+
+    fun setCourierUsernameText(text: String) {
+        courierUsernameTextView.text = text
     }
 
     fun setUpAdapter(client: ClientModel, options: FirestoreRecyclerOptions<OrderModel>) {
