@@ -26,6 +26,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
     private lateinit var courier_qr_scan_Presenter: CourierQrScanContract.Presenter
     private lateinit var username: String
     private var add_order_count = 0
+    private var valid = 2;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,23 +81,48 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
         if (add_order_count == 0) {
 
             courier_qr_scan_Presenter.splitOrderInfos(info)
-            Toast.makeText(
-                this@CourierQrScanActivity,
-                "Comandă adăugată",
-                Toast.LENGTH_SHORT
-            ).show()
+            valid = courier_qr_scan_Presenter.checkIfValid()
+            println("Valid value  " + valid)
 
-            courier_qr_scan_Presenter.addOrderInfo(username)
+            if (valid == 0) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Comandă adăugată",
+                    Toast.LENGTH_SHORT
+                ).show()
+                courier_qr_scan_Presenter.addOrderInfo(username)
+            }
+
+            if (valid == 1) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Formatul este incorect!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
         }
 
         if (add_order_count > 0) {
-            Toast.makeText(
-                this@CourierQrScanActivity,
-                "Comanda a fost deja adăugată",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            if (valid == 0) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Comanda a fost deja adăugată",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            if (valid == 1) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "S-a mai încercat acest cod",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         add_order_count++;
+
     }
 
     override fun onResume() {
