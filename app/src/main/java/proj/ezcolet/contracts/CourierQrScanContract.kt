@@ -7,6 +7,7 @@ interface CourierQrScanContract {
         suspend fun addOrder(newOrder: OrderModel)
         suspend fun addOrderInfo(courierUsername:String)
         fun splitOrderInfos(info: String)
+        fun checkIfValid():Int
 
     }
 }
