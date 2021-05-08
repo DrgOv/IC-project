@@ -24,17 +24,6 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
     OrderAdapterPresenter<CourierOrderViewHolder>(),
     CoroutineScope {
     override fun onBindVH(holder: CourierOrderViewHolder, model: OrderModel) {
-        var S:String=model.orderName
-        val spannableString = SpannableString(S)
-        val clickableSpan1: ClickableSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                println("heloooooooooooooooooooooooooooo")
-            }
-        }
-
-        spannableString.setSpan(clickableSpan1, 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        holder.upperTextView.movementMethod = LinkMovementMethod.getInstance()
-
         holder.setUpperLowerTexts(
             model.orderName,
             "Status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
