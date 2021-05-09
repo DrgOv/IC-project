@@ -1,9 +1,10 @@
 package proj.ezcolet.views.viewholders
 
+import android.app.AlertDialog
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
+import proj.ezcolet.R
 import proj.ezcolet.databinding.CourierCardItemBinding
 
 class CourierOrderViewHolder(itemView: View) :
@@ -14,13 +15,20 @@ class CourierOrderViewHolder(itemView: View) :
     val checkImageBtn: ImageButton = binding.checkBtn
     val cancelImageBtn: ImageButton = binding.cancelBtn
     init {
-        itemView.setOnClickListener { v: View ->
-            val position: Int = absoluteAdapterPosition
-            Toast.makeText(
-                itemView.context,
-                "You clicked on item ${position + 1}",
-                Toast.LENGTH_SHORT
-            ).show()
+        itemView.setOnClickListener {
+            openDialog()
         }
     }
+    fun openDialog() {
+        val position: Int = absoluteAdapterPosition
+        val builder: AlertDialog.Builder = AlertDialog.Builder(itemView.context, R.style.MyAlertDialogTheme)
+        builder.setTitle("Informații")
+            .setMessage("Ai apăsat pe obiectul ${position + 1}")
+            .setPositiveButton(
+                "ok"
+            ) { dialog, _ -> dialog.dismiss() }
+        builder.create()
+        builder.show()
+    }
+
 }
