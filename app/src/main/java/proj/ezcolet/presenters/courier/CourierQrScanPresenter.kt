@@ -2,6 +2,7 @@ package proj.ezcolet.presenters.courier
 
 import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.models.order.GeneralModel
+import proj.ezcolet.models.order.NORMAL
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.services.database.FsQueryingService
@@ -93,7 +94,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
             orderDetails[13],
             orderDetails[15],
             orderNumber,
-            "În tranzit",
+            NORMAL,
             orderDate
         )
         addOrder(newOrder)

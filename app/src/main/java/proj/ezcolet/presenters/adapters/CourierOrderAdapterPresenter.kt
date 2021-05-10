@@ -12,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import proj.ezcolet.databinding.CourierCardItemBinding
 import proj.ezcolet.databinding.CourierHomeActivityBinding
+import proj.ezcolet.models.order.CANCELED
+import proj.ezcolet.models.order.COMPLETED
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.views.courier.CourierHomeActivity
@@ -28,7 +30,7 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
             model.orderName,
             "Status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
         )
-
+        holder.clickDialog(model)
         holder.checkImageBtn.setOnClickListener {
             launch {
                 println("check+ $model")
@@ -56,12 +58,12 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         val secondStr = second.toString()
 
         model.orderDetails = hourStr + ":" + minuteStr + ":" + secondStr;
-        model.orderStatus = "completed"
+        model.orderStatus = COMPLETED
         FsOrderService.updateOrder(model)
     }
 
     private suspend fun cancelPressed(model: OrderModel) {
-        model.orderStatus = "canceled"
+        model.orderStatus = CANCELED
         FsOrderService.updateOrder(model)
     }
 }
