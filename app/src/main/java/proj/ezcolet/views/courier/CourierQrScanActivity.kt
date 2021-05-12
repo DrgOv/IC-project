@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import proj.ezcolet.R
 import proj.ezcolet.contracts.CourierQrScanContract
 import proj.ezcolet.presenters.courier.CourierQrScanPresenter
+import proj.ezcolet.services.ViewService
 import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -168,6 +169,10 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        ViewService.setViewAndId(this, CourierHomeActivity(), username)
     }
 
 }

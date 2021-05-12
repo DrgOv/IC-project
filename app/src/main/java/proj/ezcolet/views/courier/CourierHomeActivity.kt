@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import proj.ezcolet.contracts.CourierHomeContract
 import proj.ezcolet.databinding.CourierHomeActivityBinding
 import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.presenters.courier.CourierHomePresenter
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.services.database.FsQueryingService
@@ -26,13 +28,14 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
     AppCompatActivity(),
     CoroutineScope {
     private lateinit var binding: CourierHomeActivityBinding
-
+    private lateinit var courier_home_Presenter: CourierHomeContract.Presenter
     private lateinit var orderAdapter: OrderAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var exitBtn: ImageButton
     private lateinit var infoBtn: ImageButton
     private lateinit var scanQRBtn: Button
     private var orderList: MutableList<OrderModel> = mutableListOf()
+    private lateinit var username:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +44,9 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         binding = CourierHomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("Username")
+        courier_home_Presenter = CourierHomePresenter(this)
 
+        username = intent.getStringExtra("Username").toString()
         bindViews()
         if (username != null) {
             setUpRecyclerView(username)
@@ -65,10 +69,12 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
     private fun setListeners(username: String) {
         infoBtn.setOnClickListener() {
+            finish()
             ViewService.setViewAndId(this, CourierInfoActivity(), username.toString())
 
         }
         scanQRBtn.setOnClickListener() {
+            finish()
             ViewService.setViewAndId(this, CourierQrScanActivity(), username.toString())
         }
         exitBtn.setOnClickListener() {
@@ -96,7 +102,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         }
     }
 
-    var simpleCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
+    private var simpleCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
         0
     ) {
@@ -126,14 +132,14 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
     }
 
     suspend fun updateOrders(fromPosition: Int, toPosition: Int) {
-        var aux = orderList.get(fromPosition).orderNumber
-        orderList.get(fromPosition).orderNumber = orderList.get(toPosition).orderNumber
-        orderList.get(toPosition).orderNumber = aux
-        aux = orderList.get(fromPosition).id
+
+        var aux = orderList.get(fromPosition).id
         orderList.get(fromPosition).id = orderList.get(toPosition).id
         orderList.get(toPosition).id = aux
-        println(orderList.get(fromPosition).orderNumber)
-        println(orderList.get(toPosition).orderNumber)
+
+        println(orderList.get(fromPosition).id)
+        println(orderList.get(toPosition).id)
+
         FsOrderService.addOrder(orderList.get(fromPosition))
         FsOrderService.addOrder(orderList.get(toPosition))
 

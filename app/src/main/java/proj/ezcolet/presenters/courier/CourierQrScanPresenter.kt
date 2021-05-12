@@ -100,7 +100,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
         addOrder(newOrder)
     }
 
-    suspend fun checkClient(): String {
+    private suspend fun checkClient(): String {
         val clientObj = FsQueryingService.getClientBasedOnNamePhone(
             clientFirstName,
             clientLastName,
@@ -113,7 +113,7 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
 
     }
 
-    suspend fun getOrderNumber(): Int {
+    private suspend fun getOrderNumber(): Int {
         val orderNum = FsOrderService.getGeneral("orderStats")
         if (orderNum != null) {
             return orderNum.orderNumber
