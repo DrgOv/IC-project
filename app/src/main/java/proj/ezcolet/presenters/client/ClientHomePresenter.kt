@@ -8,6 +8,7 @@ import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsClientService
+import proj.ezcolet.services.database.FsCourierService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.views.client.ClientHomeActivity
 
@@ -29,5 +30,12 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
 
     suspend fun setUpAdapter() {
         clientHomeActivity.setUpAdapter(client, getOptions())
+    }
+
+    suspend fun setUpTexts() {
+        clientHomeActivity.setWelcomeText("Buna ziua, ${client.firstName}")
+        clientHomeActivity.setRemainingOrdersNumberText("0");
+        val courier = FsCourierService.getCourier(client.getOrdersByUsername()[0].courierUsername)!!
+        clientHomeActivity.setCourierUsernameText("Curier: ${courier.firstName} ${courier.lastName}")
     }
 }
