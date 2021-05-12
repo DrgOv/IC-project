@@ -1,6 +1,8 @@
 package proj.ezcolet.views.courier
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -35,8 +37,17 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
     private lateinit var infoBtn: ImageButton
     private lateinit var scanQRBtn: Button
     private var orderList: MutableList<OrderModel> = mutableListOf()
-    private lateinit var username:String
+    private lateinit var username: String
+    lateinit var mainHandler: Handler
 
+    private val updateList = object : Runnable {
+        override fun run() {
+            launch {
+                // updateOrderList()
+            }
+            mainHandler.postDelayed(this, 1000)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +67,17 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+        mainHandler = Handler(Looper.getMainLooper())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //mainHandler.removeCallbacks(updateList)
+    }
+
+    override fun onResume() {
+        super.onResume()
+       // mainHandler.post(updateList)
     }
 
     private fun bindViews() {
@@ -91,9 +113,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
                         "courierUsername", username
                     )
                 )
-            orderList = FsQueryingService.getOrdersBasedOnCourierUserName(
-                username
-            )
+            updateOrderList()
             println(orderList)
             orderAdapter = CourierOrderAdapter(options)
             orderAdapter.startListening()
@@ -102,34 +122,35 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         }
     }
 
-    private var simpleCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(
-        ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
-        0
-    ) {
-        override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
-            val fromPosition = viewHolder.absoluteAdapterPosition
-            val toPosition = target.absoluteAdapterPosition
-            Collections.swap(orderList, fromPosition, toPosition)
+    private var simpleCallback: ItemTouchHelper.SimpleCallback =
+        object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            0
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val fromPosition = viewHolder.absoluteAdapterPosition
+                val toPosition = target.absoluteAdapterPosition
+                Collections.swap(orderList, fromPosition, toPosition)
 
-            recyclerView.adapter!!.notifyItemMoved(fromPosition, toPosition)
-            println(orderList)
-            println(orderList.get(fromPosition).orderNumber)
-            println(orderList.get(toPosition).orderNumber)
-            launch {
-                updateOrders(fromPosition, toPosition)
+                recyclerView.adapter!!.notifyItemMoved(fromPosition, toPosition)
+                println(orderList)
+                println(orderList.get(fromPosition).orderNumber)
+                println(orderList.get(toPosition).orderNumber)
+                launch {
+                    updateOrders(fromPosition, toPosition)
+                }
+
+
+                return false
+
             }
 
-
-            return false
-
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
         }
-
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
-    }
 
     suspend fun updateOrders(fromPosition: Int, toPosition: Int) {
 
@@ -140,9 +161,15 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         println(orderList.get(fromPosition).id)
         println(orderList.get(toPosition).id)
 
-        FsOrderService.addOrder(orderList.get(fromPosition))
-        FsOrderService.addOrder(orderList.get(toPosition))
+        FsOrderService.updateOrder(orderList.get(fromPosition))
+        FsOrderService.updateOrder(orderList.get(toPosition))
 
+    }
+
+    private suspend fun updateOrderList() {
+        orderList = FsQueryingService.getOrdersBasedOnCourierUserName(
+            username
+        )
     }
 
     override fun onBackPressed() {

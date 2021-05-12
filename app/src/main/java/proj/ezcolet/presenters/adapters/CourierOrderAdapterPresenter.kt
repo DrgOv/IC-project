@@ -27,7 +27,7 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
     CoroutineScope {
     override fun onBindVH(holder: CourierOrderViewHolder, model: OrderModel) {
         holder.setUpperLowerTexts(
-            model.orderName,
+            " ${holder.absoluteAdapterPosition + 1}. "+model.orderName,
             "Status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
         )
         holder.clickDialog(model)
