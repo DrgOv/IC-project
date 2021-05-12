@@ -3,6 +3,7 @@ package proj.ezcolet.presenters.adapters
 import android.view.View
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import proj.ezcolet.models.order.NEEDED
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.database.FsOrderService
@@ -20,8 +21,8 @@ class ClientOrderAdapterPresenter(val client: ClientModel) :
 
         if (model.isClientOrder(client)) {
             holder.deliverImageBtn.setOnClickListener() {
-                if (model.orderStatus != "needed") {
-                    model.orderStatus = "needed"
+                if (model.orderStatus != NEEDED) {
+                    model.orderStatus = NEEDED
                     GlobalScope.launch { FsOrderService.updateOrder(model) }
                 } else {
                     holder.hideDeliverBtn()

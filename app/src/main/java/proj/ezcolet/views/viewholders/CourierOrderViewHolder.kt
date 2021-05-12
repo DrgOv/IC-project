@@ -24,7 +24,7 @@ class CourierOrderViewHolder(itemView: View) :
     override var lowerTextView: TextView = binding.courierOrderDetailsTextView
     val checkImageBtn: ImageButton = binding.checkBtn
     val cancelImageBtn: ImageButton = binding.cancelBtn
-    val REQUEST_PHONE_CALL = 1
+    private val REQUEST_PHONE_CALL = 1
     fun clickDialog(model: OrderModel) {
         itemView.setOnClickListener {
             openDialog(model)
