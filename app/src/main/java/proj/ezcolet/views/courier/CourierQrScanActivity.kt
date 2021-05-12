@@ -15,10 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import proj.ezcolet.R
 import proj.ezcolet.contracts.CourierQrScanContract
-import proj.ezcolet.models.OrderModel
 import proj.ezcolet.presenters.courier.CourierQrScanPresenter
-import proj.ezcolet.services.database.FsDatabaseService
-import proj.ezcolet.services.database.FsDatabaseService.addOrder
+import proj.ezcolet.services.ViewService
 import kotlin.coroutines.CoroutineContext
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -27,16 +25,19 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
     AppCompatActivity(), CoroutineScope {
     private lateinit var codeScanner: CodeScanner
     private lateinit var courier_qr_scan_Presenter: CourierQrScanContract.Presenter
+    private lateinit var username: String
     private var add_order_count = 0
+    private var valid = 2;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.courier_qr_scan_activity)
         courier_qr_scan_Presenter = CourierQrScanPresenter(this)
+        username = intent.getStringExtra("Username").toString()
+
         setupPermissions()
         codeScanner()
     }
-
 
     private fun codeScanner() {
         codeScanner = CodeScanner(this, qrScannerView)
@@ -81,23 +82,48 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
         if (add_order_count == 0) {
 
             courier_qr_scan_Presenter.splitOrderInfos(info)
-            Toast.makeText(
-                this@CourierQrScanActivity,
-                "Comandă adăugată",
-                Toast.LENGTH_SHORT
-            ).show()
+            valid = courier_qr_scan_Presenter.checkIfValid()
+            println("Valid value  " + valid)
 
-            courier_qr_scan_Presenter.addOrderInfo()
+            if (valid == 0) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Comandă adăugată",
+                    Toast.LENGTH_SHORT
+                ).show()
+                courier_qr_scan_Presenter.addOrderInfo(username)
+            }
+
+            if (valid == 1) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Formatul este incorect!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
         }
 
         if (add_order_count > 0) {
-            Toast.makeText(
-                this@CourierQrScanActivity,
-                "Comanda a fost deja adăugată",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            if (valid == 0) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "Comanda a fost deja adăugată",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            if (valid == 1) {
+                Toast.makeText(
+                    this@CourierQrScanActivity,
+                    "S-a mai încercat acest cod",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         add_order_count++;
+
     }
 
     override fun onResume() {
@@ -143,6 +169,10 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        ViewService.setViewAndId(this, CourierHomeActivity(), username)
     }
 
 }

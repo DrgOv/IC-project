@@ -9,6 +9,7 @@ interface LoginContract {
         fun goToRegisterScreen()
         fun goToClientScreen()
         fun goToCourierScreen()
+        fun goToAdminScreen()
     }
 
     interface Presenter {

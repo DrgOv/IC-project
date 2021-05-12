@@ -2,14 +2,13 @@ package proj.ezcolet.presenters.courier
 
 import proj.ezcolet.contracts.CourierInfoContract
 import proj.ezcolet.models.users.CourierModel
-import proj.ezcolet.models.users.UserModel
-import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.services.database.FsCourierService
 import proj.ezcolet.views.courier.CourierInfoActivity
 
 class CourierInfoPresenter(courierInfoActivity: CourierInfoActivity) :
     CourierInfoContract.Presenter {
    override suspend fun getUser(username:String): CourierModel? {
-        val user = FsDatabaseService.getCourier(username)
+        val user = FsCourierService.getCourier(username)
         return user
 
     }

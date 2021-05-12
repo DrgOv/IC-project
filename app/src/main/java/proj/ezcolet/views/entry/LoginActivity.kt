@@ -1,12 +1,10 @@
 package proj.ezcolet.views.entry
 
-import android.content.Intent
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,13 +15,14 @@ import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.models.users.UserModel
 import proj.ezcolet.presenters.entry.LoginPresenter
 import proj.ezcolet.services.ViewService
+import proj.ezcolet.views.admin.AdminHomeActivity
 import proj.ezcolet.views.client.ClientHomeActivity
 import proj.ezcolet.views.courier.CourierHomeActivity
-import proj.ezcolet.views.courier.CourierInfoActivity
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
-    AppCompatActivity(), LoginContract.View, CoroutineScope {
+    AppCompatActivity(),
+    LoginContract.View, CoroutineScope {
     private lateinit var loginPresenter: LoginContract.Presenter
     private lateinit var binding: EntryLoginActivityBinding
 
@@ -31,19 +30,27 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     private lateinit var passwordET: EditText
     private lateinit var loginBtn: Button
     private lateinit var toRegisterBtn: Button
-    private lateinit var username:String
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
-        loginPresenter = LoginPresenter(this)
         binding = EntryLoginActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loginPresenter = LoginPresenter(this)
+        bindViews()
+        setListeners()
+    }
+
+    private fun bindViews() {
         usernameET = binding.usernameEditText
         passwordET = binding.passwordEditText
         loginBtn = binding.loginBtn
         toRegisterBtn = binding.toRegisterBtn
+    }
+
+    private fun setListeners() {
         loginBtn.setOnClickListener() {
             launch {
                 login()
@@ -53,21 +60,17 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
         toRegisterBtn.setOnClickListener() {
             goToRegisterScreen()
         }
-
-        binding.toUserBtn.setOnClickListener() {
-            goToClientScreen()
-        }
-
-        binding.toCourierBtn.setOnClickListener() {
-            goToCourierScreen()
-        }
     }
 
     private suspend fun login() {
         username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        goToUserScreen(loginPresenter.login(username, password))
+        if (username == "admin" && password == "admin") {
+            goToAdminScreen()
+        } else {
+            goToUserScreen(loginPresenter.login(username, password))
+        }
     }
 
     override fun showUsernameError(error: String) {
@@ -75,6 +78,7 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     }
 
     override fun showPasswordError(error: String) {
+        println("test");
         passwordET.error = error
     }
 
@@ -95,6 +99,9 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
 
     override fun goToCourierScreen() {
         ViewService.setViewAndId(this, CourierHomeActivity(), username)
+    }
 
+    override fun goToAdminScreen() {
+        ViewService.setView(this, AdminHomeActivity())
     }
 }

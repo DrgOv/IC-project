@@ -1,39 +1,102 @@
 package proj.ezcolet.views.client
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import proj.ezcolet.models.OrderModel
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import proj.ezcolet.databinding.ClientHomeActivityBinding
+import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.presenters.client.ClientHomePresenter
 import proj.ezcolet.services.ViewService
-import proj.ezcolet.views.adapters.ClientAdapter
+import proj.ezcolet.services.database.FsClientService
+import proj.ezcolet.services.database.FsQueryingService
+import proj.ezcolet.views.adapters.ClientOrderAdapter
+import proj.ezcolet.views.adapters.OrderAdapter
 import proj.ezcolet.views.entry.LoginActivity
+import kotlin.coroutines.CoroutineContext
 
-class ClientHomeActivity : AppCompatActivity() {
+class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
+    AppCompatActivity(),
+    CoroutineScope {
+    private lateinit var clientHomePresenter: ClientHomePresenter
+    private lateinit var binding: ClientHomeActivityBinding
+
+    private lateinit var welcomeUserTextView: TextView
+    private lateinit var remainingOrdersNumberTextView: TextView
+    private lateinit var courierUsernameTextView: TextView
+    private lateinit var courierRatingTextView: TextView
+    private lateinit var yourOrderNumberTextView: TextView
+    private lateinit var orderAdapter: ClientOrderAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var exitBtn: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = ClientHomeActivityBinding.inflate(layoutInflater)
-        binding.exitBtn.setOnClickListener() {
-            finish();
-            ViewService.setView(this, LoginActivity())
-        }
-        val list = generateList(500)
-
-        binding.ordersListingRecyclerView.adapter = ClientAdapter(list)
-        binding.ordersListingRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.ordersListingRecyclerView.setHasFixedSize(true)
-
+        binding = ClientHomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        clientHomePresenter = ClientHomePresenter(this)
+        launch {
+            clientHomePresenter.initializeClient()
+            bindViews()
+            clientHomePresenter.setUpAdapter()
+            setUpRecyclerView()
+            clientHomePresenter.setUpTexts()
+            setListeners()
+        }
     }
 
-    private fun generateList(size: Int): List<OrderModel> {
-        val list = ArrayList<OrderModel>()
-        for (i in 0 until size) {
+    private fun bindViews() {
+        welcomeUserTextView = binding.textWelcomeUser
+        remainingOrdersNumberTextView = binding.textRemainingOrdersNumber
+        courierUsernameTextView = binding.textCourierUsername
+        courierRatingTextView = binding.textCourierRating
+        yourOrderNumberTextView = binding.textYourOrderNumber
+        exitBtn = binding.exitBtn
+        recyclerView = binding.ordersListingRecyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+    }
 
-           // val item = OrderModel(orderName = "Comanda $i", orderDetails = "livrat la ora:")
-           // list += item
+    fun setWelcomeText(text: String) {
+        welcomeUserTextView.text = text
+    }
+
+    fun setRemainingOrdersNumberText(text: String) {
+        remainingOrdersNumberTextView.text = text
+    }
+
+    fun setCourierUsernameText(text: String) {
+        courierUsernameTextView.text = text
+    }
+
+    fun setUpAdapter(client: ClientModel, options: FirestoreRecyclerOptions<OrderModel>) {
+        orderAdapter = ClientOrderAdapter(client, options)
+        orderAdapter.startListening()
+    }
+
+    private fun setUpRecyclerView() {
+        recyclerView.adapter = orderAdapter
+    }
+
+    private fun setListeners() {
+        exitBtn.setOnClickListener() {
+            goToLoginScreen()
         }
-        return list
+    }
+
+    private fun goToLoginScreen() {
+        finish();
+        ViewService.setView(this, LoginActivity())
+    }
+
+    override fun onBackPressed() {
+        //Disables back button
     }
 }

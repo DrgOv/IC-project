@@ -11,6 +11,7 @@ import proj.ezcolet.contracts.CourierInfoContract
 import proj.ezcolet.databinding.CourierInfoActivityBinding
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.presenters.courier.CourierInfoPresenter
+import proj.ezcolet.services.ViewService
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -32,7 +33,7 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
         super.onCreate(savedInstanceState)
         setContentView(R.layout.courier_info_activity)
         courier_info_Presenter = CourierInfoPresenter(this)
-        val binding = CourierInfoActivityBinding.inflate(layoutInflater)
+        CourierInfoActivityBinding.inflate(layoutInflater)
 
         username = intent.getStringExtra("Username").toString()
 
@@ -40,7 +41,7 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
 
     }
 
-    fun getUser() {
+    private fun getUser() {
         launch {
             val courier = courier_info_Presenter.getUser(username)
             if (courier != null) {
@@ -49,7 +50,7 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
         }
     }
 
-    suspend fun getUserData(courier: CourierModel) {
+    private suspend fun getUserData(courier: CourierModel) {
         firstName = courier_info_Presenter.getFirstName(courier).toString()
         lastName = courier_info_Presenter.getLastName(courier).toString()
         rating = courier_info_Presenter.getRating(courier).toString()
@@ -64,12 +65,16 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
         val calendar: Calendar = Calendar.getInstance()
         val month: String =
             calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))
-        monthlyOrdersTextView.text = "Comenzi " + month + ": " + monthlyOrders
 
+        monthlyOrdersTextView.text = "Comenzi " + month + ": " + monthlyOrders
         totalOrdersTextView.text = "Comenzi totale: " + totalOrders
         maxRatingsTextView.text = "Rating maxim: " + ratingMaxim + "/" + ratingsNumber
 
 
+    }
+
+    override fun onBackPressed() {
+        ViewService.setViewAndId(this, CourierHomeActivity(), username)
     }
 
 

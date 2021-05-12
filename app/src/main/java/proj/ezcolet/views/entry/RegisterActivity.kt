@@ -1,10 +1,10 @@
 package proj.ezcolet.views.entry
 
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,8 @@ import kotlin.coroutines.CoroutineContext
 
 
 class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
-    AppCompatActivity(), RegisterContract.View, CoroutineScope {
+    AppCompatActivity(),
+    RegisterContract.View, CoroutineScope {
     private lateinit var registerPresenter: RegisterContract.Presenter
     private lateinit var binding: EntryRegisterActivityBinding
 
@@ -35,10 +36,15 @@ class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatc
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFormat(PixelFormat.RGBA_8888)
-        registerPresenter = RegisterPresenter(this)
         binding = EntryRegisterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        registerPresenter = RegisterPresenter(this)
+        bindViews()
+        setListeners()
+    }
+
+    private fun bindViews() {
         firstNameET = binding.firstNameEditText
         lastNameET = binding.lastNameEditText
         streetET = binding.streetEditText
@@ -49,7 +55,9 @@ class RegisterActivity(override val coroutineContext: CoroutineContext = Dispatc
         usernameET = binding.userEditText
         passwordET = binding.passEditText
         registerBtn = binding.registerBtn
+    }
 
+    private fun setListeners() {
         registerBtn.setOnClickListener() {
             launch {
                 if (addClient()) {

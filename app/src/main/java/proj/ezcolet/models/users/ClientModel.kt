@@ -1,20 +1,22 @@
 package proj.ezcolet.models.users
 
 import com.google.firebase.firestore.Exclude
-import proj.ezcolet.models.Model
+import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.services.database.FsOrderService
+import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.services.validation.*
 
 data class ClientModel(
-    override val id: String = "",
-    override val lastName: String = "",
-    override val firstName: String = "",
-    val street: String = "",
-    override val county: String = "",
-    override val city: String = "",
-    val zipCode: String = "",
-    override val phone: String = "",
-    override val username: String = "",
-    override val password: String = ""
+    override var id: String = "",
+    override var lastName: String = "",
+    override var firstName: String = "",
+    var street: String = "",
+    override var county: String = "",
+    override var city: String = "",
+    var zipCode: String = "",
+    override var phone: String = "",
+    override var username: String = "",
+    override var password: String = ""
 ) : UserModel(id, lastName, firstName, county, city, phone, username, password, "client") {
 
     override fun toString(): String {
@@ -42,12 +44,12 @@ data class ClientModel(
     }
 
     @Exclude
-    fun isFirstNameValid(): String? {
+    fun isFirstNameValid(): String {
         return ValidationService.getStringState(firstName, PATTERN_START_UPPERCASE_MIN_3)
     }
 
     @Exclude
-    fun isStreetValid(): String? {
+    fun isStreetValid(): String {
         return ValidationService.getStringState(street)
     }
 
@@ -79,5 +81,10 @@ data class ClientModel(
     @Exclude
     fun isPasswordValid(): String {
         return ValidationService.getStringState(password, PATTERN_PASSWORD)
+    }
+
+    @Exclude
+    suspend fun getOrdersByUsername(): List<OrderModel> {
+        return FsQueryingService.getOrdersByClientUsername(this.username)
     }
 }

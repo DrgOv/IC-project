@@ -1,7 +1,6 @@
 package proj.ezcolet.contracts
 
 import proj.ezcolet.models.users.CourierModel
-import proj.ezcolet.models.users.UserModel
 
 interface CourierInfoContract {
     interface Presenter {

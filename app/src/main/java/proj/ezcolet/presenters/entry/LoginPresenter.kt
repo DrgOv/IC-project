@@ -2,14 +2,14 @@ package proj.ezcolet.presenters.entry
 
 import proj.ezcolet.contracts.LoginContract
 import proj.ezcolet.models.users.UserModel
-import proj.ezcolet.services.database.FsDatabaseService
+import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.services.validation.*
 
 class LoginPresenter(private val loginActivity: LoginContract.View) : LoginContract.Presenter {
 
     override suspend fun login(username: String, password: String): UserModel? {
         if (isDataValid(username, password)) {
-            val user = FsDatabaseService.getUserBasedOnUsername(username)
+            val user = FsQueryingService.getUserByUsername(username)
             if (user != null) {
                 if (user.doPasswordsMatch(password)) {
                     return user

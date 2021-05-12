@@ -1,0 +1,19 @@
+[33m9f2cb0b[m[33m ([m[1;36mHEAD -> [m[1;32mCourier_Home[m[33m)[m HEAD@{13 minutes ago}: merge client: Merge made by the 'recursive' strategy.
+[33m683a63b[m HEAD@{13 minutes ago}: commit (merge): Merge branch 'entry' into Courier_Home
+[33m72a82e1[m HEAD@{14 minutes ago}: checkout: moving from client to Courier_Home
+[33m3d94b05[m[33m ([m[1;31morigin/client[m[33m, [m[1;32mclient[m[33m)[m HEAD@{14 minutes ago}: pull --no-stat -v --progress origin client: Fast-forward
+[33m297ebc5[m HEAD@{15 minutes ago}: checkout: moving from entry to client
+[33m40b98ee[m[33m ([m[1;31morigin/entry[m[33m, [m[1;32mentry[m[33m)[m HEAD@{15 minutes ago}: pull --no-stat -v --progress origin entry: Fast-forward
+[33m52a4c43[m HEAD@{15 minutes ago}: checkout: moving from Courier_Home to entry
+[33m72a82e1[m HEAD@{20 minutes ago}: merge entry: Merge made by the 'recursive' strategy.
+[33m5f6de47[m HEAD@{21 minutes ago}: checkout: moving from entry to Courier_Home
+[33m52a4c43[m HEAD@{21 minutes ago}: checkout: moving from client to entry
+[33m297ebc5[m HEAD@{21 minutes ago}: checkout: moving from Courier_Home to client
+[33m5f6de47[m HEAD@{22 minutes ago}: commit: Work on courier list
+[33m4e766e4[m HEAD@{2 hours ago}: merge Courier_QRScanner: Merge made by the 'recursive' strategy.
+[33mc2f6aa9[m[33m ([m[1;31morigin/Courier_Home[m[33m)[m HEAD@{22 hours ago}: checkout: moving from Courier_QRScanner to Courier_Home
+[33md7791d9[m[33m ([m[1;31morigin/Courier_QRScanner[m[33m, [m[1;32mCourier_QRScanner[m[33m)[m HEAD@{23 hours ago}: commit: Solved the problem when scanning a QRcode that generates an invalid text
+[33m3f11c97[m HEAD@{24 hours ago}: checkout: moving from Courier_Home to Courier_QRScanner
+[33mc2f6aa9[m[33m ([m[1;31morigin/Courier_Home[m[33m)[m HEAD@{24 hours ago}: pull --no-stat -v --progress origin Courier_Home: Fast-forward
+[33m651528f[m HEAD@{2 weeks ago}: checkout: moving from master to Courier_Home
+[33m36e1d52[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{2 weeks ago}: clone: from https://github.com/DrgOv/ez-colet.git
