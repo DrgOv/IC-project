@@ -28,6 +28,16 @@ object FsQueryingService : FsDatabaseService() {
         return FsOrderService.getCollectionRef().whereEqualTo(fieldName, fieldValue)
     }
 
+    fun getOrdersQueryWhereEqualsToDay(
+        fieldName: String,
+        fieldValue: String,
+        fieldName2: String,
+        fieldValue2: String
+    ): Query {
+        return FsOrderService.getCollectionRef().whereEqualTo(fieldName, fieldValue)
+            .whereEqualTo(fieldName2, fieldValue2)
+    }
+
     suspend fun getClientBasedOnNamePhone(
         firstName: String,
         lastName: String,
@@ -45,12 +55,14 @@ object FsQueryingService : FsDatabaseService() {
     }
 
 
-    suspend fun getOrdersBasedOnCourierUserName(
-        courierUsername: String
+    suspend fun getOrdersBasedOnCourierUserNameAndDate(
+        courierUsername: String,
+        currentDay: String
     ): MutableList<OrderModel> {
         lateinit var order: OrderModel
         var orderList: MutableList<OrderModel> = mutableListOf()
-        FsOrderService.getCollectionRef().whereEqualTo("courierUsername", courierUsername).get()
+        FsOrderService.getCollectionRef().whereEqualTo("courierUsername", courierUsername)
+            .whereEqualTo("orderDate", currentDay).get()
             .addOnSuccessListener { querySnapshot ->
                 for (query in querySnapshot) {
                     order = query.toObject(OrderModel::class.java)

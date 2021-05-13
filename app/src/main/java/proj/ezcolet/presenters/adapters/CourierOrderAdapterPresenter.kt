@@ -1,24 +1,14 @@
 package proj.ezcolet.presenters.adapters
 
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import proj.ezcolet.databinding.CourierCardItemBinding
-import proj.ezcolet.databinding.CourierHomeActivityBinding
 import proj.ezcolet.models.order.CANCELED
 import proj.ezcolet.models.order.COMPLETED
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.services.database.FsOrderService
-import proj.ezcolet.views.courier.CourierHomeActivity
 import proj.ezcolet.views.viewholders.CourierOrderViewHolder
-import proj.ezcolet.views.viewholders.OrderViewHolder
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -27,7 +17,7 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
     CoroutineScope {
     override fun onBindVH(holder: CourierOrderViewHolder, model: OrderModel) {
         holder.setUpperLowerTexts(
-            " ${holder.absoluteAdapterPosition + 1}. "+model.orderName,
+            " ${holder.absoluteAdapterPosition + 1}. " + model.orderName,
             "Status: ${model.orderStatus.toLowerCase(Locale.ROOT)}"
         )
         holder.clickDialog(model)

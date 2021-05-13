@@ -77,7 +77,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
     override fun onResume() {
         super.onResume()
-       // mainHandler.post(updateList)
+        // mainHandler.post(updateList)
     }
 
     private fun bindViews() {
@@ -107,14 +107,10 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
     private fun setUpRecyclerView(username: String) {
         launch {
-            val options = ViewService
-                .setFsRecyclerAdapterOptions(
-                    FsQueryingService.getOrdersQueryWhereEqualsTo(
-                        "courierUsername", username
-                    )
-                )
-            updateOrderList()
+            val options = courier_home_Presenter.getOptions(username)
+            updateOrderList(courier_home_Presenter.getDate())
             println(orderList)
+
             orderAdapter = CourierOrderAdapter(options)
             orderAdapter.startListening()
 
@@ -141,7 +137,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
                 println(orderList.get(fromPosition).orderNumber)
                 println(orderList.get(toPosition).orderNumber)
                 launch {
-                    updateOrders(fromPosition, toPosition)
+                    courier_home_Presenter.updateOrders(orderList, fromPosition, toPosition)
                 }
 
 
@@ -152,23 +148,10 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
         }
 
-    suspend fun updateOrders(fromPosition: Int, toPosition: Int) {
 
-        var aux = orderList.get(fromPosition).id
-        orderList.get(fromPosition).id = orderList.get(toPosition).id
-        orderList.get(toPosition).id = aux
-
-        println(orderList.get(fromPosition).id)
-        println(orderList.get(toPosition).id)
-
-        FsOrderService.updateOrder(orderList.get(fromPosition))
-        FsOrderService.updateOrder(orderList.get(toPosition))
-
-    }
-
-    private suspend fun updateOrderList() {
-        orderList = FsQueryingService.getOrdersBasedOnCourierUserName(
-            username
+    private suspend fun updateOrderList(currentDay: String) {
+        orderList = FsQueryingService.getOrdersBasedOnCourierUserNameAndDate(
+            username, currentDay
         )
     }
 
