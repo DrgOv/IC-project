@@ -7,7 +7,6 @@ import proj.ezcolet.R
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.presenters.adapters.ClientOrderAdapterPresenter
-import proj.ezcolet.presenters.adapters.OrderAdapterPresenter
 import proj.ezcolet.views.viewholders.ClientOrderViewHolder
 import proj.ezcolet.views.viewholders.OrderViewHolder
 
@@ -23,6 +22,6 @@ class ClientOrderAdapter(val client: ClientModel, options: FirestoreRecyclerOpti
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int, model: OrderModel) {
-        clientOrderAdapterPresenter.onBindVH(holder as ClientOrderViewHolder, model)
+        clientOrderAdapterPresenter.onBindVH(holder as ClientOrderViewHolder, model, "")
     }
 }

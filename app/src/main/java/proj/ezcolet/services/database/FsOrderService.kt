@@ -7,6 +7,7 @@ import kotlinx.coroutines.tasks.await
 import proj.ezcolet.models.order.GeneralModel
 import proj.ezcolet.models.order.ModelInt
 import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.models.users.CourierModel
 
 object FsOrderService : FsDatabaseService() {
     private const val ORDERS_COLLECTION = "orders"
@@ -16,7 +17,7 @@ object FsOrderService : FsDatabaseService() {
         return super.db().collection(ORDERS_COLLECTION)
     }
 
-    suspend fun addInt(collectionName: String, document: ModelInt) {
+    private suspend fun addInt(collectionName: String, document: ModelInt) {
         super.db().collection(collectionName).document(document.id.toString()).set(document).await()
     }
 
@@ -28,7 +29,12 @@ object FsOrderService : FsDatabaseService() {
         super.db().collection(GENERAL_COLLECTION).document("orderStats").set(generalModel).await()
     }
 
-    suspend fun updateInt(collectionName: String, document: ModelInt) {
+    suspend fun updateGeneral(general: GeneralModel) {
+        super.db().collection(GENERAL_COLLECTION).document("orderStats")
+            .set(general, SetOptions.merge()).await()
+    }
+
+    private suspend fun updateInt(collectionName: String, document: ModelInt) {
         db().collection(collectionName).document(document.id.toString())
             .set(document, SetOptions.merge()).await()
     }
@@ -37,7 +43,7 @@ object FsOrderService : FsDatabaseService() {
         updateInt(ORDERS_COLLECTION, order)
     }
 
-    suspend fun deleteInt(collectionName: String, document: ModelInt) {
+    private suspend fun deleteInt(collectionName: String, document: ModelInt) {
         super.db().collection(collectionName).document(document.id.toString()).delete().await()
     }
 
@@ -48,4 +54,5 @@ object FsOrderService : FsDatabaseService() {
     suspend fun getGeneral(id: String): GeneralModel? {
         return super.get(GENERAL_COLLECTION, id)?.toObject()
     }
+
 }

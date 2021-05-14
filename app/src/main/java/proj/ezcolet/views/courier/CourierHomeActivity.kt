@@ -58,16 +58,23 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
         courier_home_Presenter = CourierHomePresenter(this)
 
         username = intent.getStringExtra("Username").toString()
-        bindViews()
-        if (username != null) {
-            setUpRecyclerView(username)
+        launch {
+            courier_home_Presenter.initializeCourier(username)
+            bindViews()
+            if (username != null) {
+                setUpRecyclerView(username)
+            }
+            if (username != null) {
+                setListeners(username)
+            }
+
+            courier_home_Presenter.updateMonth()
+
+
+            val itemTouchHelper = ItemTouchHelper(simpleCallback)
+            itemTouchHelper.attachToRecyclerView(recyclerView)
+            mainHandler = Handler(Looper.getMainLooper())
         }
-        if (username != null) {
-            setListeners(username)
-        }
-        val itemTouchHelper = ItemTouchHelper(simpleCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-        mainHandler = Handler(Looper.getMainLooper())
     }
 
     override fun onPause() {
@@ -96,7 +103,6 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
         }
         scanQRBtn.setOnClickListener() {
-            finish()
             ViewService.setViewAndId(this, CourierQrScanActivity(), username.toString())
         }
         exitBtn.setOnClickListener() {
@@ -111,7 +117,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
             updateOrderList(courier_home_Presenter.getDate())
             println(orderList)
 
-            orderAdapter = CourierOrderAdapter(options)
+            orderAdapter = CourierOrderAdapter(options, username)
             orderAdapter.startListening()
 
             recyclerView.adapter = orderAdapter

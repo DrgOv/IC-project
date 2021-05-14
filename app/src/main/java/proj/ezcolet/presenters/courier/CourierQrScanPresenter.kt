@@ -126,8 +126,11 @@ class CourierQrScanPresenter(courierQrScanActivity: CourierQrScanActivity) :
 
         FsOrderService.addOrder(newOrder)
         orderNumber += 1
-        var newGeneral = GeneralModel(orderNumber)
-        FsOrderService.addGeneral(newGeneral)
+        val calendar: Calendar = Calendar.getInstance()
+        val month: String =
+            calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))
+        var newGeneral = GeneralModel(orderNumber, month)
+        FsOrderService.updateGeneral(newGeneral)
     }
 
     private fun getDate(): String {

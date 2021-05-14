@@ -6,11 +6,14 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import proj.ezcolet.R
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.presenters.adapters.CourierOrderAdapterPresenter
-import proj.ezcolet.presenters.adapters.OrderAdapterPresenter
 import proj.ezcolet.views.viewholders.CourierOrderViewHolder
 import proj.ezcolet.views.viewholders.OrderViewHolder
 
-class CourierOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
+class CourierOrderAdapter(
+    options: FirestoreRecyclerOptions<OrderModel>,
+    val username: String
+) :
+
     OrderAdapter(options) {
     private var courierOrderAdapterPresenter = CourierOrderAdapterPresenter()
 
@@ -22,7 +25,7 @@ class CourierOrderAdapter(options: FirestoreRecyclerOptions<OrderModel>) :
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int, model: OrderModel) {
-        courierOrderAdapterPresenter.onBindVH(holder as CourierOrderViewHolder, model)
+        courierOrderAdapterPresenter.onBindVH(holder as CourierOrderViewHolder, model,username)
     }
 
 }
