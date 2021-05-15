@@ -104,4 +104,8 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     override fun goToAdminScreen() {
         ViewService.setView(this, AdminHomeActivity())
     }
+
+    override fun onBackPressed() {
+       finish()
+    }
 }

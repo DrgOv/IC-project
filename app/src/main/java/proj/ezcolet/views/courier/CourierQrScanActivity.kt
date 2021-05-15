@@ -172,6 +172,7 @@ class CourierQrScanActivity(override val coroutineContext: CoroutineContext = Di
     }
 
     override fun onBackPressed() {
+        finish()
         ViewService.setViewAndId(this, CourierHomeActivity(), username)
     }
 
