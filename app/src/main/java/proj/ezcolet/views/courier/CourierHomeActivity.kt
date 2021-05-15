@@ -38,16 +38,6 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
     private lateinit var scanQRBtn: Button
     private var orderList: MutableList<OrderModel> = mutableListOf()
     private lateinit var username: String
-    lateinit var mainHandler: Handler
-
-    private val updateList = object : Runnable {
-        override fun run() {
-            launch {
-                // updateOrderList()
-            }
-            mainHandler.postDelayed(this, 1000)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,19 +63,10 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
             val itemTouchHelper = ItemTouchHelper(simpleCallback)
             itemTouchHelper.attachToRecyclerView(recyclerView)
-            mainHandler = Handler(Looper.getMainLooper())
+
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        //mainHandler.removeCallbacks(updateList)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // mainHandler.post(updateList)
-    }
 
     private fun bindViews() {
         recyclerView = binding.ordersListingRecyclerView
@@ -103,6 +84,7 @@ class CourierHomeActivity(override val coroutineContext: CoroutineContext = Disp
 
         }
         scanQRBtn.setOnClickListener() {
+            finish()
             ViewService.setViewAndId(this, CourierQrScanActivity(), username.toString())
         }
         exitBtn.setOnClickListener() {

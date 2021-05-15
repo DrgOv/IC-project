@@ -74,6 +74,7 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
     }
 
     override fun onBackPressed() {
+        finish()
         ViewService.setViewAndId(this, CourierHomeActivity(), username)
     }
 
