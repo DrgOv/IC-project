@@ -3,10 +3,12 @@ package proj.ezcolet.views.client
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import kotlinx.android.synthetic.main.courier_info_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,10 +31,11 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     private lateinit var binding: ClientHomeActivityBinding
 
     private lateinit var welcomeUserTextView: TextView
-    private lateinit var remainingOrdersNumberTextView: TextView
     private lateinit var courierUsernameTextView: TextView
-    private lateinit var courierRatingTextView: TextView
-    private lateinit var yourOrderNumberTextView: TextView
+    private lateinit var likesTextView: TextView
+    private lateinit var likeImageButton: ImageButton
+    private lateinit var dislikesTextView: TextView
+    private lateinit var dislikeImageButton: ImageButton
     private lateinit var orderAdapter: ClientOrderAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var exitBtn: ImageButton
@@ -54,10 +57,11 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
 
     private fun bindViews() {
         welcomeUserTextView = binding.textWelcomeUser
-        remainingOrdersNumberTextView = binding.textRemainingOrdersNumber
         courierUsernameTextView = binding.textCourierUsername
-        courierRatingTextView = binding.textCourierRating
-        yourOrderNumberTextView = binding.textYourOrderNumber
+        likesTextView = binding.textLikes
+        likeImageButton = binding.buttonLike
+        dislikesTextView = binding.textDislikes
+        dislikeImageButton = binding.buttonDislike
         exitBtn = binding.exitBtn
         recyclerView = binding.ordersListingRecyclerView
         recyclerView.setHasFixedSize(true)
@@ -68,12 +72,20 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         welcomeUserTextView.text = text
     }
 
-    fun setRemainingOrdersNumberText(text: String) {
-        remainingOrdersNumberTextView.text = text
-    }
-
     fun setCourierUsernameText(text: String) {
         courierUsernameTextView.text = text
+    }
+
+    fun setLikes(likes: Int) {
+        likesTextView.text = likes.toString()
+    }
+
+    fun setDislikes(dislikes: Int) {
+        dislikesTextView.text = dislikes.toString()
+    }
+
+    fun showInvalidRatingToast() {
+        Toast.makeText(this, "Ai votat deja.", Toast.LENGTH_SHORT).show()
     }
 
     fun setUpAdapter(client: ClientModel, options: FirestoreRecyclerOptions<OrderModel>) {
@@ -88,6 +100,12 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
     private fun setListeners() {
         exitBtn.setOnClickListener() {
             goToLoginScreen()
+        }
+        likeImageButton.setOnClickListener() {
+            launch { clientHomePresenter.addLike() }
+        }
+        dislikeImageButton.setOnClickListener() {
+            launch { clientHomePresenter.addDislike() }
         }
     }
 

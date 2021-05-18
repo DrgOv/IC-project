@@ -6,6 +6,7 @@ import proj.ezcolet.models.order.NEEDED
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.database.FsOrderService
+import proj.ezcolet.services.validation.NUMBER
 import proj.ezcolet.views.viewholders.ClientOrderViewHolder
 import java.util.*
 
