@@ -53,11 +53,8 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
     private suspend fun getUserData(courier: CourierModel) {
         firstName = courier_info_Presenter.getFirstName(courier).toString()
         lastName = courier_info_Presenter.getLastName(courier).toString()
-        rating = courier_info_Presenter.getRating(courier).toString()
         monthlyOrders = courier_info_Presenter.getMonthlyOrders(courier).toString()
         totalOrders = courier_info_Presenter.getTotalOrders(courier).toString()
-        ratingMaxim = courier_info_Presenter.getMaxRatings(courier).toString()
-        ratingsNumber = courier_info_Presenter.getNumberRatings(courier).toString()
 
         courierUsernameTextView.text = (firstName + " " + lastName)
         ratingTextView.text = rating + "/10"

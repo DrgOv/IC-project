@@ -2,6 +2,7 @@ package proj.ezcolet.models.users
 
 import com.google.firebase.firestore.Exclude
 import proj.ezcolet.models.order.OrderModel
+import proj.ezcolet.services.database.FsClientService
 import proj.ezcolet.services.database.FsOrderService
 import proj.ezcolet.services.database.FsQueryingService
 import proj.ezcolet.services.validation.*
@@ -16,11 +17,18 @@ data class ClientModel(
     var zipCode: String = "",
     override var phone: String = "",
     override var username: String = "",
-    override var password: String = ""
+    override var password: String = "",
+    var gaveRating: Boolean = false
 ) : UserModel(id, lastName, firstName, county, city, phone, username, password, "client") {
 
     override fun toString(): String {
         return "ClientModel(id='$id', lastName='$lastName', firstName='$firstName', street='$street', county='$county', city='$city', zipCode='$zipCode', phone='$phone', username='$username', password='$password', role='$role')"
+    }
+
+    @Exclude
+    suspend fun hasRated() {
+        gaveRating = true
+        FsClientService.updateClient(this)
     }
 
     @Exclude

@@ -23,3 +23,5 @@ const val VALID = "valid"
 
 const val EMPTY_ERROR_MESSAGE = "Camp obligatoriu"
 const val INVALID_ERROR_MESSAGE = "Format invalid"
+
+var NUMBER = 0;

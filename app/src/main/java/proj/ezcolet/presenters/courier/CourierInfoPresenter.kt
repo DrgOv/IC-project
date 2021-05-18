@@ -27,13 +27,6 @@ class CourierInfoPresenter(courierInfoActivity: CourierInfoActivity) :
 
     }
 
-    override suspend fun getRating(courier:CourierModel): Float? {
-        var rating:Float
-        rating= courier.rating.toFloat()
-        return rating
-
-    }
-
     override suspend fun getMonthlyOrders(courier:CourierModel): Int? {
         var orders:Int
         orders=courier.monthlyOrders
@@ -45,20 +38,6 @@ class CourierInfoPresenter(courierInfoActivity: CourierInfoActivity) :
         var orders:Int
         orders=courier.totalOrders
         return orders
-
-    }
-
-    override suspend fun getMaxRatings(courier:CourierModel): Int? {
-        var maxRatings:Int
-        maxRatings=courier.maxRatings
-        return maxRatings
-
-    }
-
-    override suspend fun getNumberRatings(courier:CourierModel): Int? {
-        var numberRatings:Int
-        numberRatings=courier.numberRatings
-        return numberRatings
 
     }
 }

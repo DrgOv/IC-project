@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
+import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.services.ViewService
 import proj.ezcolet.services.database.FsClientService
 import proj.ezcolet.services.database.FsCourierService
@@ -15,6 +16,7 @@ import java.util.*
 
 class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
     private lateinit var client: ClientModel
+    private lateinit var courier: CourierModel
 
     suspend fun initializeClient() {
         client = FsClientService.getClient(clientHomeActivity.intent.getStringExtra("Username")!!)!!
@@ -25,7 +27,7 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
         val order = client.getOrdersByUsername()[0]
         return ViewService.setFsRecyclerAdapterOptions(
             FsQueryingService.getOrdersQueryWhereEqualsToDay(
-                "courierUsername", order.courierUsername,"orderDate",currentDay
+                "courierUsername", order.courierUsername, "orderDate", currentDay
             )
         )
     }
@@ -36,12 +38,35 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
 
     suspend fun setUpTexts() {
         clientHomeActivity.setWelcomeText("Buna ziua, ${client.firstName}")
-        clientHomeActivity.setRemainingOrdersNumberText("0");
-        val courier = FsCourierService.getCourier(client.getOrdersByUsername()[0].courierUsername)!!
+        courier = FsCourierService.getCourier(client.getOrdersByUsername()[0].courierUsername)!!
         clientHomeActivity.setCourierUsernameText("Curier: ${courier.firstName} ${courier.lastName}")
+        clientHomeActivity.setLikes(courier.likes)
+        clientHomeActivity.setDislikes(courier.dislikes)
     }
 
-     private fun getDate(): String {
+    suspend fun addLike() {
+        if (!client.gaveRating) {
+            courier.addLike()
+            clientHomeActivity.setLikes(courier.likes)
+            client.hasRated()
+        }
+        if (client.gaveRating) {
+            clientHomeActivity.showInvalidRatingToast()
+        }
+    }
+
+    suspend fun addDislike() {
+        if (!client.gaveRating) {
+            courier.addDislike()
+            clientHomeActivity.setDislikes(courier.dislikes)
+            client.hasRated()
+        }
+        if (client.gaveRating) {
+            clientHomeActivity.showInvalidRatingToast()
+        }
+    }
+
+    private fun getDate(): String {
         val calendar: Calendar = Calendar.getInstance()
         val month: String =
             calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))

@@ -20,10 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/x_large_spacing"
-            android:paddingEnd="@dimen/x_large_spacing"
             android:paddingTop="@dimen/xx_large_spacing"
-            android:paddingBottom="@dimen/medium_spacing"
-            >
+            android:paddingEnd="@dimen/x_large_spacing"
+            android:paddingBottom="@dimen/medium_spacing">
 
             <ImageButton
                 android:id="@+id/exitBtn"
@@ -42,53 +41,75 @@
             android:text="Buna ziua, user!"
             android:textSize="@dimen/medium_heading" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/x_small_spacing"
-            android:text="Comenzi ramase pana la dumneavoastra"
-            android:textSize="@dimen/x_small_heading" />
-
-        <TextView
-            android:id="@+id/text_remaining_orders_number"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:lineSpacingExtra="0dp"
-            android:text="10"
-            android:textColor="@color/package_yellow"
-            android:textSize="@dimen/large_heading" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:orientation="vertical"
-            android:paddingTop="@dimen/medium_spacing"
             android:paddingStart="@dimen/large_spacing"
             android:paddingEnd="@dimen/large_spacing">
 
             <TextView
                 android:id="@+id/text_courier_username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Curier: username" />
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Curier: username"
+                android:textSize="@dimen/small_heading"/>
 
-            <TextView
-                android:id="@+id/text_courier_rating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/small_spacing"
-                android:text="9/10 (noteaza curier)"
-                app:drawableLeftCompat="@drawable/ic_baseline_thumb_up_24" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
 
-            <TextView
-                android:id="@+id/text_your_order_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Aveti comanda: 100/10" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_likes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_heading"
+
+                        android:drawablePadding="@dimen/small_spacing" />
+
+                    <ImageButton
+                        android:id="@+id/button_like"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="14"
+                        android:background="@null"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_baseline_thumb_up_24" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_dislikes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_heading"
+
+                        android:drawablePadding="@dimen/small_spacing" />
+
+                    <ImageButton
+                        android:id="@+id/button_dislike"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="14"
+                        android:background="@null"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_baseline_thumb_down_24" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -97,8 +118,8 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:paddingStart="@dimen/medium_spacing"
-            android:paddingEnd="@dimen/medium_spacing"
             android:paddingTop="@dimen/small_spacing"
+            android:paddingEnd="@dimen/medium_spacing"
             android:paddingBottom="@dimen/large_spacing"
             tools:listitem="@layout/client_card_item" />
     </LinearLayout>
