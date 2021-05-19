@@ -12,7 +12,6 @@ import proj.ezcolet.databinding.CourierInfoActivityBinding
 import proj.ezcolet.models.users.CourierModel
 import proj.ezcolet.presenters.courier.CourierInfoPresenter
 import proj.ezcolet.services.ViewService
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class CourierInfoActivity(override val coroutineContext: CoroutineContext = Dispatchers.Main) :
@@ -22,11 +21,11 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
     private lateinit var username: String
     private lateinit var firstName: String
     private lateinit var lastName: String
-    private lateinit var rating: String
+    private var likes: Int = 0
     private lateinit var monthlyOrders: String
     private lateinit var totalOrders: String
-    private lateinit var ratingMaxim: String
-    private lateinit var ratingsNumber: String
+    private var dislikes: Int = 0
+    private var ratingRatio: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,17 +54,20 @@ class CourierInfoActivity(override val coroutineContext: CoroutineContext = Disp
         lastName = courier_info_Presenter.getLastName(courier).toString()
         monthlyOrders = courier_info_Presenter.getMonthlyOrders(courier).toString()
         totalOrders = courier_info_Presenter.getTotalOrders(courier).toString()
+        likes = courier_info_Presenter.getLikes(courier)!!
+        dislikes = courier_info_Presenter.getDislikes(courier)!!
 
         courierUsernameTextView.text = (firstName + " " + lastName)
-        ratingTextView.text = rating + "/10"
+        likeTextView.text = likes.toString()
+        dislikeTextView.text = dislikes.toString()
 
-        val calendar: Calendar = Calendar.getInstance()
-        val month: String =
-            calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale("ro"))
+        val month = courier_info_Presenter.getDate()
 
         monthlyOrdersTextView.text = "Comenzi " + month + ": " + monthlyOrders
-        totalOrdersTextView.text = "Comenzi totale: " + totalOrders
-        maxRatingsTextView.text = "Rating maxim: " + ratingMaxim + "/" + ratingsNumber
+        totalOrdersTextView.text = "Total comenzi: " + totalOrders
+
+        ratingRatio = courier_info_Presenter.calculateRatio(likes.toDouble(), dislikes.toDouble())
+        ratingRatioTextView.text = "Rație rating: " + ratingRatio.toString()
 
 
     }

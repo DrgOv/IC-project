@@ -9,5 +9,9 @@ interface CourierInfoContract {
         suspend fun getLastName(courier: CourierModel): String?
         suspend fun getMonthlyOrders(courier: CourierModel): Int?
         suspend fun getTotalOrders(courier: CourierModel): Int?
+        suspend fun getLikes(courier: CourierModel): Int?
+        suspend fun getDislikes(courier: CourierModel): Int?
+        fun getDate(): String
+        fun calculateRatio(likes: Double, dislikes: Double):Double
     }
 }
