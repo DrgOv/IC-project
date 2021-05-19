@@ -17,6 +17,7 @@ import java.util.*
 class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
     private lateinit var client: ClientModel
     private lateinit var courier: CourierModel
+    private lateinit var courierUsername: String
 
     suspend fun initializeClient() {
         client = FsClientService.getClient(clientHomeActivity.intent.getStringExtra("Username")!!)!!
@@ -24,12 +25,29 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
 
     private suspend fun getOptions(): FirestoreRecyclerOptions<OrderModel> {
         val currentDay = getDate()
-        val order = client.getOrdersByUsername()[0]
-        return ViewService.setFsRecyclerAdapterOptions(
-            FsQueryingService.getOrdersQueryWhereEqualsToDay(
-                "courierUsername", order.courierUsername, "orderDate", currentDay
+        lateinit var option: FirestoreRecyclerOptions<OrderModel>
+        var orderList =
+            FsQueryingService.getOrderBasedOnClientUserNameAndDate(client.username, currentDay)
+        println(orderList.size)
+        if (orderList.size != 0) {
+            println("here")
+            val order = orderList[0]
+            courierUsername = order.courierUsername
+            option = ViewService.setFsRecyclerAdapterOptions(
+                FsQueryingService.getOrdersQueryWhereEqualsToDay(
+                    "courierUsername", order.courierUsername, "orderDate", currentDay
+                )
             )
-        )
+
+        } else {
+            option = ViewService.setFsRecyclerAdapterOptions(
+                FsQueryingService.getOrdersQueryWhereEqualsToDay(
+                    "courierUsername", "", "orderDate", currentDay
+                )
+            )
+            courierUsername = "curier_"
+        }
+        return option
     }
 
     suspend fun setUpAdapter() {
@@ -38,7 +56,7 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
 
     suspend fun setUpTexts() {
         clientHomeActivity.setWelcomeText("Buna ziua, ${client.firstName}")
-        courier = FsCourierService.getCourier(client.getOrdersByUsername()[0].courierUsername)!!
+        courier = FsCourierService.getCourier(courierUsername)!!
         clientHomeActivity.setCourierUsernameText("Curier: ${courier.firstName} ${courier.lastName}")
         clientHomeActivity.setLikes(courier.likes)
         clientHomeActivity.setDislikes(courier.dislikes)

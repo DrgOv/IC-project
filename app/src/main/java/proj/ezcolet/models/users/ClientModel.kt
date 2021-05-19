@@ -95,4 +95,8 @@ data class ClientModel(
     suspend fun getOrdersByUsername(): List<OrderModel> {
         return FsQueryingService.getOrdersByClientUsername(this.username)
     }
+
+    suspend fun getOrdersByUsernameAndDate(currentDay: String): List<OrderModel> {
+        return FsQueryingService.getOrdersByClientUsernameAndDate(this.username, currentDay)
+    }
 }
