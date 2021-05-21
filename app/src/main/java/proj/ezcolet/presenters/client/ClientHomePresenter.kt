@@ -55,7 +55,7 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
     }
 
     suspend fun setUpTexts() {
-        clientHomeActivity.setWelcomeText("Buna ziua, ${client.firstName}")
+        clientHomeActivity.setWelcomeText("Bună ziua, ${client.firstName}")
         courier = FsCourierService.getCourier(courierUsername)!!
         clientHomeActivity.setCourierUsernameText("Curier: ${courier.firstName} ${courier.lastName}")
         clientHomeActivity.setLikes(courier.likes)
