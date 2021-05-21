@@ -5,6 +5,7 @@ import proj.ezcolet.services.database.FsCourierService
 
 class AdminAddCourierPresenter {
     suspend fun addCourier(newCourier: CourierModel) {
+        newCourier.password = BCrypt.hashpw(newCourier.password, BCrypt.gensalt())
         FsCourierService.addCourier(newCourier)
     }
 }
