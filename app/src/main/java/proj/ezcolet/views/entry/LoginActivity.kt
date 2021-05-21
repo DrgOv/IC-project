@@ -4,6 +4,7 @@ import android.graphics.PixelFormat
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,6 +81,10 @@ class LoginActivity(override val coroutineContext: CoroutineContext = Dispatcher
     override fun showPasswordError(error: String) {
         println("test");
         passwordET.error = error
+    }
+
+    override fun showLoginError() {
+        Toast.makeText(applicationContext, "Date incorecte sau utilizatorul nu exista", Toast.LENGTH_SHORT).show()
     }
 
     override fun goToRegisterScreen() {

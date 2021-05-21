@@ -1,5 +1,6 @@
 package proj.ezcolet.models.users
 
+import org.mindrot.jbcrypt.BCrypt
 import proj.ezcolet.models.Model
 
 abstract class UserModel(
@@ -14,7 +15,7 @@ abstract class UserModel(
     var role: String = ""
 ) : Model(id) {
     fun doPasswordsMatch(password: String): Boolean {
-        if (this.password == password) {
+        if (BCrypt.checkpw(password, this.password)) {
             return true
         }
         return false

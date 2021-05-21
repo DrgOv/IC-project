@@ -6,6 +6,7 @@ interface LoginContract {
     interface View {
         fun showUsernameError(error: String)
         fun showPasswordError(error: String)
+        fun showLoginError()
         fun goToRegisterScreen()
         fun goToClientScreen()
         fun goToCourierScreen()
