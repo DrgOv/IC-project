@@ -14,42 +14,42 @@ class CourierInfoPresenter(courierInfoActivity: CourierInfoActivity) :
 
     }
 
-    override suspend fun getFirstName(courier: CourierModel): String? {
+    override fun getFirstName(courier: CourierModel): String {
         var firstName = ""
         firstName = courier.firstName.toString()
         return firstName
 
     }
 
-    override suspend fun getLastName(courier: CourierModel): String? {
+    override fun getLastName(courier: CourierModel): String {
         var lastName = ""
         lastName = courier.lastName.toString()
         return lastName
 
     }
 
-    override suspend fun getMonthlyOrders(courier: CourierModel): Int? {
+    override fun getMonthlyOrders(courier: CourierModel): Int {
         var orders: Int
         orders = courier.monthlyOrders
         return orders
 
     }
 
-    override suspend fun getTotalOrders(courier: CourierModel): Int? {
+    override fun getTotalOrders(courier: CourierModel): Int {
         var orders: Int
         orders = courier.totalOrders
         return orders
 
     }
 
-    override suspend fun getLikes(courier: CourierModel): Int? {
+    override fun getLikes(courier: CourierModel): Int {
         var likes: Int
         likes = courier.likes
         return likes
 
     }
 
-    override suspend fun getDislikes(courier: CourierModel): Int? {
+    override fun getDislikes(courier: CourierModel): Int {
         var dislikes: Int
         dislikes = courier.dislikes
         return dislikes
@@ -64,7 +64,7 @@ class CourierInfoPresenter(courierInfoActivity: CourierInfoActivity) :
     }
 
     override fun calculateRatio(likes: Double, dislikes: Double): Double{
-        val ratio=(likes/dislikes)
+        val ratio = likes/dislikes
         return ratio
     }
 }
