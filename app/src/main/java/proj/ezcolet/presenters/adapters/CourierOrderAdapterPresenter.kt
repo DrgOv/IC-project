@@ -31,14 +31,14 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         holder.checkImageBtn.setOnClickListener {
             launch {
                 println("check+ $model")
-                checkPressed(model,username,holder)
+                checkPressed(model, username, holder)
             }
 
         }
         holder.cancelImageBtn.setOnClickListener {
             launch {
                 println("cancel + $model")
-                cancelPressed(model,holder)
+                cancelPressed(model, holder)
             }
         }
     }
@@ -48,11 +48,13 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         username: String,
         holder: CourierOrderViewHolder
     ) {
-        if(model.orderStatus!="în curs de livrare")
-        {
-            Toast.makeText(holder.itemView.context, "Comanda este într-o stare finală", Toast.LENGTH_SHORT).show()
-        }
-        else {
+        if (model.orderStatus != "în curs de livrare" && model.orderStatus != "livrare rapidă") {
+            Toast.makeText(
+                holder.itemView.context,
+                "Comanda este într-o stare finală",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
             val calendar: Calendar = Calendar.getInstance()
             val hour: Int = calendar.get(Calendar.HOUR_OF_DAY)
             val hourStr = hour.toString()
@@ -90,11 +92,13 @@ class CourierOrderAdapterPresenter(override val coroutineContext: CoroutineConte
         model: OrderModel,
         holder: CourierOrderViewHolder
     ) {
-        if(model.orderStatus!="în curs de livrare")
-        {
-            Toast.makeText(holder.itemView.context, "Comanda este într-o stare finală", Toast.LENGTH_SHORT).show()
-        }
-        else {
+        if (model.orderStatus != "în curs de livrare" && model.orderStatus != "livrare rapidă") {
+            Toast.makeText(
+                holder.itemView.context,
+                "Comanda este într-o stare finală",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
             model.orderStatus = CANCELED
             FsOrderService.updateOrder(model)
         }
