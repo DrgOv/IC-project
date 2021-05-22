@@ -23,25 +23,18 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
 
     override fun isDataValid(newClient: ClientModel): Boolean {
         val validationMap = newClient.generateValidationMap()
-
+        var isValid=true
         for ((key, value) in validationMap) {
             when (value) {
                 EMPTY -> {
-                    showError(key, EMPTY_ERROR_MESSAGE)
-                    return false
+                    isValid=false
                 }
                 INVALID -> {
-                    var errorMessage = INVALID_ERROR_MESSAGE
-                    if (key == "password") {
-                        errorMessage =
-                            "$INVALID_ERROR_MESSAGE - minim 8 caractere, 1 litera mare, 1 litera mica, 1 cifra"
-                    }
-                    showError(key, errorMessage)
-                    return false
+                    isValid=false
                 }
             }
         }
-        return true
+        return isValid
     }
 
     override fun showError(field: String, error: String) {
