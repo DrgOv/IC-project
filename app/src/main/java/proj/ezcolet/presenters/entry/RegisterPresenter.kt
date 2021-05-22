@@ -11,6 +11,10 @@ import proj.ezcolet.services.validation.INVALID_ERROR_MESSAGE
 
 class RegisterPresenter(private val registerActivity: RegisterContract.View) :
     RegisterContract.Presenter {
+    companion object {
+        var emptyFields = mutableListOf<String>()
+        var invalidFields = mutableListOf<String>()
+    }
 
     override suspend fun addClient(newClient: ClientModel): Boolean {
         if (isDataValid(newClient)) {
@@ -18,19 +22,24 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
             FsClientService.addClient(newClient)
             return true
         }
+        showErrors()
         return false
     }
 
+
+
     override fun isDataValid(newClient: ClientModel): Boolean {
         val validationMap = newClient.generateValidationMap()
-        var isValid=true
+        var isValid = true
         for ((key, value) in validationMap) {
             when (value) {
                 EMPTY -> {
-                    isValid=false
+                    isValid = false
+                    emptyFields.add(key)
                 }
                 INVALID -> {
-                    isValid=false
+                    isValid = false
+                    invalidFields.add(key)
                 }
             }
         }
@@ -49,5 +58,21 @@ class RegisterPresenter(private val registerActivity: RegisterContract.View) :
             "username" -> registerActivity.showUsernameError(error)
             "password" -> registerActivity.showPasswordError(error)
         }
+    }
+
+    fun showErrors() {
+        for (emptyField in emptyFields) {
+            showError(emptyField, EMPTY_ERROR_MESSAGE)
+        }
+        for (invalidField in invalidFields) {
+            var error = INVALID_ERROR_MESSAGE
+            if (invalidField == "password") {
+                error =
+                    "$INVALID_ERROR_MESSAGE - minim 8 caractere, 1 litera mare, 1 litera mica, 1 cifra"
+            }
+            showError(invalidField, error)
+        }
+        emptyFields = mutableListOf()
+        invalidFields = mutableListOf()
     }
 }
