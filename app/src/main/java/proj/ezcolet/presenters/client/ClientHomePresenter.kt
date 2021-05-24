@@ -4,6 +4,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import proj.ezcolet.models.order.COMPLETED
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.models.users.CourierModel
@@ -28,7 +29,6 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
         lateinit var option: FirestoreRecyclerOptions<OrderModel>
         var orderList =
             FsQueryingService.getOrderBasedOnClientUserNameAndDate(client.username, currentDay)
-        println(orderList.size)
         if (orderList.size != 0) {
             println("here")
             val order = orderList[0]
@@ -63,25 +63,47 @@ class ClientHomePresenter(private val clientHomeActivity: ClientHomeActivity) {
     }
 
     suspend fun addLike() {
-        if (!client.gaveRating) {
-            courier.addLike()
-            clientHomeActivity.setLikes(courier.likes)
-            client.hasRated()
+        val currentDay = getDate()
+        var orderList =
+            FsQueryingService.getOrderBasedOnClientUserNameAndDate(client.username, currentDay)
+        if (orderList.size != 0) {
+            val order = orderList[0]
+            if (order.orderStatus == COMPLETED) {
+                if (!client.gaveRating) {
+                    courier.addLike()
+                    clientHomeActivity.setLikes(courier.likes)
+                    client.hasRated()
+                    return
+                }
+                if (client.gaveRating) {
+                    clientHomeActivity.showInvalidRatingToast()
+                    return
+                }
+            }
         }
-        if (client.gaveRating) {
-            clientHomeActivity.showInvalidRatingToast()
-        }
+        clientHomeActivity.showCantRateToast()
     }
 
     suspend fun addDislike() {
-        if (!client.gaveRating) {
-            courier.addDislike()
-            clientHomeActivity.setDislikes(courier.dislikes)
-            client.hasRated()
+        val currentDay = getDate()
+        var orderList =
+            FsQueryingService.getOrderBasedOnClientUserNameAndDate(client.username, currentDay)
+        if (orderList.size != 0) {
+            val order = orderList[0]
+            if (order.orderStatus == COMPLETED) {
+                if (!client.gaveRating) {
+                    courier.addDislike()
+                    clientHomeActivity.setDislikes(courier.dislikes)
+                    client.hasRated()
+                    return
+                }
+                if (client.gaveRating) {
+                    clientHomeActivity.showInvalidRatingToast()
+                    return
+                }
+            }
         }
-        if (client.gaveRating) {
-            clientHomeActivity.showInvalidRatingToast()
-        }
+        clientHomeActivity.showCantRateToast()
     }
 
     private fun getDate(): String {

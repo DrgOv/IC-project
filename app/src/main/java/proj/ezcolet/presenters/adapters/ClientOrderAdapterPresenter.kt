@@ -2,7 +2,9 @@ package proj.ezcolet.presenters.adapters
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import proj.ezcolet.models.order.COMPLETED
 import proj.ezcolet.models.order.NEEDED
+import proj.ezcolet.models.order.NORMAL
 import proj.ezcolet.models.order.OrderModel
 import proj.ezcolet.models.users.ClientModel
 import proj.ezcolet.services.database.FsOrderService
@@ -23,13 +25,13 @@ class ClientOrderAdapterPresenter(val client: ClientModel) :
         )
 
         if (model.isClientOrder(client)) {
-            holder.deliverImageBtn.setOnClickListener() {
-                if (model.orderStatus != NEEDED) {
+            if (model.orderStatus == NORMAL && model.orderDetails.isEmpty()) {
+                holder.deliverImageBtn.setOnClickListener() {
                     model.orderStatus = NEEDED
                     GlobalScope.launch { FsOrderService.updateOrder(model) }
-                } else {
-                    holder.hideDeliverBtn()
                 }
+            } else {
+                holder.hideDeliverBtn()
             }
         } else {
             holder.setUpperText("Comanda ${holder.layoutPosition + 1}")

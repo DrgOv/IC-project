@@ -88,6 +88,10 @@ class ClientHomeActivity(override val coroutineContext: CoroutineContext = Dispa
         Toast.makeText(this, "Ai votat deja.", Toast.LENGTH_SHORT).show()
     }
 
+    fun showCantRateToast() {
+        Toast.makeText(this, "Nu poti vota.", Toast.LENGTH_SHORT).show()
+    }
+
     fun setUpAdapter(client: ClientModel, options: FirestoreRecyclerOptions<OrderModel>) {
         orderAdapter = ClientOrderAdapter(client, options)
         orderAdapter.startListening()
